@@ -1,11 +1,13 @@
 import Documents from "@/models/documentModel";
 import connect from "@/utils/database";
+import Folders from "@/models/folderModel";
 import { NextResponse } from "next/server";
 
 export const GET=async(request)=>{
     try {
         await connect();
-        const documents = await Documents.find();
+        const {fid}=useParams();
+        const documents = await Folders.findById(fid).populate({path:"documents"})
         return new NextResponse(JSON.stringify(documents),{status:200});
     } catch (error) {
         return new NextResponse("Error",{status:400});
