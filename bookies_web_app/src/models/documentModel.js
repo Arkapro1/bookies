@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
-const Documents = new mongoose.Schema(
+import { model, models, Schema } from "mongoose";
+
+const docSchema = new Schema(
     {
         name:{
             type:String,
@@ -21,4 +22,5 @@ const Documents = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('Documents', Documents);
+const Documents=models.Documents || model("Documents",docSchema);
+export default Documents; 
