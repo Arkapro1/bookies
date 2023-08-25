@@ -25,3 +25,13 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+.text-gradient-purple-green {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, rgb(182, 106, 239), rgb(93, 228, 238));
+}
+/* In your Tailwind CSS configuration or your custom styles */
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
