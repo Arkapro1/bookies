@@ -1,3 +1,4 @@
+import AuthProvider from '@/components/AuthProvider/AuthProvider';
 import Nav from '@/components/nav/nav';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -11,14 +12,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-
-    <>
-        <Nav/>
-    <body className={inter.className}>
-        {/* <Nav/> */}
-        {children}
+    <html lang="en">
+      <body className={inter.className}>
+        <AuthProvider>
+        <Nav/>{children}
+        </AuthProvider>
         </body>
-      <Footer/>
     </>
   )
 }
