@@ -3,15 +3,14 @@ import Documents from "@/models/documentModel";
 import connect from "@/utils/database";
 import Folders from "@/models/folderModel";
 import { NextResponse } from "next/server";
-// import { useParams } from 'next/navigation';
 
 export const GET=async(request,{params})=>{
     try {
         await connect();
         const fid=params.fid;
-        const folder = await Folders.findById(fid).populate({path:"documents"})
-        return new NextResponse(JSON.stringify(folder.documents),{status:200});
-        // return new NextResponse(fid,{status:200});
+        const folder = await Folders.findById(fid).populate({path:"subFolders",select:["name"]})
+        return new NextResponse(JSON.stringify(folder.subFolders),{status:200});
+        
     } catch (error) {
         return new NextResponse("Error",{status:400});
     }
@@ -19,21 +18,21 @@ export const GET=async(request,{params})=>{
 
 export const POST=async(request,{params})=>{
     const body=await request.json(); 
-    const newDoc=new Documents(body);
+    const newFolder=new Folders(body);
     
     try {
         await connect();
-        await newDoc.save();    
+        await newFolder.save();
        
         const fid=params.fid;
         await Folders.updateOne(
             { _id: fid},
             {
                 $push: {
-                    documents: [newDoc._id]
+                    subFolders: [newFolder._id]
                 }
             });
-        return new NextResponse("Doc created",{status:200});
+        return new NextResponse("Sub Doc created",{status:200});
     } catch (error) {
         return new NextResponse(error,{status:400});
     }
