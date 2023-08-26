@@ -1,11 +1,14 @@
 "use client";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
-import { signOut } from "next-auth/react";
 const Nav = () => {
-  let session = useSession();
-  session = session.data;
+  // let session = useSession();
+  // session = session.data;
   const [toggle, setToggle] = useState(false);
+  const { data: session, status } = useSession();
+  // if (status == "loading") {
+  //   return <Loading />;
+  // }
   return (
     <>
       <nav class="bg-white border-gray-200 dark:bg-gray-900">
