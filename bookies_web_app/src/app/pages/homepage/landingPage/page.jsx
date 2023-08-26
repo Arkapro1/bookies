@@ -1,3 +1,4 @@
+import Analysis from "@/components/popularAnalysis/page";
 const Page = (params) => {
     return (
         <>
@@ -32,7 +33,9 @@ const Page = (params) => {
                         <img class="object-cover object-center rounded" alt="hero" src="/images/image-removebg-preview.png" />
                     </div>
                 </div>
+            
             </section>
+            <Analysis/>
         </>
     )
 }
