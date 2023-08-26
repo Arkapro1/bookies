@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 
 function Login() {
@@ -10,7 +10,7 @@ function Login() {
     session = session.data;
     const [sidebar, setsidebar] = useState();
     if (session) { 
-        router?.push("/");
+        redirect("/pages/homepage/landingPage");
       }
     return (
         <div className="h-full bg-gradient-to-tl from-green-400 to-indigo-900 w-full py-16 px-4">
