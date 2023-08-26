@@ -13,6 +13,10 @@ const folderSchema = new Schema(
             type:[{type:Schema.Types.ObjectId}],
             ref:"Documents"
         },
+        isWorkSpace:{
+            type:Boolean,
+            required:true
+        },
 
         createAt: {
             type: Date,
