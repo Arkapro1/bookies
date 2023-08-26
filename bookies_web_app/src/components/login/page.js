@@ -10,8 +10,9 @@ function Login() {
     session = session.data;
     const [sidebar, setsidebar] = useState();
     if (session) { 
-        redirect("/pages/homepage/landingPage");
+        redirect("/pages/homepage/userMainPage");
       }
+      
     return (
         <div className="h-full bg-gradient-to-tl from-green-400 to-indigo-900 w-full py-16 px-4">
             <div className="flex flex-col items-center justify-center">

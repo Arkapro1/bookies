@@ -1,6 +1,7 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
+
 const Nav = () => {
   // let session = useSession();
   // session = session.data;
@@ -9,6 +10,10 @@ const Nav = () => {
   // if (status == "loading") {
   //   return <Loading />;
   // }
+  const handleSignOut = () => {
+    signOut({ callbackUrl: "http://localhost:3000/" });
+  };
+
   return (
     <>
       <nav class="bg-white border-gray-200 dark:bg-gray-900">
@@ -41,7 +46,7 @@ const Nav = () => {
               {!session && <a href="/login">Get started</a>}
               {session && (
                 <>
-                  <button onClick={signOut}>Sign Out </button>
+                  <button onClick={handleSignOut}>Sign Out </button>
                 </>
               )}
             </button>
