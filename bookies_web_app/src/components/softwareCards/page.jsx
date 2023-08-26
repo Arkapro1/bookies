@@ -1,5 +1,5 @@
 const Services = (props) => {
-    const image=this.props.img
+    // const image=this.props.img
     return (
         <>
 
