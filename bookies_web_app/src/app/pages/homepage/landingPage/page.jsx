@@ -1,4 +1,5 @@
 import Analysis from "@/components/popularAnalysis/page";
+import Services from "@/components/softwareCards/page";
 const Page = (params) => {
     return (
         <>
@@ -33,7 +34,8 @@ const Page = (params) => {
                         <img class="object-cover object-center rounded" alt="hero" src="/images/image-removebg-preview.png" />
                     </div>
                 </div>
-            
+            <Services/>
+            <br />
             </section>
             <Analysis/>
         </>
