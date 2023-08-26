@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "autoprefixer": "10.4.15",
-    "mongoose": "6.11.1",
+    "mongoose": "^6.12.0",
     "next": "13.4.19",
+    "next-auth": "^4.23.1",
     "postcss": "8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -20,6 +21,5 @@
   "main": "index.js",
   "license": "MIT",
   "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
-  "devDependencies": {},
   "author": ""
 }
