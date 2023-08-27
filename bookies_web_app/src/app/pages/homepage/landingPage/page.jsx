@@ -11,7 +11,6 @@ const Page = (params) => {
             <span class="bg-gray-800 typewriter text-orange-300 text-2xl text border terminal-border p-5 rounded-3xl terminal">
               <h1>Unleash Smarter Bookmark Management 🔐</h1>
             </span>
-            {/* </h1> */}
             <br />
 
             <div class="mb-8 leading-relaxed text-gradient-purple-green">
