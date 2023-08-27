@@ -15,9 +15,9 @@
     height: calc(100% + var(--border-width) * 2);
     background: linear-gradient(
       60deg,
-      hsl(0, 0%, 100%),
-      hsl(169, 73%, 80%),
-      hsl(0, 0%, 100%),
+      hsl(276, 89%, 70%),
+      hsl(163, 93%, 71%),
+      hsl(226, 86%, 67%),
       hsl(0, 0%, 100%)
     );
     background-size: 300% 300%;
