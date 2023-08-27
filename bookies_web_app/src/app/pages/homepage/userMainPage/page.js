@@ -1,4 +1,14 @@
+"use client";
+
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+
 const userMainPage=()=>{
+    const {status}=useSession();
+    if(status=="unauthenticated"){
+        redirect('/');
+    }
+
     return(
         <>
             <section class="bg-white py-6 sm:py-8 lg:py-12 mx-auto">
