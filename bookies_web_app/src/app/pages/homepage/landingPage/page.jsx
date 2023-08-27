@@ -81,10 +81,10 @@ const Page = (params) => {
 
                 </div>
 
-                <br />
-            </section>
-            <Analysis />
-        </>
-    )
-}
+        <br />
+      </section>
+      <Analysis />
+    </>
+  );
+};
 export default Page;
