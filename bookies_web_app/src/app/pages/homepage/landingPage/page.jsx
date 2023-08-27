@@ -7,7 +7,7 @@ const Page = (params) => {
       <section class="text-gray-600 body-font">
         <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
           <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <span class=" typewriter text-orange-300 text-2xl text   p-5 rounded-3xl terminal">
+            <span class=" typewriter text-orange-300 text-2xl text   rounded-3xl terminal">
               <h1>Unleash Smarter Bookmark Management 🔐</h1>
             </span>
             <br />
@@ -559,26 +559,23 @@ const Page = (params) => {
           </div>
         </div>
         <div className="grid md:grid-cols-2 grid-cols-1 gap-4  md:gap-0  md:place-items-center p-10 rounded-2xl border-dotted border-2 border-indigo-500/50 mx-8 ">
-          <div className="card2">
-            <Services
-              props={{
-                img: "https://cdn3d.iconscout.com/3d/premium/thumb/anonymous-transaction-8444755-6648608.png?f=webp",
-                type: "Browser Extention",
-                offering:
-                  "⚡Boost your productivity with our extension, offering time-saving shortcuts for lightning-fast bookmarking",
-              }}
-            />
-          </div>
-          <div className="card2">
-            <Services
-              props={{
-                img: "https://cdn3d.iconscout.com/3d/premium/thumb/mobile-app-4493981-3738374.png?f=webp",
-                type: "Mobile App",
-                offering:
-                  "🧠Enhance efficiency with rapid mobile bookmarking and effortless cross-device synchronization through the app",
-              }}
-            />
-          </div>
+          <Services
+            props={{
+              img: "https://cdn3d.iconscout.com/3d/premium/thumb/anonymous-transaction-8444755-6648608.png?f=webp",
+              type: "Browser Extention",
+              offering:
+                "⚡Boost your productivity with our extension, offering time-saving shortcuts for lightning-fast bookmarking",
+            }}
+          />
+
+          <Services
+            props={{
+              img: "https://cdn3d.iconscout.com/3d/premium/thumb/mobile-app-4493981-3738374.png?f=webp",
+              type: "Mobile App",
+              offering:
+                "🧠Enhance efficiency with rapid mobile bookmarking and effortless cross-device synchronization through the app",
+            }}
+          />
         </div>
 
         <br />

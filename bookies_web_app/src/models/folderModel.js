@@ -17,6 +17,9 @@ const folderSchema = new Schema(
             type:Boolean,
             required:true
         },
+        descrition:{
+            type:String
+        },
 
         createAt: {
             type: Date,

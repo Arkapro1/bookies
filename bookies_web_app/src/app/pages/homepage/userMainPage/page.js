@@ -2,39 +2,110 @@
 
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { useState } from "react";
 
 const userMainPage=()=>{
-    const {status}=useSession();
+    const {data:session ,status}=useSession();
+    const [toggle, setToggle] = useState(false);
     if(status=="unauthenticated"){
         redirect('/');
     }
 
     return(
         <>
-            <section class="bg-white py-6 sm:py-8 lg:py-12 mx-auto">
-    <div class="mx-auto max-w-screen-xl px-4 md:px-8">
-
-        <div class="relative mb-10 pt-8 md:mb-16">
-        <h2 class="mb-4 text-center font-serif text-3xl font-bold text-gray-800 md:mb-6 md:text-4xl">Integration Guides</h2>
-
-        <div className="lg:px-80">
-            <form>   
-                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                        </svg>
-                    </div>
-                    <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required/>
-                    <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
-                </div>
-
-            </form>
-            </div>  
-        </div>
+        {/* <!-- Main modal --> */}
         
-        <div class="mx-5 grid gap-8 sm:grid-cols-2 sm:gap-12 lg:grid-cols-3  xl:gap-16">
+
+{toggle && 
+<div className=" fixed z-50 flex w-screen h-screen justify-center items-center bg-zinc-950/70 ">
+<div id="authentication-modal" tabindex="-1" aria-hidden="true" class="w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto">
+        {/* <!-- Modal content --> */}
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button onClick={ ()=> setToggle((prev) => !prev)} type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="px-6 py-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
+                <form class="space-y-6" action="#">
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required/>
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required/>
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required/>
+                            </div>
+                            <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+                        </div>
+                        <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
+                    </div>
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
+                    <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                        Not registered? <a href="#" class="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+</div>
+}
+      <section class="text-gray-600 body-font px-4">
+      
+    <div className="">
+
+        <div class="grid gap-auto  mb-10 pt-6 md:mb-16 lg:grid-cols-2 ">
+        <h2 class="mb-4 inline text-start font-serif text-3xl font-bold text-gray-800 md:mb-6 md:text-4xl">Welcome {session?.user.name}</h2>
+
+        {/* button */}
+        {/* <button class=" relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
+  <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+      Create
+  </span>
+</button> */}
+<div className="columns-2 ">
+
+
+<button onClick={() => setToggle((prev) => !prev)} data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 lg:ml-16 xl:ml-40" type="button">
+  Toggle modal
+</button> 
+        {/* searchbox */}
+        
+       <div class=" mb-4 flex flex-wrap">
+         <input
+            type="search"
+            class=" m-0 w-[1px] min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="button-addon2" />
+          <span
+            class="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
+            id="basic-addon2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="h-5 w-5">
+              <path
+                fill-rule="evenodd"
+                d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                clip-rule="evenodd" />
+            </svg>
+          </span>
+ </div>
+
+        </div>
+        </div>
+        <div class="mx-5 grid gap-8 place-items-center sm:grid-cols-2 sm:gap-12 lg:grid-cols-4  xl:gap-16">
 
         <Article/>
         <Article/>
@@ -53,52 +124,86 @@ const userMainPage=()=>{
 
 export default userMainPage;
 
-const Article=()=>{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const Article=({})=>{
+  const {data:session ,status}=useSession();
     return(
         <>
-            {/* <article class="">
-            <a class="block rounded-lg bg-gray-900 p-2 transition hover:scale-105" href="#">
-            <h2 class="mx-4 mt-4 mb-10 font-serif text-2xl font-semibold text-white">12 Ways to Utilize Zapier for Business Productivity</h2>
-            <div class="flex items-center rounded-md px-4 py-3">
-                <img class="h-10 w-10 rounded-full object-cover" src="/images/y9s3xOJV6rnQPKIrdPYJy.png" alt="Simon Lewis" />
-                <p class="ml-4 w-56">
-                <strong class="block text-lg font-medium text-white">Simon Lewis</strong>
-                <span class="text-xs text-white"> Founder of 2 Startups </span>
-                </p>
+           <div class='break-inside relative overflow-hidden flex flex-col justify-between space-y-3 text-sm rounded-xl max-w-[23rem] p-4 mb-4 bg-white text-black dark:bg-slate-800 dark:text-white'>
+        <div class='flex items-center justify-between font-medium'>
+            <span class='uppercase text-xs text-green-500'>edit collabs</span>
+            <span class='text-xs text-slate-500'>#team</span>
+        </div>
+        <div class='flex flex-row items-center space-x-3'>
+            <div class='flex flex-none items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white'>
+            <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+                <polygon points='14 2 18 6 7 17 3 17 3 13 14 2' />
+                <line x1='3' y1='22' x2='21' y2='22' />
+            </svg>
             </div>
-            </a>
-        </article> */}
-        
-        <div class="border  relative flex max-w-[20rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-  <div class="relative m-0 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none">
-  <h4 class="p-3 block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-      UI/UX Review Check
-    </h4>
-    <img
-    src="data:image/jpeg;base64,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"
-    width={400}
-    height={200}
-    //   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
-    //   src="card.jpg"
-    // src=""
-      alt="ui/ux review check"
-    />
-  </div>
-  <div class="p-6">
-    
-  </div>
-  <div class="flex items-center  p-6">
-    <div class="flex items-center -space-x-3">
-      <div
-        data-tooltip="author-2"
-        class="absolute z-50 whitespace-normal break-words rounded-lg bg-black py-1.5 px-3 font-sans text-sm font-normal text-white focus:outline-none"
-      >
-        Tania Andrew
-      </div>
-    </div> 
-  </div>
-</div>
+            <span class='text-base font-medium'>workspace name</span>
+        </div>
+        <div> workspace description</div>
+        <div class='flex justify-between items-center'>
+            <div>
+            <dt class='sr-only'>Users</dt>
+            <dd class='flex justify-start -space-x-1.5'>
+                <a href='#' class='inline-block -m-1'>
+                <img class='w-7 h-7 rounded-full ring-2 ring-white dark:ring-slate-800' src={session?.user.image} alt='avatar' />
+                </a>
+                
+                <span class='inline-block -m-1 rounded-full ring-2 ring-white dark:ring-slate-800'>
+                <svg width='28' height='28' viewBox='0 0 31 31' fill='none' xmlns='http://www.w3.org/2000/svg' class='text-slate-200 dark:text-slate-600'>
+                    <path d='M31 15.5C31 24.0604 24.0604 31 15.5 31C6.93959 31 0 24.0604 0 15.5C0 6.93959 6.93959 0 15.5 0C24.0604 0 31 6.93959 31 15.5ZM8.20879 15.5C8.20879 19.5268 11.4732 22.7912 15.5 22.7912C19.5268 22.7912 22.7912 19.5268 22.7912 15.5C22.7912 11.4732 19.5268 8.20879 15.5 8.20879C11.4732 8.20879 8.20879 11.4732 8.20879 15.5Z' fill='currentColor' />
+                    <path d='M31 15.5C31 18.049 30.3714 20.5586 29.1698 22.8066C27.9682 25.0547 26.2307 26.9716 24.1113 28.3878C21.9919 29.8039 19.556 30.6755 17.0193 30.9254C14.4826 31.1752 11.9234 30.7956 9.56841 29.8201C7.21345 28.8447 5.1354 27.3035 3.51834 25.3331C1.90128 23.3627 0.795112 21.0239 0.297828 18.5239C-0.199455 16.0239 -0.0725081 13.4398 0.667425 11.0006C1.40736 8.56136 2.73744 6.34225 4.53984 4.53985L10.2876 10.2876C9.43046 11.1448 8.79791 12.2002 8.44602 13.3602C8.09413 14.5202 8.03376 15.7491 8.27025 16.9381C8.50675 18.127 9.03281 19.2393 9.80184 20.1764C10.5709 21.1134 11.5591 21.8464 12.6791 22.3103C13.799 22.7742 15.0161 22.9547 16.2225 22.8359C17.4289 22.7171 18.5874 22.3026 19.5953 21.6291C20.6033 20.9556 21.4295 20.0439 22.001 18.9748C22.5724 17.9058 22.8714 16.7122 22.8714 15.5H31Z' fill='#2BC86A' />
+                </svg>
+                </span>
+            </dd>
+            </div>
+            <button class='flex items-center justify-center text-xs font-medium rounded-full px-4 py-1 space-x-1 border-2 border-black bg-white hover:bg-black hover:text-white text-black dark:bg-slate-800 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-black'>
+            <span>Edit</span>
+            <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+                <path d='M5 12h13M12 5l7 7-7 7' />
+            </svg>
+            </button>
+        </div>
+        </div>
 
         </>
     )
+}
+
+
+const createFolderModal=()=>{
+  return(<>
+    
+{/* <!-- Modal toggle --> */}
+
+
+
+
+  </>)
 }

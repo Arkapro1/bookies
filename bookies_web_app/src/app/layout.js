@@ -15,7 +15,11 @@ export default function RootLayout({ children }) {
     <html>
       <body className={inter.className}>
         <AuthProvider>
-        <Nav/>{children}
+        <Nav/>
+        <div className='max-w-screen-xl mx-auto'>
+
+        {children}
+        </div>
         <Footer/>
         </AuthProvider>
         </body> 
