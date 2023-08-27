@@ -59,7 +59,7 @@ const userMainPage=()=>{
 </div> 
 </div>
 }
-      <section class="text-gray-600 body-font px-4">
+      <section class="text-gray-600 body-font px-4 bg-dark">
       
     <div className="">
 
