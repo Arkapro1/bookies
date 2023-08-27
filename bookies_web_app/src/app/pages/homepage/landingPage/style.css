@@ -1,5 +1,5 @@
 .terminal {
-  color: rgb(187, 255, 86);
+  color: rgb(86, 255, 252);
   font: 1.9rem Inconsolata, monospace;
   text-shadow: 0 0 3px #8b8a8a;
 }
@@ -10,7 +10,7 @@
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
 
-  animation: typing 6s steps(40, end) infinite,
+  animation: typing 6s steps(40, end) ,
     blink-caret 0.75s step-end infinite;
 }
 
