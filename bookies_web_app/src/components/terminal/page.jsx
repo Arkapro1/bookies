@@ -1,7 +1,7 @@
 const Terminal=()=>{
     return(
         <>
-<div class="w-1/2 mx-auto">
+<div class="w-60% mx-auto">
   <div class="w-full shadow-2xl subpixel-antialiased rounded h-64 bg-black border-black mx-auto">
     <div class="flex items-center h-6 rounded-t bg-gray-100 border-b border-gray-500 text-center text-black" id="headerTerminal">
       <div class="flex ml-2 items-center text-center border-red-900 bg-red-500 shadow-inner rounded-full w-3 h-3" id="closebtn">
