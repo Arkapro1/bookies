@@ -54,7 +54,7 @@ const userMainPage=()=>{
     <div className="">
 
         <div class="grid gap-auto  mb-10 pt-6 md:mb-16 lg:grid-cols-2 ">
-        <h2 class="mb-4 inline text-start font-serif text-3xl font-bold text-gray-800 md:mb-6 md:text-4xl">Welcome {session?.user.name}</h2>
+        <h2 class="mb-4 inline text-start font-serif text-3xl font-bold text-gray-200 md:mb-6 md:text-4xl">Welcome {session?.user.name}</h2>
 
         {/* button */}
         {/* <button class=" relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">

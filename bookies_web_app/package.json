@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev -p 32914",
     "build": "next build",
-    "start": "next start -p 3000",
+    "start": "next start -p 32914",
     "lint": "next lint"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "autoprefixer": "10.4.15",
     "mongoose": "^6.12.0",
     "next": "13.4.19",
