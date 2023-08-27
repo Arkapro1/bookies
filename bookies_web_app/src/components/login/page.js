@@ -5,7 +5,6 @@ import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import './style.css';
 import './style1.css';
-
 function Login() {
     let session = useSession();
     const router = useRouter();

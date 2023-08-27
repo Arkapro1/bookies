@@ -1,5 +1,6 @@
 import Analysis from "@/components/popularAnalysis/page";
 import Services from "@/components/softwareCards/page";
+import Terminal from "@/components/terminal/page";
 import "./style.css";
 const Page = (params) => {
   return (
@@ -584,7 +585,7 @@ const Page = (params) => {
         <br />
       </section>
       <div class="flex items-center p-11">
-        <button
+        {/* <button
           type="button"
           class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
@@ -602,9 +603,9 @@ const Page = (params) => {
           <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
             20
           </div>
-        </button>
+        </button> */}
 
-        <p class="p-10 text-left text-gray-500 dark:text-gray-400">
+        {/* <p class="p-10 text-left text-gray-500 dark:text-gray-400">
           In the realm of productivity, Bookies have emerged as a guiding light
           for digital nomads. Regardless of the diverse locations they traverse,
           Bookies empower these modern wanderers to seamlessly manage their
@@ -614,7 +615,8 @@ const Page = (params) => {
           stay focused and organized amidst their globetrotting endeavors.
           Bookies have truly become an essential companion for those shaping
           their professional journey from various horizons.
-        </p>
+        </p> */}
+       <Terminal/>
       </div>
       <Analysis />
       <br />
