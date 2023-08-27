@@ -559,23 +559,26 @@ const Page = (params) => {
           </div>
         </div>
         <div className="grid md:grid-cols-2 grid-cols-1 gap-4  md:gap-0  md:place-items-center p-10 rounded-2xl border-dotted border-2 border-indigo-500/50 mx-8 ">
-          <Services
-            props={{
-              img: "https://cdn3d.iconscout.com/3d/premium/thumb/anonymous-transaction-8444755-6648608.png?f=webp",
-              type: "Browser Extention",
-              offering:
-                "⚡Boost your productivity with our extension, offering time-saving shortcuts for lightning-fast bookmarking",
-            }}
-          />
-
-          <Services
-            props={{
-              img: "https://cdn3d.iconscout.com/3d/premium/thumb/mobile-app-4493981-3738374.png?f=webp",
-              type: "Mobile App",
-              offering:
-                "🧠Enhance efficiency with rapid mobile bookmarking and effortless cross-device synchronization through the app",
-            }}
-          />
+          <div className="card2">
+            <Services
+              props={{
+                img: "https://cdn3d.iconscout.com/3d/premium/thumb/anonymous-transaction-8444755-6648608.png?f=webp",
+                type: "Browser Extention",
+                offering:
+                  "⚡Boost your productivity with our extension, offering time-saving shortcuts for lightning-fast bookmarking",
+              }}
+            />
+          </div>
+          <div className="card2">
+            <Services
+              props={{
+                img: "https://cdn3d.iconscout.com/3d/premium/thumb/mobile-app-4493981-3738374.png?f=webp",
+                type: "Mobile App",
+                offering:
+                  "🧠Enhance efficiency with rapid mobile bookmarking and effortless cross-device synchronization through the app",
+              }}
+            />
+          </div>
         </div>
 
         <br />
