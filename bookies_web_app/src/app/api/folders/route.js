@@ -6,10 +6,13 @@ export const GET=async(request)=>{
     try {
         await connect();
         const folders = await Folders.find();
-    //  const filteredData=  folders.filter((ele)=>{
-    //         return ele.isWorkSpace;
-    //     })
-        return new NextResponse(JSON.stringify(folders),{status:200});
+
+     let filteredData=  folders.filter((ele)=>{
+            return ele.isWorkSpace;
+        })
+        filteredData=filteredData==null?[]:filteredData;
+        console.log(JSON.stringify(filteredData))
+        return new NextResponse(JSON.stringify(filteredData),{status:200});
     } catch (error) {
         return new NextResponse("Error",{status:400});
     }
@@ -17,6 +20,7 @@ export const GET=async(request)=>{
 
 export const POST=async(request)=>{
     const body=await request.json(); 
+    console.log(body)
     const newDoc=new Folders(body);
     // const newDoc=body;
     try {
