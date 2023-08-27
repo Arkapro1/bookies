@@ -2,10 +2,11 @@ import Folders from "@/models/folderModel";
 import connect from "@/utils/database";
 import { NextResponse } from "next/server";
 
-export const GET=async(request)=>{
+export const GET=async(req,res)=>{
     try {
+       
         await connect();
-        const folders = await Folders.find();
+        const folders = await Folders.find({});
 
      let filteredData=  folders.filter((ele)=>{
             return ele.isWorkSpace;
