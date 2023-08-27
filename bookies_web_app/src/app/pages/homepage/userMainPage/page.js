@@ -1,6 +1,5 @@
 "use client";
-
-import axios from "axios";
+import axios from "axios"
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useState,useEffect } from "react";
