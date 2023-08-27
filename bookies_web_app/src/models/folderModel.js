@@ -1,7 +1,7 @@
 import { model, models, Schema } from "mongoose";
 const folderSchema = new Schema(
     {
-        user:{
+        gmail:{
             type:String,
             required:true
         },

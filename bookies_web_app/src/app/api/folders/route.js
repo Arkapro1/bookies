@@ -2,10 +2,9 @@ import Folders from "@/models/folderModel";
 import connect from "@/utils/database";
 import { NextResponse } from "next/server";
 
-export const GET=async(request)=>{
+export const GET=async(req,res)=>{
     try {
-        // const session = await session({request})
-        // console.log(session.user.email,"jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj")
+       
         await connect();
         const folders = await Folders.find({});
 

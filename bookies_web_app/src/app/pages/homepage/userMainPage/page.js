@@ -5,15 +5,17 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useState,useEffect } from "react";
 
+
 const userMainPage=()=>{
  
     const {data:session ,status}=useSession();
     const [toggle, setToggle] = useState(false);
     const WorkspacesApi="/api/folders"
-  // const [user,setUser]=useState( session?.user.email);
     const [workspaces,setWorkspaces]=useState([])
-    const [constworkspaces,constsetWorkspaces]=useState([])
-    const [newWorkspace,setNewWorkspace]=useState({name:"",description:"",isWorkSpace:true})
+    const [constworkspaces,constsetWorkspaces]=useState([]);
+    let pass= session?.user?.email.toString();
+    console.log(pass); 
+    const [newWorkspace,setNewWorkspace]=useState({gmail: pass || "",name:"",description:"",isWorkSpace:true})
     const formselect=["CREATE","UPDATE"]
     const [formtype,setFormtype]=useState(formselect[0])
     let [foldereditApi,foldereditApiSet]=useState("");
@@ -44,9 +46,13 @@ const userMainPage=()=>{
       setWorkspaces(filterdata)
     }
     const getWorkspaces=async()=>{
+      const gmail=await session?.user?.email.toString();
+      setNewWorkspace({gmail,name:"",description:"",isWorkSpace:true})
       const content=await axios.get(WorkspacesApi)
       setWorkspaces(content.data)
       constsetWorkspaces(content.data)
+      console.log(newWorkspace);
+     
       
     }
     const createWorkspace=async()=>{
@@ -55,7 +61,7 @@ const userMainPage=()=>{
      await getWorkspaces()
     }
     useEffect(() => {
-      console.log(newWorkspace);
+     
       getWorkspaces();
       
     },[])
