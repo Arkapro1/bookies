@@ -1,6 +1,10 @@
 import { model, models, Schema } from "mongoose";
 const folderSchema = new Schema(
     {
+        user:{
+            type:String,
+            required:true
+        },
         name:{
             type:String,
             required:true

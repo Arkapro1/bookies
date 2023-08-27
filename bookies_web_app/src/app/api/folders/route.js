@@ -4,8 +4,10 @@ import { NextResponse } from "next/server";
 
 export const GET=async(request)=>{
     try {
+        // const session = await session({request})
+        // console.log(session.user.email,"jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj")
         await connect();
-        const folders = await Folders.find();
+        const folders = await Folders.find({});
 
      let filteredData=  folders.filter((ele)=>{
             return ele.isWorkSpace;
