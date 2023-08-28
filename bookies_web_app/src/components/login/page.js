@@ -5,13 +5,17 @@ import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import './style.css';
 import './style1.css';
+import axios from "axios";
 function Login() {
     let session = useSession();
     const router = useRouter();
     session = session.data;
     const [sidebar, setsidebar] = useState();
-    if (session) { 
+    if (session) {
+        axios.post("/api/user/create",{name:session?.user?.name,gmail:session?.user?.email})
+        
         redirect("/pages/homepage/userMainPage");
+       
       }
       
     return (

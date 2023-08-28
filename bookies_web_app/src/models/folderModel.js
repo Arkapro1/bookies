@@ -21,11 +21,14 @@ const folderSchema = new Schema(
             type:Boolean,
             required:true
         },
+        collabUser:{
+            type:[{type:Schema.Types.ObjectId}],
+            ref:"Users"
+        },
         description:{
             type:String,
             
         },
-
         createAt: {
             type: Date,
             default: Date.now
