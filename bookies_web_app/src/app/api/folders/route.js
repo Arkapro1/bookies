@@ -4,12 +4,12 @@ import { NextResponse } from "next/server";
 export const GET=async(req,res)=>{
     try {
         // const body=await request.json(); 
-        // console.log(body)
+        // console.log(body,"fgggggggggggggggggggs")
         // const session =await getServerSession(authOptions)
         
         await connect();
-        // const folders = await Folders.find({gmail:session?.user?.email});
-        const folders=await Folders.find();
+        const folders = await Folders.find({});
+        // const folders=await Folders.find();
 
     //  let filteredData=  folders.filter((ele)=>{
             // return ele.isWorkSpace;
