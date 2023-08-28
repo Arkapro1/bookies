@@ -24,5 +24,9 @@
   "main": "index.js",
   "license": "MIT",
   "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
-  "author": ""
+  "author": "",
+  "devDependencies": {
+    "@types/react": "18.2.21",
+    "typescript": "5.2.2"
+  }
 }
