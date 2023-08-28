@@ -5,6 +5,10 @@ const folderSchema = new Schema(
             type:String,
             required:true
         },
+        gmail:{
+            type:String, 
+            required:true
+        },
         subFolders:{
             type:[{type:Schema.Types.ObjectId}],
             ref:"Folders"

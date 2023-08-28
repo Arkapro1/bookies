@@ -1,25 +1,25 @@
 "use client";
 
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const userMainPage=()=>{
- 
-    const {data:session ,status}=useSession();
+import axios from 'axios';
+
+const userMainPage=()=>{ 
+    const {data:session,status}=useSession();
+    let mail=session?.user?.email;
+    console.log(mail);
     const [toggle, setToggle] = useState(false);
     const WorkspacesApi="/api/folders"
    
     const [workspaces,setWorkspaces]=useState([])
     const [constworkspaces,constsetWorkspaces]=useState([])
-    const [newWorkspace,setNewWorkspace]=useState({name:"",description:"",isWorkSpace:true})
+    const [newWorkspace,setNewWorkspace]=useState({gmail:"",name:"",description:"",isWorkSpace:true})
     const formselect=["CREATE","UPDATE"]
     const [formtype,setFormtype]=useState(formselect[0])
     let [foldereditApi,foldereditApiSet]=useState("");
-    // const foldereditApiSet=(api)=>{
-    //   foldereditApi=api;
-    // }
+    
   const folderEdit=async()=>{
     console.log(foldereditApi)
    await axios.put(foldereditApi,newWorkspace);
@@ -29,7 +29,7 @@ const userMainPage=()=>{
         redirect('/');
     }
     const updateFormFill=(name,description)=>{
-      setNewWorkspace({...newWorkspace,name,description})
+      setNewWorkspace({...newWorkspace,gmail:"gmaa",name,description})
     }
     const updateWorkspace=()=>{
 
@@ -50,7 +50,7 @@ const userMainPage=()=>{
     }
     const createWorkspace=async()=>{
      await axios.post(WorkspacesApi,newWorkspace);
-     await getWorkspaces()
+     await getWorkspaces() 
     }
     useEffect(() => {
       getWorkspaces();
@@ -87,6 +87,8 @@ const userMainPage=()=>{
                     </div>
                   
                     <button type="button" onClick={()=>{formtype=="CREATE"?createWorkspace():folderEdit(); setToggle(false);setNewWorkspace({name:"",description:"",isWorkSpace:true})}} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{formtype=="CREATE"?"Create":"Update"}</button>
+                    
+                    {formtype=="UPDATE" && <button type="button" onClick={()=>{createWorkspace(); setToggle(false);setNewWorkspace({name:"",description:"",isWorkSpace:true})}} className=" bg-red-600 w-full text-white  hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center   dark:focus:ring-blue-800">{"Delete"}</button>}
                    
                 </form>
             </div>
@@ -95,7 +97,7 @@ const userMainPage=()=>{
 </div> 
 </div>
 }
-      <section className="text-gray-600 body-font px-4">
+      <section className="text-gray-600 body-font px-4 bg-dark">
       
     <div className="">
 
@@ -222,6 +224,7 @@ const Article=({props,setToggle,setFormtype,updateFormFill,foldereditApiSet})=>{
                 <path d='M5 12h13M12 5l7 7-7 7' />
             </svg>
             </button>
+            
         </div>
         </div>
 
