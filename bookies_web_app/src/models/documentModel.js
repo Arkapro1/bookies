@@ -2,10 +2,6 @@ import { model, models, Schema } from "mongoose";
 
 const docSchema = new Schema(
     {
-        user:{
-            type:String,
-            required:true
-        },
         name:{
             type:String,
             required:true
