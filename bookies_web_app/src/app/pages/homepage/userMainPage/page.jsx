@@ -12,17 +12,12 @@ const userMainPage=()=>{
     const WorkspacesApi="/api/folders"
    
     const [workspaces,setWorkspaces]=useState([])
-<<<<<<< HEAD:bookies_web_app/src/app/pages/homepage/userMainPage/page.jsx
     const [constworkspaces,constsetWorkspaces]=useState([]);
     let pass= `${session?.user?.email.toString()}`;
     // console.log(pass); 
     const[aa,aaa]=useState(session?.user?.email)
     // const [pass,setPass]=useState("");
     const [newWorkspace,setNewWorkspace]=useState({gmail: pass || "",name:"",description:"",isWorkSpace:true})
-=======
-    const [constworkspaces,constsetWorkspaces]=useState([])
-    const [newWorkspace,setNewWorkspace]=useState({name:"",description:"",isWorkSpace:true})
->>>>>>> parent of 8b57270 (Merge branch 'main' of https://github.com/Arkapro1/bookies):bookies_web_app/src/app/pages/homepage/userMainPage/page.js
     const formselect=["CREATE","UPDATE"]
     const [formtype,setFormtype]=useState(formselect[0])
     let [foldereditApi,foldereditApiSet]=useState("");
@@ -53,12 +48,8 @@ const userMainPage=()=>{
     }
     let content=""
     const getWorkspaces=async()=>{
-<<<<<<< HEAD:bookies_web_app/src/app/pages/homepage/userMainPage/page.jsx
       console.log(aa);
       const content=await axios.get(WorkspacesApi,{gmail:pass})
-=======
-      const content=await axios.get(WorkspacesApi)
->>>>>>> parent of 8b57270 (Merge branch 'main' of https://github.com/Arkapro1/bookies):bookies_web_app/src/app/pages/homepage/userMainPage/page.js
       setWorkspaces(content.data)
       constsetWorkspaces(content.data)
       
@@ -102,13 +93,9 @@ const userMainPage=()=>{
                         <textarea rows="5" type="text" name="description" id="description" placeholder="Description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required value={newWorkspace.description} onChange={(e)=>setNewWorkspace({...newWorkspace,description:e.target.value})}/>
                     </div>
                   
-<<<<<<< HEAD:bookies_web_app/src/app/pages/homepage/userMainPage/page.jsx
                     <button type="button" onClick={()=>{formtype=="CREATE"?createWorkspace():folderEdit(); axios.get(WorkspacesApi,{gmail:session?.user?.email});
                     setWorkspaces(content.data)
       constsetWorkspaces(content.data);setToggle(false);setNewWorkspace({...newWorkspace,name:"",description:"",})}} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >{formtype=="CREATE"?"Create":"Update"}</button>
-=======
-                    <button type="button" onClick={()=>{formtype=="CREATE"?createWorkspace():folderEdit(); setToggle(false);setNewWorkspace({name:"",description:"",isWorkSpace:true})}} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{formtype=="CREATE"?"Create":"Update"}</button>
->>>>>>> parent of 8b57270 (Merge branch 'main' of https://github.com/Arkapro1/bookies):bookies_web_app/src/app/pages/homepage/userMainPage/page.js
                    
                 </form>
             </div>
