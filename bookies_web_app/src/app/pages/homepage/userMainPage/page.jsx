@@ -13,8 +13,10 @@ const userMainPage=()=>{
     const WorkspacesApi="/api/folders"
     const [workspaces,setWorkspaces]=useState([])
     const [constworkspaces,constsetWorkspaces]=useState([]);
-    let pass= session?.user?.email.toString();
-    console.log(pass); 
+    let pass= `${session?.user?.email.toString()}`;
+    // console.log(pass); 
+    const[aa,aaa]=useState(session?.user?.email)
+    // const [pass,setPass]=useState("");
     const [newWorkspace,setNewWorkspace]=useState({gmail: pass || "",name:"",description:"",isWorkSpace:true})
     const formselect=["CREATE","UPDATE"]
     const [formtype,setFormtype]=useState(formselect[0])
@@ -45,10 +47,10 @@ const userMainPage=()=>{
       })
       setWorkspaces(filterdata)
     }
+    let content=""
     const getWorkspaces=async()=>{
-      const gmail=await session?.user?.email.toString();
-      setNewWorkspace({gmail,name:"",description:"",isWorkSpace:true})
-      const content=await axios.get(WorkspacesApi)
+      console.log(aa);
+      const content=await axios.get(WorkspacesApi,{gmail:pass})
       setWorkspaces(content.data)
       constsetWorkspaces(content.data)
       console.log(newWorkspace);
@@ -70,6 +72,7 @@ const userMainPage=()=>{
         <>
         {/* <!-- Main modal --> */}
         
+    
 
 {toggle && 
 <div className=" fixed z-50 flex w-screen h-screen justify-center items-center bg-zinc-950/70 ">
@@ -88,14 +91,16 @@ const userMainPage=()=>{
                 <form className="space-y-6" action="#">
                     <div>
                         <label for="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Workspace Name</label>
-                        <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Workspace Name" required value={newWorkspace.name} onChange={(e)=>setNewWorkspace({...newWorkspace,name:e.target.value})}/>
+                        <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Workspace Name" required value={newWorkspace.name} onChange={(e)=>setNewWorkspace({...newWorkspace,name:e.target.value,gmail:session?.user?.email})}/>
                     </div>
                     <div>
                         <label for="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                         <textarea rows="5" type="text" name="description" id="description" placeholder="Description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required value={newWorkspace.description} onChange={(e)=>setNewWorkspace({...newWorkspace,description:e.target.value})}/>
                     </div>
                   
-                    <button type="button" onClick={()=>{formtype=="CREATE"?createWorkspace():folderEdit(); setToggle(false);setNewWorkspace({...newWorkspace,name:"",description:"",})}} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{formtype=="CREATE"?"Create":"Update"}</button>
+                    <button type="button" onClick={()=>{formtype=="CREATE"?createWorkspace():folderEdit(); axios.get(WorkspacesApi,{gmail:session?.user?.email});
+                    setWorkspaces(content.data)
+      constsetWorkspaces(content.data);setToggle(false);setNewWorkspace({...newWorkspace,name:"",description:"",})}} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >{formtype=="CREATE"?"Create":"Update"}</button>
                    
                 </form>
             </div>

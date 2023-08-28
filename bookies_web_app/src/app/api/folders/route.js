@@ -1,12 +1,16 @@
 import Folders from "@/models/folderModel";
 import connect from "@/utils/database";
 import { NextResponse } from "next/server";
-
+import  authOptions  from "../auth/[...nextauth]/route"
+import { getServerSession } from "next-auth/next"
 export const GET=async(req,res)=>{
     try {
-       
+        // const body=await request.json(); 
+        // console.log(body)
+        const session =await getServerSession(authOptions)
+        
         await connect();
-        const folders = await Folders.find({});
+        const folders = await Folders.find({gmail:session?.user?.email});
 
      let filteredData=  folders.filter((ele)=>{
             return ele.isWorkSpace;
