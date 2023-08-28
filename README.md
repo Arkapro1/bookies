@@ -1,4 +1,4 @@
-# Bookies - Universal Bookmark Organizer
+# 🧠Bookies.Ai - Universal Bookmark Organizer
 
 Welcome to the Bookies repository! This project aims to provide a comprehensive solution for organizing, syncing, and accessing bookmarks across various devices. Whether you're using a computer, a tablet, or a smartphone, Bookies ensures that your favorite online resources are easily manageable and always within reach.
 
