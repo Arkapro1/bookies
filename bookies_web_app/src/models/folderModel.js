@@ -1,4 +1,4 @@
-import { model, models, Schema } from "mongoose";
+import mongoose, { model, models, Schema } from "mongoose";
 const folderSchema = new Schema(
     {
         name:{
@@ -16,6 +16,11 @@ const folderSchema = new Schema(
         documents:{
             type:[{type:Schema.Types.ObjectId}],
             ref:"Documents"
+        },
+        folderCode:{
+            type:String,
+            // default:"hello"
+            unique:true
         },
         isWorkSpace:{
             type:Boolean,

@@ -8,8 +8,7 @@ import axios from 'axios';
 
 const userMainPage=()=>{ 
     const {data:session,status}=useSession();
-    let mail=session?.user?.email;
-    console.log(mail);
+    
     const [toggle, setToggle] = useState(false);
     const WorkspacesApi="/api/folders"
    
@@ -48,7 +47,7 @@ const userMainPage=()=>{
       setWorkspaces(filterdata)
     }
     const getWorkspaces=async()=>{
-      const content=await axios.get(WorkspacesApi,{gmail:newWorkspace.gmail})
+      const content=await axios.get(WorkspacesApi,{email:session?.user?.email})
       setWorkspaces(content.data)
       constsetWorkspaces(content.data)
       

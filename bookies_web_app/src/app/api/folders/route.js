@@ -1,9 +1,10 @@
 import Folders from "@/models/folderModel";
 import connect from "@/utils/database";
+import { useParams } from "next/navigation";
 import { NextResponse } from "next/server";
 export const GET=async(req,res)=>{
     try {
-        // const body=await request.json(); 
+        // const {gmail}=useParams()
         // console.log(body,"fgggggggggggggggggggs")
         // const session =await getServerSession(authOptions)
         
@@ -26,7 +27,9 @@ export const GET=async(req,res)=>{
 export const POST=async(request)=>{
     const body=await request.json();  
     // console.log(body)
-    const newDoc=new Folders(body);
+    const folderCode=Math.floor(Math.random() * 9000000000) + 1000000000;
+    console.log(folderCode);
+    const newDoc=new Folders({...body,folderCode:`${folderCode}`});
     // const newDoc=body;
     try {
         await connect();
