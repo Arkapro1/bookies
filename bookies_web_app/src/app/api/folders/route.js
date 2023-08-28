@@ -1,3 +1,4 @@
+
 import Folders from "@/models/folderModel";
 import connect from "@/utils/database";
 import { NextResponse } from "next/server";
@@ -40,8 +41,8 @@ export const GET=async(request)=>{
 }
 
 export const POST=async(request)=>{
-    const body=await request.json(); 
-    console.log(body)
+    const body=await request.json();  
+    // console.log(body)
     const newDoc=new Folders(body);
     // const newDoc=body;
     try {

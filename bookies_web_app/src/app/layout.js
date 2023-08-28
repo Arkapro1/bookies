@@ -17,7 +17,6 @@ export default function RootLayout({ children }) {
         <AuthProvider>
         <Nav/>
         <div className='max-w-screen-xl min-h-screen mx-auto p-4'>
-
         {children}
         </div>
         <Footer/>
