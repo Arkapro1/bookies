@@ -24,8 +24,11 @@ const LinksInFolder = ({ links }) => {
                   />
                 </svg>
                 <p class="ml-2 text-lg body-font">
-                  Enter <span class="italic text-blue-400">links</span>{" "}
-                  <span class="italic">here</span>
+                  Your{" "}
+                  <span class=" text-md font-bold italic text-blue-400">
+                    link
+                  </span>{" "}
+                  {/* <span class="italic">here</span> */}
                 </p>
               </span>
               <div
