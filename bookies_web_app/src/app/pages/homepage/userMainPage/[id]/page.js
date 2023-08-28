@@ -39,7 +39,7 @@ const WorkspaceOpenView = () => {
      }
 
     const putLink=async(link)=>{
-       await axios.post(addLinkApi,{contentLink:link||"kjgajk",contentType:"link"})
+      //  await axios.post(addLinkApi,{contentLink:link||"kjgajk",contentType:"link"})
     }
     useEffect(()=>{
         // getAllLinks()
