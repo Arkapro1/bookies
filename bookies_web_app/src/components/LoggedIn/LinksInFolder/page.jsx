@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 const LinksInFolder = ({ links }) => {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(false); 
+
   return (
     <>
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
@@ -61,10 +62,9 @@ const LinksInFolder = ({ links }) => {
                   <span class="sr-only">Fire icon</span>
                 </div> */}
                 <div class="ml-3 text-sm  text-white body-font font-poppins">
-                  <a>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Vel sed quas architecto
-                  </a>
+                  <p onClick={(e)=>e.preventDefault()}>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate maiores atque labore maxime? Ipsa perspiciatis eaque amet maxime.
+                  </p>
                 </div>
 
                 {/* <button

@@ -12,6 +12,7 @@ const SubFolders = () => {
     const val = setVal(prompt("Enter a link"));
   };
   const [val, setVal] = useState("def");
+  
   console.log(val);
   const { data: session, status } = useSession();
   const [toggle, setToggle] = useState(false);
