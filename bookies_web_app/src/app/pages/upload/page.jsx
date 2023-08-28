@@ -6,38 +6,38 @@ const CLOUDINARY_CLOUD_NAME="dp9sxoddy"
 ,CLOUDINARY_API_KEY="744592612514596"
 ,CLOUDINARY_API_SECRET="tTNiGqsPjnHncSuQ4NI5cY5x_Rc",
 CLOUDINARY_UPLOAD_PRESET="npfiapsd"
+let uploadedImage=""
 const Upload = () => {
     const [file, setFile] = useState([]);
-    const [uploadedImage, setUploadedImage] = useState('');
-    
+    console.log("look",uploadedImage);
     const handleFileChange = async (e) => {
      alert("Uploading Your Files⌛🔐")
     if (e.target.files) {
       const selectedFile = e.target.files[0];
+      //file detected
       setFile([...file, selectedFile]); // Use spread operator to update state
 
       const formData = new FormData();
       formData.append('file', selectedFile);
       formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
       try {
-        console.log('hjckhgckgvvkhg');
+        console.log('uploading');
         const response = await axios.post(
           `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
           formData,
-        );
-        let NewId=(response.data.public_id);
-        setUploadedImage(NewId);
+        )
+        // //  taking the UpdatedImgId
+        uploadedImage=response.data.public_id;
+        // // demon try 
+        // console.log(response);
+        // setUploadedImage(response.data.public_id);
+        console.log("this is data uploadedImageId->>",uploadedImage)
       } catch (error) {
-        console.error('Error uploading image:', error);
-        // Display an error message to the user
+        console.error('Error uploading image:', error);                                                                                                                                                                                                                                                                                         
       }
-      
-      console.log("uploaded ---> ",uploadedImage);
     }
   };
-
   // console.log(file);
-
   return (
     <>
           <div className="mt-20">
@@ -84,7 +84,7 @@ const Upload = () => {
             />
           </label>
         </div>
-        <a href="/pages/homepage/userMainPage">
+        <a href="/pages/homepage/userMainPage/">
           <button className="border border-white hover:bg-gray-700 text-gray-200 p-3 rounded-lg mt-5">
             Go Back
           </button>
