@@ -5,7 +5,6 @@ Welcome to the Bookies repository! This project aims to provide a comprehensive 
 # Bookies.Ai 📚
 ![Bookies Extension](https://drive.google.com/uc?id=1cA0_o63Rj9dIcQOvYapmHpqe9JOjqjPR)
 
-
 Welcome to Bookies, your ultimate bookmark management service! 🚀
 
 Organize, Sync, and Access Your Bookmarks Effortlessly 🌐
@@ -22,6 +21,15 @@ Organize, Sync, and Access Your Bookmarks Effortlessly 🌐
 
 🔍 **Universal Search:** Quickly find bookmarks using keywords, tags, or folder names.
 
+## How The UI looks like  🚀
+![Bookies Extension](https://drive.google.com/uc?id=1Kl9gO3wFwAC2SyCgaDMPD_LG9j9pcRWy)
+![Bookies Extension](https://drive.google.com/uc?id=1R9rVY3PgYPElCg9EVuePmTUCg0340etT)
+![Bookies Extension](https://drive.google.com/uc?id=1_zJVPHSGYn7IGRu90hKjrHsK4dtd6VcO)
+## Workspaces 🚀
+![Bookies Extension](https://drive.google.com/uc?id=1lgXFyGelvR4F5tX5JEH2A1vfxjsfXGTa)
+![Bookies Extension](https://drive.google.com/uc?id=14wKNLRqGjv4jd113LMYjgb_pjl_TBU5_)
+![Bookies Extension](https://drive.google.com/uc?id=1vmDBSZxgCQ1Mo_wJBcOmud2pFWn-vtno)
+![Bookies Extension](https://drive.google.com/uc?id=19z1plg5u0Uzs_-p2si_rKrrIAZWp3UT8)
 ## Getting Started 🚀
 
 1. Clone this repository to get started.
@@ -42,6 +50,9 @@ Organize, Sync, and Access Your Bookmarks Effortlessly 🌐
 
 - **Universal Search:** Find bookmarks quickly using Bookies' powerful search feature. Search by keywords, tags, or folder names to locate your saved resources in no time.
 
+## Working Stage
+1. **Collab with friends** 
+2. **Integrate Ai with your Workspace** 
 ## Getting Started
 
 To get started with Bookies, follow these steps:
