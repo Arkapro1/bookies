@@ -13,6 +13,7 @@ import Filter from "@/components/Filter/page";
 const WorkspaceOpenView = () => {
     return (
         <>
+
             <Filter/>
             <SubFolders />
             <LinksInFolder />
