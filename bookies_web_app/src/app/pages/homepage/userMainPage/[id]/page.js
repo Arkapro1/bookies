@@ -10,9 +10,11 @@ import TextInFolder from "@/components/LoggedIn/TextInFolder/page";
 import ImgInFolder from "@/components/LoggedIn/ImgInFolder/page";
 import DocsInFolder from "@/components/DocsInFolder/page";
 import Filter from "@/components/Filter/page";
+import Add_on from "@/components/Add_on/page";
 const WorkspaceOpenView = () => {
     return (
         <>
+            {/* <Add_on/> */}
             <Filter/>
             <SubFolders />
             <LinksInFolder />
