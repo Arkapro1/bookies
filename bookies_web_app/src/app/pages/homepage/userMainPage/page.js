@@ -236,5 +236,3 @@ const Article=({props,setToggle,setFormtype,updateFormFill,foldereditApiSet,fold
         </>
     )
 }
-
-
