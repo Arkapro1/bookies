@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
 const TextInFolder = ({ texts }) => {
-  const [toggle, setToggle] = useState(false);
+  
   return (
     <>
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
         {texts.map((text) => {
+          const [toggle, setToggle] = useState(false);
           return (
             <div>
               {/* <a class="block min-w-60 max-w-60 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">

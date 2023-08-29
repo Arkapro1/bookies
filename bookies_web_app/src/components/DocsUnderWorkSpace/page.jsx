@@ -31,7 +31,7 @@ const SubFolders = () => {
   const [workspaces, setWorkspaces] = useState([]);
   const [constworkspaces, constsetWorkspaces] = useState([]);
   const [newWorkspace, setNewWorkspace] = useState({
-    gmail: "gm",
+    gmail: "",
     name: "",
     description: "",
     isWorkSpace: true,
@@ -68,7 +68,7 @@ const SubFolders = () => {
     await getWorkspaces();
   };
   useEffect(() => {
-    getWorkspaces();
+    // getWorkspaces();
   }, []);
   return (
     <>

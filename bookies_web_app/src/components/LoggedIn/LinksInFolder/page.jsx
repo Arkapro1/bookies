@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
 const LinksInFolder = ({ links }) => {
-  const [toggle, setToggle] = useState(false); 
+  
 
   return (
     <>
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
         {links.map((link) => {
+          const [toggle, setToggle] = useState(false); 
           return (
             <div class="mb-10 w-60">
               <span class="flex">
@@ -138,4 +139,8 @@ const LinksInFolder = ({ links }) => {
     </>
   );
 };
+
+const linkItem=()=>{
+  
+}
 export default LinksInFolder;
