@@ -1,7 +1,8 @@
-# 🧠Bookies.Ai - Universal Bookmark Organizer
+# [🧠Bookies.Ai](https://bookies-ai.vercel.app/) - Universal Bookmark Organizer
 
 Welcome to the Bookies repository! This project aims to provide a comprehensive solution for organizing, syncing, and accessing bookmarks across various devices. Whether you're using a computer, a tablet, or a smartphone, Bookies ensures that your favorite online resources are easily manageable and always within reach.
-
+## ```TAKE A LOOK LIVE LINK->```
+### [Bookies.Ai](https://bookies-ai.vercel.app/)
 # Bookies.Ai 📚
 ![Bookies Extension](https://drive.google.com/uc?id=1cA0_o63Rj9dIcQOvYapmHpqe9JOjqjPR)
 
