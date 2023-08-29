@@ -11,6 +11,7 @@ const userMainPage=()=>{
     
     const [toggle, setToggle] = useState(false);
     const WorkspacesApi="/api/folders"
+ 
    
     const [workspaces,setWorkspaces]=useState([])
     const [constworkspaces,constsetWorkspaces]=useState([])
@@ -117,6 +118,7 @@ const userMainPage=()=>{
     <div className="">
 
         <div className="grid gap-auto  mb-10 pt-6 md:mb-16 lg:grid-cols-2 ">
+          
         <h2 className="mb-4 inline text-start font-serif text-3xl font-bold text-gray-200 md:mb-6 md:text-4xl">Welcome {session?.user.name}</h2>
 
 <div className="columns-2 ">
