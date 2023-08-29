@@ -1,7 +1,28 @@
 "use client";
-import { useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 const TextInFolder = ({ texts }) => {
   const [toggle, setToggle] = useState(false);
+
+  const control = useAnimation();
+  const [ref, inView] = useInView();
+  const boxVariant = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.2 },
+    },
+    hidden: { opacity: 0, scale: 0.8 },
+  };
+  useEffect(() => {
+    if (inView) {
+      control.start("visible");
+    } else {
+      control.start("hidden");
+    }
+  }, [control, inView]);
+
   return (
     <>
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
@@ -36,61 +57,67 @@ const TextInFolder = ({ texts }) => {
                   Details of the text{" "}
                 </p>
               </a> */}
-
-              <div
-                onContextMenu={(e) => {
-                  e.preventDefault();
-                  // () => {
-                  setToggle((prev) => !prev);
-                  // };
-                }}
-                class="block w-64 mt-10 p-6  border border-gray-200 rounded-lg shadow  dark:border-gray-700 "
+              <motion.div
+                initial="hidden"
+                animate={control}
+                ref={ref}
+                variants={boxVariant}
               >
-                <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                  Noteworthy technology
-                </h5>
-                <p class="text-sm text-left text-gray-700 dark:text-gray-400">
-                  Here are the biggest enterprise technology.
-                </p>
-                {toggle && (
-                  <div className="mt-2">
-                    <button className="mr-2 hover:bg-green-400 p-2 rounded">
-                      <svg
-                        class="w-[17px] h-[17px] text-gray-800 dark:text-white"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 20 18"
-                      >
-                        <path
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M4.109 17H1v-2a4 4 0 0 1 4-4h.87M10 4.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm7.95 2.55a2 2 0 0 1 0 2.829l-6.364 6.364-3.536.707.707-3.536 6.364-6.364a2 2 0 0 1 2.829 0Z"
-                        />
-                      </svg>
-                    </button>
-                    <button className="mr-2 hover:bg-red-700 p-2 rounded">
-                      <svg
-                        class="w-[17px] h-[17px] text-gray-800 dark:text-white"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 18 20"
-                      >
-                        <path
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                )}
-              </div>
+                <div
+                  onContextMenu={(e) => {
+                    e.preventDefault();
+                    // () => {
+                    setToggle((prev) => !prev);
+                    // };
+                  }}
+                  class="block w-64 mt-10 p-6  border border-gray-200 rounded-lg shadow  dark:border-gray-700 "
+                >
+                  <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+                    Noteworthy technology
+                  </h5>
+                  <p class="text-sm text-left text-gray-700 dark:text-gray-400">
+                    Here are the biggest enterprise technology.
+                  </p>
+                  {toggle && (
+                    <div className="mt-2">
+                      <button className="mr-2 hover:bg-green-400 p-2 rounded">
+                        <svg
+                          class="w-[17px] h-[17px] text-gray-800 dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 20 18"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4.109 17H1v-2a4 4 0 0 1 4-4h.87M10 4.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm7.95 2.55a2 2 0 0 1 0 2.829l-6.364 6.364-3.536.707.707-3.536 6.364-6.364a2 2 0 0 1 2.829 0Z"
+                          />
+                        </svg>
+                      </button>
+                      <button className="mr-2 hover:bg-red-700 p-2 rounded">
+                        <svg
+                          class="w-[17px] h-[17px] text-gray-800 dark:text-white"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 18 20"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
               {/* 
               {toggle && (
                 <div
