@@ -1,4 +1,4 @@
-import { model, models, Schema } from "mongoose";
+import mongoose, { model, models, Schema } from "mongoose";
 const folderSchema = new Schema(
     {
         name:{
@@ -17,15 +17,23 @@ const folderSchema = new Schema(
             type:[{type:Schema.Types.ObjectId}],
             ref:"Documents"
         },
+        folderCode:{
+            type:String,
+            // default:"hello"
+            unique:true
+        },
         isWorkSpace:{
             type:Boolean,
             required:true
+        },
+        collabUser:{
+            type:[{type:Schema.Types.ObjectId}],
+            ref:"Users"
         },
         description:{
             type:String,
             
         },
-
         createAt: {
             type: Date,
             default: Date.now

@@ -1,14 +1,16 @@
 import Folders from "@/models/folderModel";
 import connect from "@/utils/database";
+import { useParams } from "next/navigation";
 import { NextResponse } from "next/server";
-export const GET=async(req,res)=>{
+export const PUT=async(request)=>{
+    const body=await request.json();
     try {
-        // const body=await request.json(); 
-        // console.log(body,"fgggggggggggggggggggs")
+        // const {gmail}=useParams()
+        console.log(body,"fgggggggggggggggggggs")
         // const session =await getServerSession(authOptions)
         
         await connect();
-        const folders = await Folders.find({});
+        const folders = await Folders.find({gmail:body.gmail,isWorkSpace:true});
         // const folders=await Folders.find();
 
     //  let filteredData=  folders.filter((ele)=>{
@@ -26,7 +28,9 @@ export const GET=async(req,res)=>{
 export const POST=async(request)=>{
     const body=await request.json();  
     // console.log(body)
-    const newDoc=new Folders(body);
+    const folderCode=Math.floor(Math.random() * 9000000000) + 1000000000;
+    console.log(folderCode);
+    const newDoc=new Folders({...body,folderCode:`${folderCode}`});
     // const newDoc=body;
     try {
         await connect();
