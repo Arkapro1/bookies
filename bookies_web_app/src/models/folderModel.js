@@ -26,7 +26,7 @@ const folderSchema = new Schema(
             type:Boolean,
             required:true
         },
-        collabUser:{
+        collabUsers:{
             type:[{type:Schema.Types.ObjectId}],
             ref:"Users"
         },

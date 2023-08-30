@@ -1,8 +1,8 @@
 "use client";
 
-import { signIn, useSession } from "next-auth/react";
+import { signIn, useSession,getSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './style.css';
 import './style1.css';
 import axios from "axios";
@@ -11,12 +11,18 @@ function Login() {
     const router = useRouter();
     session = session.data;
     const [sidebar, setsidebar] = useState();
-    if (session) {
-        axios.post("/api/user/create",{name:session?.user?.name,gmail:session?.user?.email})
+    const setUserAndLoadPage=async()=>{
+        const sessionData=await getSession()
+        if(sessionData){
+            axios.post("/api/user/create",{name:sessionData?.user?.name,gmail:sessionData?.user?.email})
         
-        redirect("/pages/homepage/userMainPage");
-       
-      }
+            redirect("/pages/homepage/userMainPage");
+        }
+    }
+    useEffect(()=>{
+        setUserAndLoadPage();
+    },[])
+ 
       
     return (
         <div className=" w-full py-16 px-4 ">
