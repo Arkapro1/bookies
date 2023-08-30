@@ -1,6 +1,5 @@
 import Folders from "@/models/folderModel";
 import connect from "@/utils/database";
-import { useParams } from "next/navigation";
 import { NextResponse } from "next/server";
 export const PUT=async(request)=>{
     const body=await request.json();

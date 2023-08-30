@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession ,getSession} from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -22,6 +22,9 @@ const userMainPage=()=>{
     let [folderdeleteApi,folderdeleteApiSet]=useState("");
     const email=""+session?.user?.email+"";
     // console.log(session?.user?.email);
+    // if(status=="loading"){
+    //   <LoadingSkeleton/>
+    // }
   const folderEdit=async()=>{
     console.log(foldereditApi)
    await axios.put(foldereditApi,newWorkspace);
@@ -75,44 +78,47 @@ const userMainPage=()=>{
 
     return(
         <>
+        {/* <Suspense fallback={<p>Loading feed...</p>}> */}
+
+        
         {/* <!-- Main modal --> */}
         
 
-{toggle && 
-<div className=" fixed z-50 flex w-screen h-screen justify-center items-center bg-zinc-950/70 ">
-<div id="authentication-modal" tabindex="-1" aria-hidden="true" className="w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto">
-        {/* <!-- Modal content --> */}
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button onClick={ ()=> {setToggle((prev) => !prev);setNewWorkspace({...newWorkspace, name:"",description:"",isWorkSpace:true})}} type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
-                <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                </svg>
-                <span className="sr-only">Create Workspace</span>
-            </button>
-            <div className="px-6 py-6 lg:px-8">
-                <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">{formtype=="CREATE"?"Create":"Update"} New Workspace</h3>
-                <form className="space-y-6" action="#">
-                    <div>
-                        <label for="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Workspace Name</label>
-                        <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Workspace Name" required value={newWorkspace.name} onChange={(e)=>setNewWorkspace({...newWorkspace,name:e.target.value,gmail:`${session?.user?.email}`})}/>
-                    </div>
-                    <div>
-                        <label for="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                        <textarea rows="5" type="text" name="description" id="description" placeholder="Description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required value={newWorkspace.description} onChange={(e)=>setNewWorkspace({...newWorkspace,description:e.target.value})}/>
-                    </div>
-                  
-                    <button type="button" onClick={()=>{formtype=="CREATE"?createWorkspace():folderEdit(); setToggle(false);setNewWorkspace({...newWorkspace, name:"",description:"",isWorkSpace:true})}} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{formtype=="CREATE"?"Create":"Update"}</button>
-                    
-                    {formtype=="UPDATE" && <button type="button" onClick={()=>{folderdelete(folderdeleteApi); setToggle(false);setNewWorkspace({...newWorkspace,name:"",description:"",isWorkSpace:true})}} className=" bg-red-600 w-full text-white  hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center   dark:focus:ring-blue-800">{"Delete"}</button>}
-                   
-                </form>
-            </div>
-        </div>
-    </div>
-</div> 
-</div>
-}
+      {toggle && 
+      <div className=" fixed z-50 flex w-screen h-screen justify-center items-center bg-zinc-950/70 ">
+      <div id="authentication-modal" tabindex="-1" aria-hidden="true" className="w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+          <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto">
+              {/* <!-- Modal content --> */}
+              <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                  <button onClick={ ()=> {setToggle((prev) => !prev);setNewWorkspace({...newWorkspace, name:"",description:"",isWorkSpace:true})}} type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                      <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                      </svg>
+                      <span className="sr-only">Create Workspace</span>
+                  </button>
+                  <div className="px-6 py-6 lg:px-8">
+                      <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">{formtype=="CREATE"?"Create":"Update"} New Workspace</h3>
+                      <form className="space-y-6" action="#">
+                          <div>
+                              <label for="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Workspace Name</label>
+                              <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Workspace Name" required value={newWorkspace.name} onChange={(e)=>setNewWorkspace({...newWorkspace,name:e.target.value,gmail:`${session?.user?.email}`})}/>
+                          </div>
+                          <div>
+                              <label for="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                              <textarea rows="5" type="text" name="description" id="description" placeholder="Description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required value={newWorkspace.description} onChange={(e)=>setNewWorkspace({...newWorkspace,description:e.target.value})}/>
+                          </div>
+                        
+                          <button type="button" onClick={()=>{formtype=="CREATE"?createWorkspace():folderEdit(); setToggle(false);setNewWorkspace({...newWorkspace, name:"",description:"",isWorkSpace:true})}} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{formtype=="CREATE"?"Create":"Update"}</button>
+                          
+                          {formtype=="UPDATE" && <button type="button" onClick={()=>{folderdelete(folderdeleteApi); setToggle(false);setNewWorkspace({...newWorkspace,name:"",description:"",isWorkSpace:true})}} className=" bg-red-600 w-full text-white  hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center   dark:focus:ring-blue-800">{"Delete"}</button>}
+                        
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div> 
+      </div>
+      }
       <section className="text-gray-600 body-font px-4 bg-dark">
      
     <div className="">
@@ -121,12 +127,12 @@ const userMainPage=()=>{
           
         <h2 className="mb-4 inline text-start font-serif text-3xl font-bold text-gray-200 md:mb-6 md:text-4xl">Welcome {session?.user.name}</h2>
 
-<div className="columns-2 ">
+      <div className="columns-2 ">
 
 
-<button onClick={() => {setToggle((prev) => !prev);setFormtype("CREATE")}} data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 lg:ml-16 xl:ml-40" type="button">
-  Create
-</button> 
+      <button onClick={() => {setToggle((prev) => !prev);setFormtype("CREATE")}} data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 lg:ml-16 xl:ml-40" type="button">
+        Create
+      </button> 
         {/* searchbox */}
         
        <div className=" mb-4 flex flex-wrap">
@@ -150,12 +156,13 @@ const userMainPage=()=>{
                 clip-rule="evenodd" />
             </svg>
           </span>
- </div>
+      </div>
 
         </div>
         </div>
+        
         <div className="mx-5 grid gap-8 place-items-center sm:grid-cols-2 sm:gap-12 lg:grid-cols-4  xl:gap-16">
-
+        <p>collab</p>
         {
          workspaces?.map((ele)=>{
             
@@ -167,12 +174,22 @@ const userMainPage=()=>{
         </div>
     </div>
 </section>
-
+{/* </Suspense> */}
         </>
     )
 }
 
+const Comp=()=>{
+  return(
+    <>
+      {/* <Suspense fallback={<p>Loading feed...</p>}> */}
+        {/* <userMainPage/> */}
+        {/* </Suspense> */}
+    </>
+  )
+}
 export default userMainPage;
+// export default Comp;
 
 
 
