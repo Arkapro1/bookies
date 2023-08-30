@@ -18,6 +18,10 @@ const userSchema = new Schema(
             type:[{type:Schema.Types.ObjectId}],
             ref:"Folders"
         },
+        collabRequest:{
+            type:[{type:Schema.Types.ObjectId}],
+            ref:"Users"
+        },
         createAt: {
             type: Date,
             default: Date.now
