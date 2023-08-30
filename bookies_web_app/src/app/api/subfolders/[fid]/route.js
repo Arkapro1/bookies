@@ -8,7 +8,7 @@ export const GET=async(request,{params})=>{
     try {
         await connect();
         const fid=params.fid;
-        const folder = await Folders.findById(fid).populate({path:"subFolders",select:["name"]})
+        const folder = await Folders.findById(fid).populate({path:"subFolders"})
         return new NextResponse(JSON.stringify(folder.subFolders),{status:200});
         
     } catch (error) {
@@ -18,7 +18,8 @@ export const GET=async(request,{params})=>{
 
 export const POST=async(request,{params})=>{
     const body=await request.json(); 
-    const newFolder=new Folders(body);
+    const folderCode=Math.floor(Math.random() * 9000000000) + 1000000000;
+    const newFolder=new Folders({...body,workSpace:false,folderCode});
     
     try {
         await connect();

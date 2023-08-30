@@ -55,6 +55,7 @@ const LinksInFolder = ({ links }) => {
       </span>
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
         {links.map((link) => {
+          const [toggle, setToggle] = useState(false); 
           return (
             <motion.div
               initial="hidden"
@@ -171,4 +172,8 @@ const LinksInFolder = ({ links }) => {
     </>
   );
 };
+
+const linkItem=()=>{
+  
+}
 export default LinksInFolder;

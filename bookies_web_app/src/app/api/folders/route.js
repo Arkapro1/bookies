@@ -5,7 +5,7 @@ export const PUT=async(request)=>{
     const body=await request.json();
     try {
         // const {gmail}=useParams()
-        console.log(body,"fgggggggggggggggggggs")
+        // console.log(body,"fgggggggggggggggggggs")
         // const session =await getServerSession(authOptions)
         
         await connect();

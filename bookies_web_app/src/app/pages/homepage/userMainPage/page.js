@@ -47,7 +47,7 @@ const userMainPage=()=>{
      
       const filterdata=constworkspaces.filter((ele)=>{
        
-        return  ele.name.includes(e.target.value)
+        return  ele.name.toLowerCase().includes(e.target.value.toLowerCase() )
       })
       setWorkspaces(filterdata)
     }
@@ -58,7 +58,7 @@ const userMainPage=()=>{
     
     
     const getWorkspaces=async()=>{
-      console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+      // console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
      const sessionn=await getSession()
       const content=await axios.put(WorkspacesApi,{gmail:sessionn?.user?.email})
       setWorkspaces(content.data)
@@ -240,9 +240,16 @@ const Article=({props,setToggle,setFormtype,updateFormFill,foldereditApiSet,fold
             <div>
             <dt className='sr-only'>Users</dt>
             <dd className='flex justify-start -space-x-1.5'>
-                <a href='#' className='inline-block -m-1'>
+            <a href='#' className='inline-block -m-1'>
                 <img className='w-7 h-7 rounded-full ring-2 ring-white dark:ring-slate-800' src={session?.user.image} alt='avatar' />
                 </a>
+            {/* {props.collabUser.map(()=>{
+              return<a href='#' className='inline-block -m-1'>
+                <img className='w-7 h-7 rounded-full ring-2 ring-white dark:ring-slate-800' src={session?.user.image} alt='avatar' />
+                </a>
+            })
+               
+            } */}
                 
                 <span className='inline-block -m-1 rounded-full ring-2 ring-white dark:ring-slate-800'>
                 <svg width='28' height='28' viewBox='0 0 31 31' fill='none' xmlns='http://www.w3.org/2000/svg' className='text-slate-200 dark:text-slate-600'>
