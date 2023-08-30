@@ -14,13 +14,16 @@ const userSchema = new Schema(
         type:[{type:Schema.Types.ObjectId}],
         ref:"Folders"
        },
-        collab:{
+        collaborators:{
             type:[{type:Schema.Types.ObjectId}],
             ref:"Folders"
         },
-        collabRequest:{
-            type:[{type:Schema.Types.ObjectId}],
-            ref:"Users"
+        collabRequests:{
+            type:[{type:{
+                collaboratorId:{type:Schema.Types.ObjectId,ref:"Users"},
+                workSpaceId:{type:Schema.Types.ObjectId,ref:"Folders"},
+            }}],
+            
         },
         createAt: {
             type: Date,
