@@ -10,6 +10,9 @@ const userMainPage=()=>{
     const {data:session,status}=useSession();
     
     const [toggle, setToggle] = useState(false);
+    const [Jointoggle, setJoinToggle] = useState(false);
+    const [notification, setnotification] = useState(false);
+    // const [Jointoggle, setJoinToggle] = useState(false);
     const WorkspacesApi="/api/folders"
  
    
@@ -20,7 +23,11 @@ const userMainPage=()=>{
     const [formtype,setFormtype]=useState(formselect[0])
     let [foldereditApi,foldereditApiSet]=useState("");
     let [folderdeleteApi,folderdeleteApiSet]=useState("");
-    const email=""+session?.user?.email+"";
+    //false array
+    const [collabrequests,setCollabrequests]=useState([
+      {collaboratorGmail:"test@gmai1.com",workSpaceName:"test Workspace"},
+      {collaboratorGmail:"test@gmai2.com",workSpaceName:"test Workspace"},
+    ])
     // console.log(session?.user?.email);
   const folderEdit=async()=>{
     console.log(foldereditApi)
@@ -113,6 +120,76 @@ const userMainPage=()=>{
 </div> 
 </div>
 }
+{/* Join A Workspace modal */}
+{Jointoggle && 
+  <div className=" fixed z-50 flex w-screen h-screen justify-center items-center bg-zinc-950/70 ">
+<div id="Join_A_Workspace_modal" tabindex="-1" aria-hidden="true"  className="w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-md max-h-full">
+        {/* <!-- Modal content --> */}
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button onClick={()=>setJoinToggle(false)} type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="px-6 py-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Join a Workspace</h3>
+                <form class="space-y-6" action="#">
+                  
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">WorkSpace Code</label>
+                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required/>
+                    </div>
+                    
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Request a Collab</button>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+</div> 
+}
+{/* notification tg */}
+{notification && 
+  <div className=" fixed z-50 flex w-screen h-screen justify-center items-center bg-zinc-950/70 ">
+<div id="notification_Tg" tabindex="-1" aria-hidden="true"  className="w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-md max-h-full">
+        {/* <!-- Modal content --> */}
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button onClick={()=>setnotification(false)} type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="px-6 py-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">🔔 Knock! Knock! </h3>
+                {/* <form class="space-y-6" action="#"> */}
+                 { 
+                  collabrequests.map((request)=>{
+                    return <>
+                    <div>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{request.collaboratorGmail} is requesting to Join --{request.workSpaceName}</label>
+                </div>
+                       <div class="colums-2">
+                       <button type="text" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
+                         <button type="text" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={()=>{setCollabrequests([...collabrequests].filter((e)=>e!=request))}}>Reject</button>
+                       </div></>
+                  })
+                    
+                  }
+           
+
+                 
+                {/* </form> */}
+            </div>
+        </div>
+    </div>
+</div> 
+</div> 
+}
       <section className="text-gray-600 body-font px-4 bg-dark">
      
     <div className="">
@@ -121,12 +198,30 @@ const userMainPage=()=>{
           
         <h2 className="mb-4 inline text-start font-serif text-3xl font-bold text-gray-200 md:mb-6 md:text-4xl">Welcome {session?.user.name}</h2>
 
-<div className="columns-2 ">
-
+<div className="columns-2 flex ">
 
 <button onClick={() => {setToggle((prev) => !prev);setFormtype("CREATE")}} data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 lg:ml-16 xl:ml-40" type="button">
   Create
 </button> 
+{/* Join a Workspace */}
+<button type="button" onClick={()=>{setJoinToggle((pev)=>!pev)}} data-modal-target="Join_A_Workspace_modal" data-modal-toggle="Join_A_Workspace_modal" class=" text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-3 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+
+  Join a Workspace 
+  </button>
+  {/* Notification */}
+  <button onClick={()=>{setnotification(pev=>(!pev))}} data-modal-target="notification_Tg" data-modal-toggle="notification_Tg">
+<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path fill-rule="evenodd" d="M12 2.25A6.75 6.75 0 005.25 9v.75a8.217 8.217 0 01-2.119 5.52.75.75 0 00.298 1.206c1.54
+  4.57 3.16.99 4.831 1.243a3.75 3.75 0 107.48 0 24.583 24.583 0 004.83-1.244.75.75 0 00.298-1.205 8.217 8.217 0 01-2.118-5.52V9A6.75 6.75 0 0012 2.25zM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 004.496 0l.002.1a2.25 2.25 0 11-4.5 0zm.75-10.5a.75.75 0 000 1.5h1.599l-2.223 3.334A.75.75 0 0010.5 13.5h3a.75.75 0 000-1.5h-1.599l2.223-3.334A.75.75 0 0013.5 7.5h-3z" clip-rule="evenodd" />
+</svg>
+</button>
+{/* View Collabed Spaces */}
+<button type="button" class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 m-1 ">
+  <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM8.547 4.505a8.25 8.25 0 1011.672 8.214l-.46-.46a2.252 2.252 0 01-.422-.586l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.211.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.654-.261a2.25 2.25 0 01-1.384-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.279-2.132z" clipRule="evenodd" />
+</svg>
+View Collabed Spaces
+</button>
         {/* searchbox */}
         
        <div className=" mb-4 flex flex-wrap">

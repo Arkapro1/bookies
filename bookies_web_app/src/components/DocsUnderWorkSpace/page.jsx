@@ -263,6 +263,7 @@ const SubFolders = () => {
                     Select and to your secound Brain 🧠Enhance{" "}
                   </h3>
                   <form class="ml-5" action="#">
+                      data-modal-target="authentication-modal"
                     <div class="">
                       {/* <button onClick={(e) => handleFile}> */}
                       <a
@@ -315,7 +316,6 @@ const SubFolders = () => {
             <div className="columns-2  ">
               <button
                 onClick={() =>{ setToggle1((prev) => !prev);setFormtype("CREATE")}}
-                data-modal-target="authentication-modal"
                 data-modal-toggle="authentication-modal"
                 class="sm:ml-10 mr-3 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-blue-800 "
                 type="button"
