@@ -1,4 +1,5 @@
 import { model, models, Schema } from "mongoose";
+
 const userSchema = new Schema(
     {
         name:{
@@ -14,15 +15,20 @@ const userSchema = new Schema(
         type:[{type:Schema.Types.ObjectId}],
         ref:"Folders"
        },
+       //will be edited as collabspaces
         collaborators:{
             type:[{type:Schema.Types.ObjectId}],
             ref:"Folders"
         },
         collabRequests:{
-            type:[{type:{
+            type:[
+                {
+                type:{
                 collaboratorId:{type:Schema.Types.ObjectId,ref:"Users"},
                 workSpaceId:{type:Schema.Types.ObjectId,ref:"Folders"},
-            }}],
+            }
+        }
+        ],
             
         },
         createAt: {
@@ -33,5 +39,5 @@ const userSchema = new Schema(
 )
 
 // module.exports = mongoose.model('Folders', Folder);
-const Users=models.User || model("Users",userSchema);
+const Users=models.Users || model("Users",userSchema);
 export default Users; 
