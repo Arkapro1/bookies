@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useSession,getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { redirect, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 // import Workspace from "../Folder/page";
@@ -12,7 +12,7 @@ const SubFolders = () => {
     const val = setVal(prompt("Enter a link"));
   };
   const [val, setVal] = useState("def");
-  
+
   console.log(val);
   const { data: session, status } = useSession();
   const [toggle, setToggle] = useState(false);
@@ -20,7 +20,7 @@ const SubFolders = () => {
   if (status == "unauthenticated") {
     redirect("/");
   }
-  const {id}=useParams()
+  const { id } = useParams();
   //   const handleFile = (e) => {
   //     e.preventDefault();
   //     redirect("/pages/upload");
@@ -51,10 +51,10 @@ const SubFolders = () => {
   const updateFormFill = (name, description) => {
     setnewFolder({ ...newFolder, name, description });
   };
-  const folderdelete=async()=>{
+  const folderdelete = async () => {
     await axios.delete(folderdeleteApi);
-    await getFolder()
-  }
+    await getFolder();
+  };
   // const updateWorkspace = () => {};
   // const searchResult = (e) => {
   //   const filterdata = constFolder.filter((ele) => {
@@ -68,12 +68,14 @@ const SubFolders = () => {
     // constsetFolder(content.data);
   };
   const createFolder = async () => {
-    const sessionData= await getSession()
-    await axios.post(FolderApi, {...newFolder,gmail:sessionData?.user?.email});
+    const sessionData = await getSession();
+    await axios.post(FolderApi, {
+      ...newFolder,
+      gmail: sessionData?.user?.email,
+    });
     await getFolder();
   };
   useEffect(() => {
-
     getFolder();
   }, []);
   return (
@@ -145,7 +147,6 @@ const SubFolders = () => {
                           setnewFolder({
                             ...newFolder,
                             name: e.target.value,
-                          
                           })
                         }
                       />
@@ -175,46 +176,58 @@ const SubFolders = () => {
                       />
                     </div>
 
-                  { formtype=="CREATE"&& <button
-                      type="button"
-                      onClick={() => {
-                        createFolder() ;
-                        setToggle1(false);
-                        setnewFolder({
-                          ...newFolder,
-                          name: "",
-                          description: "",
-                          isWorkSpace: false,
-                        });
-                      }}
-                      className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >
-                     
-                      Create
-                    </button>
-                  }
-                    { formtype=="UPDATE" &&<button  onClick={() => {
-                        folderEdit();
-                        setToggle1(false);
-                        setnewFolder({
-                          ...newFolder,
-                          name: "",
-                          description: "",
-                          isWorkSpace: false,
-                        });
-                      }} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Update</button>
-                    }
-                    { formtype=="UPDATE" &&<button  onClick={() => {
-                        folderdelete();
-                        setToggle1(false);
-                        setnewFolder({
-                          ...newFolder,
-                          name: "",
-                          description: "",
-                          isWorkSpace: false,
-                        });
-                      }}  className="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Delete</button>
-                    }
+                    {formtype == "CREATE" && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          createFolder();
+                          setToggle1(false);
+                          setnewFolder({
+                            ...newFolder,
+                            name: "",
+                            description: "",
+                            isWorkSpace: false,
+                          });
+                        }}
+                        className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        Create
+                      </button>
+                    )}
+                    {formtype == "UPDATE" && (
+                      <button
+                        onClick={() => {
+                          folderEdit();
+                          setToggle1(false);
+                          setnewFolder({
+                            ...newFolder,
+                            name: "",
+                            description: "",
+                            isWorkSpace: false,
+                          });
+                        }}
+                        className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        Update
+                      </button>
+                    )}
+                    {formtype == "UPDATE" && (
+                      <button
+                        onClick={() => {
+                          folderdelete();
+                          setToggle1(false);
+                          setnewFolder({
+                            ...newFolder,
+                            name: "",
+                            description: "",
+                            isWorkSpace: false,
+                          });
+                        }}
+                        className="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                      >
+                        Delete
+                      </button>
+                    )}
                   </form>
                 </div>
               </div>
@@ -314,7 +327,10 @@ const SubFolders = () => {
 
             <div className="columns-2  ">
               <button
-                onClick={() =>{ setToggle1((prev) => !prev);setFormtype("CREATE")}}
+                onClick={() => {
+                  setToggle1((prev) => !prev);
+                  setFormtype("CREATE");
+                }}
                 data-modal-target="authentication-modal"
                 data-modal-toggle="authentication-modal"
                 class="sm:ml-10 mr-3 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-blue-800 "
@@ -362,20 +378,21 @@ const SubFolders = () => {
             </div>
           </div>
           <div class="mx-5 grid gap-8 place-items-center sm:grid-cols-2 sm:gap-12 lg:grid-cols-4  xl:gap-16">
-          {
-            Folder.map((ele) => {
+            {Folder.map((ele) => {
               return (
                 <>
                   <FolderCard
-                   props={ele} setFormtype={setFormtype} setToggle1={setToggle1} updateFormFill={updateFormFill} foldereditApiSet={foldereditApiSet} folderdeleteApiSet={folderdeleteApiSet}
+                    props={ele}
+                    setFormtype={setFormtype}
+                    setToggle1={setToggle1}
+                    updateFormFill={updateFormFill}
+                    foldereditApiSet={foldereditApiSet}
+                    folderdeleteApiSet={folderdeleteApiSet}
                   />
                 </>
               );
-            }
+            })}
 
-            )
-          }
-           
             <br />
           </div>
         </div>
@@ -386,64 +403,114 @@ const SubFolders = () => {
 
 export default SubFolders;
 
-const FolderCard=({props,setToggle1,setFormtype,updateFormFill,foldereditApiSet,folderdeleteApiSet})=>{
-  const {data:session ,status}=useSession();
-  const foldereditApi=`/api/folderEdit/${props._id}`
-  const folderdeleteApi=`/api/delete/folder/${props._id}`
- 
-    return(
-        <>
-        
-           <div  className='break-inside relative overflow-hidden flex flex-col justify-between space-y-3 text-sm rounded-xl min-w-[16rem] max-w-[23rem] p-4 mb-4 bg-white text-black dark:bg-slate-800 dark:text-white'>
-        <div className='flex items-center justify-between font-medium'>
-            <span className='uppercase text-xs text-green-500'>edit collabs</span>
-            <span className='text-xs text-slate-500'>#team</span>
+const FolderCard = ({
+  props,
+  setToggle1,
+  setFormtype,
+  updateFormFill,
+  foldereditApiSet,
+  folderdeleteApiSet,
+}) => {
+  const { data: session, status } = useSession();
+  const foldereditApi = `/api/folderEdit/${props._id}`;
+  const folderdeleteApi = `/api/delete/folder/${props._id}`;
+
+  return (
+    <>
+      <div className="break-inside relative overflow-hidden flex flex-col justify-between space-y-3 text-sm rounded-xl min-w-[16rem] max-w-[23rem] p-4 mb-4 bg-white text-black dark:bg-slate-800 dark:text-white">
+        <div className="flex items-center justify-between font-medium">
+          <span className="uppercase text-xs text-green-500">edit collabs</span>
+          <span className="text-xs text-slate-500">#team</span>
         </div>
-        <a href={"/pages/homepage/userMainPage/"+props._id}>
-        <div className='flex flex-row items-center space-x-3'>
-            <div className='flex flex-none items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white'>
-            <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-                <polygon points='14 2 18 6 7 17 3 17 3 13 14 2' />
-                <line x1='3' y1='22' x2='21' y2='22' />
-            </svg>
+        <a href={"/pages/homepage/userMainPage/" + props._id}>
+          <div className="flex flex-row items-center space-x-3">
+            <div className="flex flex-none items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon points="14 2 18 6 7 17 3 17 3 13 14 2" />
+                <line x1="3" y1="22" x2="21" y2="22" />
+              </svg>
             </div>
-            <span className='text-base font-medium'>{props.name}</span>
-        </div>
+            <span className="text-base font-medium">{props.name}</span>
+          </div>
         </a>
         <div>{props.description}</div>
-        <div className='flex justify-between items-center'>
-            <div>
-            <dt className='sr-only'>Users</dt>
-            <dd className='flex justify-start -space-x-1.5'>
-            <a href='#' className='inline-block -m-1'>
-                <img className='w-7 h-7 rounded-full ring-2 ring-white dark:ring-slate-800' src={session?.user.image} alt='avatar' />
-                </a>
-            {/* {props.collabUser.map(()=>{
+        <div className="flex justify-between items-center">
+          <div>
+            <dt className="sr-only">Users</dt>
+            <dd className="flex justify-start -space-x-1.5">
+              <a href="#" className="inline-block -m-1">
+                <img
+                  className="w-7 h-7 rounded-full ring-2 ring-white dark:ring-slate-800"
+                  src={session?.user.image}
+                  alt="avatar"
+                />
+              </a>
+              {/* {props.collabUser.map(()=>{
               return<a href='#' className='inline-block -m-1'>
                 <img className='w-7 h-7 rounded-full ring-2 ring-white dark:ring-slate-800' src={session?.user.image} alt='avatar' />
                 </a>
             })
                
             } */}
-                
-                <span className='inline-block -m-1 rounded-full ring-2 ring-white dark:ring-slate-800'>
-                <svg width='28' height='28' viewBox='0 0 31 31' fill='none' xmlns='http://www.w3.org/2000/svg' className='text-slate-200 dark:text-slate-600'>
-                    <path d='M31 15.5C31 24.0604 24.0604 31 15.5 31C6.93959 31 0 24.0604 0 15.5C0 6.93959 6.93959 0 15.5 0C24.0604 rem0 31 6.93959 31 15.5ZM8.20879 15.5C8.20879 19.5268 11.4732 22.7912 15.5 22.7912C19.5268 22.7912 22.7912 19.5268 22.7912 15.5C22.7912 11.4732 19.5268 8.20879 15.5 8.20879C11.4732 8.20879 8.20879 11.4732 8.20879 15.5Z' fill='currentColor' />
-                    <path d='M31 15.5C31 18.049 30.3714 20.5586 29.1698 22.8066C27.9682 25.0547 26.2307 26.9716 24.1113 28.3878C21.9919 29.8039 19.556 30.6755 17.0193 30.9254C14.4826 31.1752 11.9234 30.7956 9.56841 29.8201C7.21345 28.8447 5.1354 27.3035 3.51834 25.3331C1.90128 23.3627 0.795112 21.0239 0.297828 18.5239C-0.199455 16.0239 -0.0725081 13.4398 0.667425 11.0006C1.40736 8.56136 2.73744 6.34225 4.53984 4.53985L10.2876 10.2876C9.43046 11.1448 8.79791 12.2002 8.44602 13.3602C8.09413 14.5202 8.03376 15.7491 8.27025 16.9381C8.50675 18.127 9.03281 19.2393 9.80184 20.1764C10.5709 21.1134 11.5591 21.8464 12.6791 22.3103C13.799 22.7742 15.0161 22.9547 16.2225 22.8359C17.4289 22.7171 18.5874 22.3026 19.5953 21.6291C20.6033 20.9556 21.4295 20.0439 22.001 18.9748C22.5724 17.9058 22.8714 16.7122 22.8714 15.5H31Z' fill='#2BC86A' />
-                </svg>
-                </span>
-            </dd>
-            </div>
-            <button onClick={()=>{folderdeleteApiSet(folderdeleteApi);foldereditApiSet(foldereditApi);setFormtype("UPDATE");setToggle1(true);updateFormFill(props.name,props.description)}} className='flex items-center justify-center text-xs font-medium rounded-full px-4 py-1 space-x-1 border-2 border-black bg-white hover:bg-black hover:text-white text-black dark:bg-slate-800 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-black'>
-            <span>Edit</span>
-            <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
-                <path d='M5 12h13M12 5l7 7-7 7' />
-            </svg>
-            </button>
-            
-        </div>
-        </div>
 
-        </>
-    )
-}
+              <span className="inline-block -m-1 rounded-full ring-2 ring-white dark:ring-slate-800">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 31 31"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="text-slate-200 dark:text-slate-600"
+                >
+                  <path
+                    d="M31 15.5C31 24.0604 24.0604 31 15.5 31C6.93959 31 0 24.0604 0 15.5C0 6.93959 6.93959 0 15.5 0C24.0604 rem0 31 6.93959 31 15.5ZM8.20879 15.5C8.20879 19.5268 11.4732 22.7912 15.5 22.7912C19.5268 22.7912 22.7912 19.5268 22.7912 15.5C22.7912 11.4732 19.5268 8.20879 15.5 8.20879C11.4732 8.20879 8.20879 11.4732 8.20879 15.5Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M31 15.5C31 18.049 30.3714 20.5586 29.1698 22.8066C27.9682 25.0547 26.2307 26.9716 24.1113 28.3878C21.9919 29.8039 19.556 30.6755 17.0193 30.9254C14.4826 31.1752 11.9234 30.7956 9.56841 29.8201C7.21345 28.8447 5.1354 27.3035 3.51834 25.3331C1.90128 23.3627 0.795112 21.0239 0.297828 18.5239C-0.199455 16.0239 -0.0725081 13.4398 0.667425 11.0006C1.40736 8.56136 2.73744 6.34225 4.53984 4.53985L10.2876 10.2876C9.43046 11.1448 8.79791 12.2002 8.44602 13.3602C8.09413 14.5202 8.03376 15.7491 8.27025 16.9381C8.50675 18.127 9.03281 19.2393 9.80184 20.1764C10.5709 21.1134 11.5591 21.8464 12.6791 22.3103C13.799 22.7742 15.0161 22.9547 16.2225 22.8359C17.4289 22.7171 18.5874 22.3026 19.5953 21.6291C20.6033 20.9556 21.4295 20.0439 22.001 18.9748C22.5724 17.9058 22.8714 16.7122 22.8714 15.5H31Z"
+                    fill="#2BC86A"
+                  />
+                </svg>
+              </span>
+            </dd>
+          </div>
+          <button
+            onClick={() => {
+              folderdeleteApiSet(folderdeleteApi);
+              foldereditApiSet(foldereditApi);
+              setFormtype("UPDATE");
+              setToggle1(true);
+              updateFormFill(props.name, props.description);
+            }}
+            className="flex items-center justify-center text-xs font-medium rounded-full px-4 py-1 space-x-1 border-2 border-black bg-white hover:bg-black hover:text-white text-black dark:bg-slate-800 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-black"
+          >
+            <span>Edit</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h13M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
