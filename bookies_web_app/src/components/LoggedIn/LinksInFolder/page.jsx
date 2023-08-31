@@ -77,7 +77,7 @@ const LinksInFolder = ({ links }) => {
         {links.map((link,index) => {
           const [toggle, setToggle] = useState(false);
           const [editable, setEditable] = useState(false);
-          const [text, setText] = useState("a text");
+          const [text, setText] = useState("https://chat.openai.com/");
           const inputRef = useRef(null);
           const handleEdit = () => {
             setEditable(true);
@@ -94,7 +94,7 @@ const LinksInFolder = ({ links }) => {
           };
           const handleClick = () => {
             if (!editable) {
-              document.getElementById("input").style.borderColor =
+              document.getElementById(`input${index}`).style.borderColor =
                 "transparent";
               window.open(text, "_blank");
             }
@@ -148,7 +148,7 @@ const LinksInFolder = ({ links }) => {
                       {/* <p contentEditable={true}>Links lorem20</p> */}
                       {/* <a href={text}> */}
                       <input
-                        className=" w-full rounded p-2 bg-transparent "
+                        className=" w-full rounded p-2 bg-transparent cursor-pointer"
                         id={`input${index}`}
                         type="text"
                         value={text}
