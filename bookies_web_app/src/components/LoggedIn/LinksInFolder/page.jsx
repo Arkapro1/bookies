@@ -82,6 +82,7 @@ const LinksInFolder = ({ links }) => {
           const handleEdit = () => {
             setEditable(true);
             document.getElementById("input").style.background = "#334155";
+            document.getElementById("input").style.cursor = "text";
             inputRef.current.focus();
           };
           const handleChange = (e) => {
@@ -92,9 +93,16 @@ const LinksInFolder = ({ links }) => {
             setToggle((prev) => !prev);
             document.getElementById("input").style.background = "#0f172a";
           };
-          useEffect(() => {
-            inputRef.current.disabled = !editable;
-          }, [editable]);
+          const handleClick = () => {
+            if (!editable) {
+              document.getElementById("input").style.borderColor =
+                "transparent";
+              window.open(text, "_blank");
+            }
+          };
+          // useEffect(() => {
+          //   inputRef.current.disabled = !editable;
+          // }, [editable]);
           return (
             <motion.div
               initial="hidden"
@@ -139,16 +147,19 @@ const LinksInFolder = ({ links }) => {
                     </div>
                     <div class="ml-3 text-sm font-normal ">
                       {/* <p contentEditable={true}>Links lorem20</p> */}
+                      {/* <a href={text}> */}
                       <input
-                        className=" w-full rounded p-2 bg-transparent "
+                        className=" w-full rounded p-2 bg-transparent cursor-pointer"
                         id="input"
                         type="text"
                         value={text}
                         onChange={handleChange}
+                        onClick={handleClick}
                         ref={inputRef}
                         readOnly={!editable}
                         tabIndex={"0"}
                       />
+                      {/* </a> */}
                     </div>
                   </div>
 

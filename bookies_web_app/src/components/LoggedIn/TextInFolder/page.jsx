@@ -1,6 +1,6 @@
 "use client";
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 const TextInFolder = ({ texts }) => {
   const [toggle, setToggle] = useState(false);
@@ -28,36 +28,33 @@ const TextInFolder = ({ texts }) => {
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
         {texts.map((text) => {
           const [toggle, setToggle] = useState(false);
+          const [editable, setEditable] = useState(false);
+          const [title, setTitle] = useState("title");
+          const [desc, setDesc] = useState("description");
+          const inputRef = useRef(null);
+          const handleEdit = () => {
+            setEditable(true);
+            document.getElementById("noteTitle").style.background = "#334155";
+            document.getElementById("noteDesc").style.background = "#334155";
+            inputRef.current.focus();
+          };
+          const handleTitleChange = (e) => {
+            setTitle(e.target.value);
+          };
+          const handleDescChange = (e) => {
+            setDesc(e.target.value);
+          };
+          const handleSave = () => {
+            setEditable(false);
+            setToggle((prev) => !prev);
+            document.getElementById("noteTitle").style.background = "#000";
+            document.getElementById("noteDesc").style.background = "#000";
+          };
+          useEffect(() => {
+            inputRef.current.disabled = !editable;
+          }, [editable]);
           return (
             <div>
-              {/* <a class="block min-w-60 max-w-60 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div class="flex flex-inline justify-between">
-                  <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {" "}
-                    default Note Heading..........................
-                  </h5>
-                  <button
-                    onClick={() => {
-                      setToggle((prev) => !prev);
-                    }}
-                    class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-                  >
-                    {" "}
-                    <svg
-                      class="w-6 h-5 mt-1 text-orange-500"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      viewBox="0 0 4 15"
-                    >
-                      <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                    </svg>
-                  </button>
-                </div>
-                <p class="font-normal text-gray-700 dark:text-gray-400">
-                  Details of the text{" "}
-                </p>
-              </a> */}
               <motion.div
                 initial="hidden"
                 animate={control}
@@ -73,15 +70,38 @@ const TextInFolder = ({ texts }) => {
                   }}
                   class="block w-64 mt-10 p-6  border border-gray-200 rounded-lg shadow  dark:border-gray-700 "
                 >
-                  <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                    Noteworthy technology
-                  </h5>
-                  <p class="text-sm text-left text-gray-700 dark:text-gray-400">
+                  {/* <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white"> */}
+                  {/* Noteworthy technology */}
+                  <input
+                    value={title}
+                    onChange={handleTitleChange}
+                    ref={inputRef}
+                    readOnly={!editable}
+                    tabIndex={"0"}
+                    type="text"
+                    id="noteTitle"
+                    class="mb-2 p-1 rounded text-lg font-bold w-full text-white bg-transparent"
+                  />
+                  {/* </h5> */}
+                  {/* <p class="text-sm text-left text-gray-700 dark:text-gray-400">
                     Here are the biggest enterprise technology.
-                  </p>
+                  </p> */}
+                  <textarea
+                    value={desc}
+                    onChange={handleDescChange}
+                    ref={inputRef}
+                    readOnly={!editable}
+                    tabIndex={"0"}
+                    type="text"
+                    id="noteDesc"
+                    class="mb-2 p-1 rounded text-sm font-bold w-full text-gray-400 bg-transparent"
+                  />
                   {toggle && (
                     <div className="mt-2">
-                      <button className="mr-2 hover:bg-green-400 p-2 rounded">
+                      <button
+                        className="mr-2 hover:bg-green-400 p-2 rounded"
+                        onClick={editable ? handleSave : handleEdit}
+                      >
                         <svg
                           class="w-[17px] h-[17px] text-gray-800 dark:text-white"
                           aria-hidden="true"
@@ -119,26 +139,6 @@ const TextInFolder = ({ texts }) => {
                   )}
                 </div>
               </motion.div>
-              {/* 
-              {toggle && (
-                <div
-                  class="mt-2  inline-flex rounded-md shadow-sm "
-                  role="group"
-                >
-                  <button
-                    type="button"
-                    class="ml-16 px-3 py-2 text-sm font-medium text-gray-900 bg-white border mr-6 border-gray-200 rounded hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-dark dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-800 dark:focus:ring-blue-500 dark:focus:text-white"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    class="px-3  py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-red-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-blue-500 dark:focus:text-white"
-                  >
-                    Delete
-                  </button>
-                </div>
-              )} */}
             </div>
           );
         })}
