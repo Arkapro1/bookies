@@ -26,10 +26,19 @@ const Upload = () => {
           `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
           formData,
         )
+        if (response.status === 200) {
+          alert("File Uploaded");
+          window.location.href = "http://localhost:32914/pages/homepage/userMainPage/64f01c3e4421ccc76ca11ed5";
+          // mongo maro ekhane 
+      } else {
+          alert("Upload Failed"); // Show an alert if the upload fails
+      }
         // //  taking the UpdatedImgId
         uploadedImage=response.data.public_id;
         // // demon try 
-        // console.log(response);
+        console.log(response.data.secure_url);
+        console.log(response.data.format);
+        
         // setUploadedImage(response.data.public_id);
         console.log("this is data uploadedImageId->>",uploadedImage)
       } catch (error) {
