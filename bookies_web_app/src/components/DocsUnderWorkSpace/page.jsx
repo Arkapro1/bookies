@@ -8,18 +8,26 @@ import LoadingSkeleton from "../loading/LoadingSkeleton";
 const SubFolders = () => {
   const handleLink = (e) => {
     e.preventDefault();
-    // alert(12);
-    const val = setVal(prompt("Enter a link"));
-  };
 
+    const d = setVal(prompt("Enter a link"));
+  };
+  const { id } = useParams();
+  const FolderApi = `/api/subfolders/${id}`;
+  const postNoteApi = `/api/uploadfile/note/${id}`;
+  const postLinkApi = `/api/uploadfile/link/${id}`;
   const handleNote = (e) => {
     e.preventDefault();
     setToggle((prev) => !prev);
     // alert(21);
     setNoteToggle((prev) => !prev);
   };
-  const [val, setVal] = useState("def");
-
+  const [val, setVal] = useState(false);
+  const postLinks = async (contentLink) => {
+    await axios.post(postLinkApi, { contentLink });
+  };
+  if (val) {
+    postLinks(val);
+  }
   console.log(val);
   const { data: session, status } = useSession();
 
@@ -30,16 +38,6 @@ const SubFolders = () => {
   if (status == "unauthenticated") {
     redirect("/");
   }
-
-  const { id } = useParams();
-  //   const handleFile = (e) => {
-  //     e.preventDefault();
-  //     redirect("/pages/upload");
-  //   };
-
-  const FolderApi = `/api/subfolders/${id}`;
-  const postNoteApi = `/api/uploadfile/note/${id}`;
-  const postLinkApi = `/api/uploadfile/link/${id}`;
 
   const [Folder, setFolder] = useState([]);
   const [newFolder, setnewFolder] = useState({
@@ -68,10 +66,7 @@ const SubFolders = () => {
     await axios.delete(folderdeleteApi);
     await getFolder();
   };
-  const postLinks = async () => {
-    await axios.post(postLinkApi, {});
-  };
-  const postNote = async () => {};
+
   // const updateWorkspace = () => {};
   // const searchResult = (e) => {
   //   const filterdata = constFolder.filter((ele) => {
@@ -99,8 +94,8 @@ const SubFolders = () => {
   const [noteTitle, setNoteTitle] = useState("");
   const [noteDesc, setNoteDesc] = useState("");
 
-  const handleNoteSubmit = () => {
-    // e.preventDefault();
+  const handleNoteSubmit = async () => {
+    await postNote();
     console.log(noteTitle);
   };
   if (status == "loading") {

@@ -51,7 +51,7 @@ const TextInFolder = ({ texts }) => {
     </>
   );
 };
-const TextHelper = ({ text }) => {
+const TextHelper = ({ text }, { index }) => {
   const control = useAnimation();
   const [ref, inView] = useInView();
   const boxVariant = {

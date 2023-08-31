@@ -2,12 +2,15 @@
 import React, { useState } from "react";
 import { Image } from 'cloudinary-react';
 import axios from 'axios';
+import { useParams } from "next/navigation";
 const CLOUDINARY_CLOUD_NAME="dp9sxoddy"
 ,CLOUDINARY_API_KEY="744592612514596"
 ,CLOUDINARY_API_SECRET="tTNiGqsPjnHncSuQ4NI5cY5x_Rc",
 CLOUDINARY_UPLOAD_PRESET="npfiapsd"
 let uploadedImage=""
 const Upload = () => {
+    const {id}=useParams()
+    const uploadfileApi="/api/uploadfile/"
     const [file, setFile] = useState([]);
     console.log("look",uploadedImage);
     const handleFileChange = async (e) => {
@@ -26,10 +29,19 @@ const Upload = () => {
           `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
           formData,
         )
+        if (response.status === 200) {
+          alert("File Uploaded");
+          window.location.href = "http://localhost:32914/pages/homepage/userMainPage/64f01c3e4421ccc76ca11ed5";
+          // mongo maro ekhane 
+      } else {
+          alert("Upload Failed"); // Show an alert if the upload fails
+      }
         // //  taking the UpdatedImgId
         uploadedImage=response.data.public_id;
         // // demon try 
-        // console.log(response);
+        console.log(response.data.secure_url);
+        console.log(response.data.format);
+        
         // setUploadedImage(response.data.public_id);
         console.log("this is data uploadedImageId->>",uploadedImage)
       } catch (error) {
