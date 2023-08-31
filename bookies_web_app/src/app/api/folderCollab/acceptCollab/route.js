@@ -6,32 +6,40 @@ import Users from "@/models/user";
 import { NextResponse } from "next/server";
 export const POST=async(request)=>{
     const body=await request.json(); 
-    const folderCode=body.folderCode
-    const collabUserEmail=body.email
+    const workSpaceId=body.workSpaceId
+    const collaboratorId=body.collaboratorId
     try {
         await connect();
-        const user=await Users.findOne({gmail:collabUserEmail})
-        const workspace=await Folders.findOne({folderCode:folderCode})
-
+        const collaborator=await Users.findById(collaboratorId)
+        if(!collaborator){
+            return new NextResponse("User not found",{status:400});
+        }
+        const workspace =  (await Folders.findOne({_id : workSpaceId}));
+        if(!workspace){
+            return new NextResponse("Folder not found",{status:400});
+        }
 
         const updateFolder= Folders.updateOne(
-            { folderCode: folderCode},
+            { _id: workspace._id},
             {
                 $push: {
-                    collabUser: [user._id]
+                    collabUsers: [collaborator._id]
                 }
             });
         const updateCollabUser=Users.updateOne(
-            {gmail:collabUserEmail},
+            {_id:collaborator._id},
             {
                 $push: {
-                    collab: [workspace._id]
+                    collaborators: [workspace._id]
                 }
              }
              
        )
 
        const update= await Promise.all([updateFolder,updateCollabUser])
+         if(!update){
+                return new NextResponse("Collab failed",{status:400});
+            }
 
         return new NextResponse("Collab succseccfull",{status:200});
     } catch (error) {
