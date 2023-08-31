@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 // import Workspace from "@/components/workSpaces/page";
 import DocsInFolder from "@/components/DocsInFolder/page";
 import SubFolders from "@/components/DocsUnderWorkSpace/page";
-import Filter from "@/components/Filter/page";
 import ImgInFolder from "@/components/LoggedIn/ImgInFolder/page";
 import LinksInFolder from "@/components/LoggedIn/LinksInFolder/page";
 import TextInFolder from "@/components/LoggedIn/TextInFolder/page";
@@ -52,7 +51,7 @@ const WorkspaceOpenView = () => {
     return (
         <>
     
-            <Filter/>
+            {/* <Filter/> */}
             <SubFolders putLink={putLink} />
             <LinksInFolder links={links} />
             <TextInFolder texts={texts}/>
