@@ -74,14 +74,14 @@ const LinksInFolder = ({ links }) => {
       </span>
 
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
-        {links.map((link) => {
+        {links.map((link,index) => {
           const [toggle, setToggle] = useState(false);
           const [editable, setEditable] = useState(false);
           const [text, setText] = useState("a text");
           const inputRef = useRef(null);
           const handleEdit = () => {
             setEditable(true);
-            document.getElementById("input").style.background = "#334155";
+            document.getElementById(`input${index}`).style.background = "#334155";
             inputRef.current.focus();
           };
           const handleChange = (e) => {
@@ -90,7 +90,7 @@ const LinksInFolder = ({ links }) => {
           const handleSave = () => {
             setEditable(false);
             setToggle((prev) => !prev);
-            document.getElementById("input").style.background = "#0f172a";
+            document.getElementById(`input${index}`).style.background = "#0f172a";
           };
           useEffect(() => {
             inputRef.current.disabled = !editable;
@@ -141,7 +141,7 @@ const LinksInFolder = ({ links }) => {
                       {/* <p contentEditable={true}>Links lorem20</p> */}
                       <input
                         className=" w-full rounded p-2 bg-transparent "
-                        id="input"
+                        id={`input${index}`}
                         type="text"
                         value={text}
                         onChange={handleChange}
