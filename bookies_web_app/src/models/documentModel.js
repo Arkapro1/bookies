@@ -18,7 +18,9 @@ const docSchema = new Schema(
             type:String,
             // required:true
         },
-        
+        description:{
+            type:String,
+        },
         createAt: {
             type: Date,
             default: Date.now

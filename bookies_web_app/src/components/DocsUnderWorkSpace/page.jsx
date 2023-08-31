@@ -37,6 +37,8 @@ const SubFolders = () => {
   //   };
 
   const FolderApi = `/api/subfolders/${id}`;
+  const postNoteApi=`/api/uploadfile/note/${id}`
+  const postLinkApi=`/api/uploadfile/link/${id}`
 
   const [Folder, setFolder] = useState([]);
   const [newFolder, setnewFolder] = useState({
@@ -65,6 +67,12 @@ const SubFolders = () => {
     await axios.delete(folderdeleteApi);
     await getFolder();
   };
+  const postLinks=async()=>{
+    await axios.post(postLinkApi,{})
+  }
+  const postNote=async()=>{
+
+  }
   // const updateWorkspace = () => {};
   // const searchResult = (e) => {
   //   const filterdata = constFolder.filter((ele) => {
