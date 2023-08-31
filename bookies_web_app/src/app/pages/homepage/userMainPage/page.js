@@ -27,7 +27,7 @@ const userMainPage=()=>{
     const [collabCode,setCollabCode]=useState("")
     const [collabToggle,setCollabToggle]=useState(true)
     const requestCollabApi="/api/folderCollab/collabRequest"
-    const acceptCollab="/api/folderCollab/acceptCollab"
+    const acceptCollabApi="/api/folderCollab/acceptCollab"
     const CollabWorkspacesApi="/api/folderCollab/collabWorkspaces"
     //false array
     const [collabrequests,setCollabrequests]=useState([])
@@ -36,13 +36,17 @@ const userMainPage=()=>{
      const sessionData=await getSession()
      console.log(sessionData?.user?.email);
      const requestData=  await axios.post(requestCollabApi,{email:sessionData?.user?.email});
-      console.log(requestData.data);
+      
      setCollabrequests(requestData.data)
 
     }
    const requestCollab=async()=>{
       const sessionData=await getSession()
       await axios.put(requestCollabApi,{workSpaceCode:collabCode,email:sessionData?.user?.email});
+   }
+   const acceptCollab=async(collaboratorId,workSpaceId)=>{
+      await axios.post(acceptCollabApi,{collaboratorId:collaboratorId,workSpaceId:workSpaceId})
+      await deleteCollabWorkSpaces(collaboratorId,workSpaceId)
    }
    const makeOffInput=()=>{
     folderCodeInputRef.current.blur();
@@ -78,7 +82,7 @@ const userMainPage=()=>{
     
     
     const getWorkspaces=async()=>{
-      // console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+      
      const sessionn=await getSession()
       const content=await axios.put(WorkspacesApi,{gmail:sessionn?.user?.email})
       setWorkspaces(content.data)
@@ -89,8 +93,13 @@ const userMainPage=()=>{
     const getCollabWorkSpaces=async()=>{
       const sessionn=await getSession()
       const content=await axios.put(CollabWorkspacesApi,{gmail:sessionn?.user?.email})
-      setWorkspaces([...content.data])
-      constsetWorkspaces([...content.data])
+      setWorkspaces(content.data)
+      constsetWorkspaces(content.data)
+    }
+    const deleteCollabWorkSpaces=async(collaboratorId,workSpaceId)=>{
+      const sessionn=await getSession()
+      const content=await axios.post(CollabWorkspacesApi,{collaboratorId:collaboratorId,workSpaceId:workSpaceId,gmail:sessionn?.user?.email})
+     
     }
     const createWorkspace=async()=>{
      await axios.post(WorkspacesApi,newWorkspace);
@@ -99,7 +108,7 @@ const userMainPage=()=>{
     useEffect(() => {
       
       getWorkspaces();
-      // getCollabRequests();
+      getCollabRequests();
       
       
     },[])
@@ -207,8 +216,8 @@ const userMainPage=()=>{
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{request.collaboratorGmail} is requesting to Join --{request.workSpaceName}</label>
                 </div>
                        <div class="colums-2">
-                       <button type="text" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
-                         <button type="text" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={()=>{setCollabrequests([...collabrequests].filter((e)=>e!=request))}}>Reject</button>
+                       <button type="text" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={()=>{acceptCollab(request.collaboratorId,request.workSpaceId);setCollabrequests([...collabrequests].filter((e)=>e!=request))}}>Accept</button>
+                         <button type="text" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={()=>{setCollabrequests([...collabrequests].filter((e)=>e!=request));deleteCollabWorkSpaces(request.collaboratorId,request.workSpaceId)}}>Reject</button>
                        </div></>
                   })
                     
@@ -242,7 +251,7 @@ const userMainPage=()=>{
   Join a Workspace 
   </button>
   {/* Notification */}
-  <button onClick={()=>{getCollabRequests();setnotification(pev=>(!pev));}} data-modal-target="notification_Tg" data-modal-toggle="notification_Tg">
+  <button onClick={()=>{setnotification(pev=>(!pev));}} data-modal-target="notification_Tg" data-modal-toggle="notification_Tg">
 <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
   <path fill-rule="evenodd" d="M12 2.25A6.75 6.75 0 005.25 9v.75a8.217 8.217 0 01-2.119 5.52.75.75 0 00.298 1.206c1.54
   4.57 3.16.99 4.831 1.243a3.75 3.75 0 107.48 0 24.583 24.583 0 004.83-1.244.75.75 0 00.298-1.205 8.217 8.217 0 01-2.118-5.52V9A6.75 6.75 0 0012 2.25zM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 004.496 0l.002.1a2.25 2.25 0 11-4.5 0zm.75-10.5a.75.75 0 000 1.5h1.599l-2.223 3.334A.75.75 0 0010.5 13.5h3a.75.75 0 000-1.5h-1.599l2.223-3.334A.75.75 0 0013.5 7.5h-3z" clip-rule="evenodd" />

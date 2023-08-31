@@ -66,11 +66,14 @@ export const POST=async(request)=>{
          const workSpace=await Folders.findOne({_id:req.workSpaceId})
             return {
                 collaboratorGmail:collaborator.gmail,
-                workSpaceName:workSpace.name
+                workSpaceName:workSpace.name,
+                collaboratorId:collaborator._id,
+                workSpaceId:workSpace._id
             }
 
         }))
-        console.log(collabRequestData);
+        
+        // console.log(collabRequestData);
         return new NextResponse(JSON.stringify(collabRequestData, null, 2), {
             status: 200,
             headers: {

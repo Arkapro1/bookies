@@ -8,6 +8,7 @@ export const POST=async(request)=>{
     const body=await request.json(); 
     const workSpaceId=body.workSpaceId
     const collaboratorId=body.collaboratorId
+    console.log(body);
     try {
         await connect();
         const collaborator=await Users.findById(collaboratorId)
