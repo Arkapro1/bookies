@@ -3,7 +3,7 @@ import axios from "axios";
 import { getSession, useSession } from "next-auth/react";
 import { redirect, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-// import Workspace from "../Folder/page";
+import LoadingSkeleton from "../loading/LoadingSkeleton";
 
 const SubFolders = () => {
   const handleLink = (e) => {
@@ -30,6 +30,7 @@ const SubFolders = () => {
   if (status == "unauthenticated") {
     redirect("/");
   }
+
   const { id } = useParams();
   //   const handleFile = (e) => {
   //     e.preventDefault();
@@ -37,8 +38,8 @@ const SubFolders = () => {
   //   };
 
   const FolderApi = `/api/subfolders/${id}`;
-  const postNoteApi=`/api/uploadfile/note/${id}`
-  const postLinkApi=`/api/uploadfile/link/${id}`
+  const postNoteApi = `/api/uploadfile/note/${id}`;
+  const postLinkApi = `/api/uploadfile/link/${id}`;
 
   const [Folder, setFolder] = useState([]);
   const [newFolder, setnewFolder] = useState({
@@ -67,12 +68,10 @@ const SubFolders = () => {
     await axios.delete(folderdeleteApi);
     await getFolder();
   };
-  const postLinks=async()=>{
-    await axios.post(postLinkApi,{})
-  }
-  const postNote=async()=>{
-
-  }
+  const postLinks = async () => {
+    await axios.post(postLinkApi, {});
+  };
+  const postNote = async () => {};
   // const updateWorkspace = () => {};
   // const searchResult = (e) => {
   //   const filterdata = constFolder.filter((ele) => {
@@ -104,7 +103,9 @@ const SubFolders = () => {
     // e.preventDefault();
     console.log(noteTitle);
   };
-
+  if (status == "loading") {
+    return <LoadingSkeleton />;
+  }
   return (
     <>
       {/* Folder Modal */}
@@ -535,6 +536,10 @@ const FolderCard = ({
   const { data: session, status } = useSession();
   const foldereditApi = `/api/folderEdit/${props._id}`;
   const folderdeleteApi = `/api/delete/folder/${props._id}`;
+
+  if (status == "loading") {
+    return <LoadingSkeleton />;
+  }
 
   return (
     <>

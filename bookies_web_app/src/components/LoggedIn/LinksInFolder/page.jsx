@@ -5,6 +5,9 @@ import { useInView } from "react-intersection-observer";
 
 const LinksInFolder = ({ links }) => {
   const [toggle, setToggle] = useState(false);
+  const [editable, setEditable] = useState(false);
+  const [text, setText] = useState("https://chat.openai.com/");
+  const inputRef = useRef(null);
 
   const control = useAnimation();
   const [ref, inView] = useInView();
@@ -56,14 +59,15 @@ const LinksInFolder = ({ links }) => {
       </span>
 
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
-        {links.map((link,index) => {
+        {links.map((link, index) => {
           const [toggle, setToggle] = useState(false);
           const [editable, setEditable] = useState(false);
           const [text, setText] = useState("https://chat.openai.com/");
           const inputRef = useRef(null);
           const handleEdit = () => {
             setEditable(true);
-            document.getElementById(`input${index}`).style.background = "#334155";
+            document.getElementById(`input${index}`).style.background =
+              "#334155";
             inputRef.current.focus();
           };
           const handleChange = (e) => {
@@ -72,7 +76,8 @@ const LinksInFolder = ({ links }) => {
           const handleSave = () => {
             setEditable(false);
             setToggle((prev) => !prev);
-            document.getElementById(`input${index}`).style.background = "#0f172a";
+            document.getElementById(`input${index}`).style.background =
+              "#0f172a";
           };
           const handleClick = () => {
             if (!editable) {
@@ -133,7 +138,7 @@ const LinksInFolder = ({ links }) => {
                         className=" w-full rounded p-2 bg-transparent cursor-pointer"
                         id={`input${index}`}
                         type="text"
-                        value={text}
+                        value={link}
                         onChange={handleChange}
                         onClick={handleClick}
                         ref={inputRef}
