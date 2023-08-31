@@ -1,6 +1,6 @@
 "use client";
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 const LinksInFolder = ({ links }) => {
@@ -28,6 +28,25 @@ const LinksInFolder = ({ links }) => {
     }
   }, [control, inView]);
 
+  // const [editDiv, setEditDiv] = false;
+
+  // const [editable, setEditable] = useState(false);
+  // const [text, setText] = useState("a text");
+  // const inputRef = useRef(null);
+  // const handleEdit = () => {
+  //   setEditable(true);
+  //   inputRef.current.focus();
+  // };
+  // const handleChange = (e) => {
+  //   setText(e.target.value);
+  // };
+  // const handleSave = () => {
+  //   setEditable(false);
+  // };
+  // useEffect(() => {
+  //   inputRef.current.disabled = !editable;
+  // }, [editable]);
+
   return (
     <>
       <span class="flex ml-8 text-4xl mt-20 mb-8">
@@ -53,9 +72,29 @@ const LinksInFolder = ({ links }) => {
         </p>
         {/* </motion.p> */}
       </span>
+
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
         {links.map((link) => {
-          const [toggle, setToggle] = useState(false); 
+          const [toggle, setToggle] = useState(false);
+          const [editable, setEditable] = useState(false);
+          const [text, setText] = useState("a text");
+          const inputRef = useRef(null);
+          const handleEdit = () => {
+            setEditable(true);
+            document.getElementById("input").style.background = "#334155";
+            inputRef.current.focus();
+          };
+          const handleChange = (e) => {
+            setText(e.target.value);
+          };
+          const handleSave = () => {
+            setEditable(false);
+            setToggle((prev) => !prev);
+            document.getElementById("input").style.background = "#0f172a";
+          };
+          useEffect(() => {
+            inputRef.current.disabled = !editable;
+          }, [editable]);
           return (
             <motion.div
               initial="hidden"
@@ -63,10 +102,10 @@ const LinksInFolder = ({ links }) => {
               ref={ref}
               variants={boxVariant}
             >
-              <div class="mb-10 w-60">
+              <div class="mb-20 w-60">
                 <div
                   id="toast-default"
-                  class="border  mt-2 border-white hover:text-gray-200 flex-col justify-between items-center w-full max-w-xs p-4 rounded-lg shadow  "
+                  class="border  mt-2 p-3 bg-gray-900 hover:text-gray-200 hover:bg-none flex-col justify-between items-center w-full max-w-xs  rounded-lg shadow  "
                   role="alert"
                   onContextMenu={(e) => {
                     e.preventDefault();
@@ -75,59 +114,51 @@ const LinksInFolder = ({ links }) => {
                     // };
                   }}
                 >
-                  {/* <div class="  inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg dark:bg-blue-800 dark:text-blue-200">
-                  <svg
-                    class="w-4 h-4"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 18 20"
+                  <div
+                    id="toast-default"
+                    class="flex items-center w-full max-w-xs p-4 text-gray-500  rounded-lg shadow dark:text-gray-400 "
+                    role="alert"
                   >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15.147 15.085a7.159 7.159 0 0 1-6.189 3.307A6.713 6.713 0 0 1 3.1 15.444c-2.679-4.513.287-8.737.888-9.548A4.373 4.373 0 0 0 5 1.608c1.287.953 6.445 3.218 5.537 10.5 1.5-1.122 2.706-3.01 2.853-6.14 1.433 1.049 3.993 5.395 1.757 9.117Z"
-                    />
-                  </svg>
-                  <span class="sr-only">Fire icon</span>
-                </div> */}
-                  <div class="ml-3 text-sm  text-white body-font font-poppins">
-                    <a>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Vel sed quas architecto
-                    </a>
+                    <div class="inline-flex items-center justify-center  flex-shrink-0 w-8 h-8 text-green-300 bg-gray-800 rounded-lg  ">
+                      <svg
+                        class="w-4 h-4 "
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 18 20"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15.147 15.085a7.159 7.159 0 0 1-6.189 3.307A6.713 6.713 0 0 1 3.1 15.444c-2.679-4.513.287-8.737.888-9.548A4.373 4.373 0 0 0 5 1.608c1.287.953 6.445 3.218 5.537 10.5 1.5-1.122 2.706-3.01 2.853-6.14 1.433 1.049 3.993 5.395 1.757 9.117Z"
+                        />
+                      </svg>
+                      <span class="sr-only">Fire icon</span>
+                    </div>
+                    <div class="ml-3 text-sm font-normal ">
+                      {/* <p contentEditable={true}>Links lorem20</p> */}
+                      <input
+                        className=" w-full rounded p-2 bg-transparent "
+                        id="input"
+                        type="text"
+                        value={text}
+                        onChange={handleChange}
+                        ref={inputRef}
+                        readOnly={!editable}
+                        tabIndex={"0"}
+                      />
+                    </div>
                   </div>
 
-                  {/* <button
-                  type="button"
-                  class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg  p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-                  data-dismiss-target="#toast-default"
-                  aria-label="Close"
-                  onClick={() => {
-                    setToggle((prev) => !prev);
-                  }}
-                >
-                  <svg
-                    class="w-5 h-5 text-gray-800 dark:text-orange-500"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 18 18"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M6.143 1H1.857A.857.857 0 0 0 1 1.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 7 6.143V1.857A.857.857 0 0 0 6.143 1Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 17 6.143V1.857A.857.857 0 0 0 16.143 1Zm-10 10H1.857a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 7 16.143v-4.286A.857.857 0 0 0 6.143 11Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286a.857.857 0 0 0-.857-.857Z"
-                    />
-                  </svg>
-                </button> */}
                   {toggle && (
                     <div class="mt-2">
-                      <button className="ml-3  p-2 hover:bg-green-400  rounded">
+                      {/* edit button */}
+                      <button
+                        onClick={editable ? handleSave : handleEdit}
+                        className="ml-3  p-2 hover:bg-green-400  rounded "
+                      >
                         <svg
                           class="w-[16px] h-[16px] text-gray-800 dark:text-white"
                           aria-hidden="true"
@@ -173,7 +204,5 @@ const LinksInFolder = ({ links }) => {
   );
 };
 
-const linkItem=()=>{
-  
-}
+const linkItem = () => {};
 export default LinksInFolder;
