@@ -28,25 +28,6 @@ const LinksInFolder = ({ links }) => {
     }
   }, [control, inView]);
 
-  // const [editDiv, setEditDiv] = false;
-
-  // const [editable, setEditable] = useState(false);
-  // const [text, setText] = useState("a text");
-  // const inputRef = useRef(null);
-  // const handleEdit = () => {
-  //   setEditable(true);
-  //   inputRef.current.focus();
-  // };
-  // const handleChange = (e) => {
-  //   setText(e.target.value);
-  // };
-  // const handleSave = () => {
-  //   setEditable(false);
-  // };
-  // useEffect(() => {
-  //   inputRef.current.disabled = !editable;
-  // }, [editable]);
-
   return (
     <>
       <span class="flex ml-8 text-4xl mt-20 mb-8">
@@ -65,24 +46,24 @@ const LinksInFolder = ({ links }) => {
           />
         </svg>
         {/* <motion.p initial="hidden" animate="visible" variants={textVariant}> */}
-        <p class="ml-2  body-font ">
+        <p className="ml-2 mb-4 text-xl font-extrabold text-gray-900 dark:text-white  lg:text-4xl">
           Your{" "}
-          <span class=" text-md font-bold italic text-blue-400 ">links</span>{" "}
-          {/* <span class="italic">here</span> */}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r to-sky-600 from-purple-600">
+            Links
+          </span>
         </p>
         {/* </motion.p> */}
       </span>
 
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
-        {links.map((link) => {
+        {links.map((link,index) => {
           const [toggle, setToggle] = useState(false);
           const [editable, setEditable] = useState(false);
-          const [text, setText] = useState("a text");
+          const [text, setText] = useState("https://chat.openai.com/");
           const inputRef = useRef(null);
           const handleEdit = () => {
             setEditable(true);
-            document.getElementById("input").style.background = "#334155";
-            document.getElementById("input").style.cursor = "text";
+            document.getElementById(`input${index}`).style.background = "#334155";
             inputRef.current.focus();
           };
           const handleChange = (e) => {
@@ -91,11 +72,11 @@ const LinksInFolder = ({ links }) => {
           const handleSave = () => {
             setEditable(false);
             setToggle((prev) => !prev);
-            document.getElementById("input").style.background = "#0f172a";
+            document.getElementById(`input${index}`).style.background = "#0f172a";
           };
           const handleClick = () => {
             if (!editable) {
-              document.getElementById("input").style.borderColor =
+              document.getElementById(`input${index}`).style.borderColor =
                 "transparent";
               window.open(text, "_blank");
             }
@@ -150,7 +131,7 @@ const LinksInFolder = ({ links }) => {
                       {/* <a href={text}> */}
                       <input
                         className=" w-full rounded p-2 bg-transparent cursor-pointer"
-                        id="input"
+                        id={`input${index}`}
                         type="text"
                         value={text}
                         onChange={handleChange}

@@ -4,16 +4,22 @@ const docSchema = new Schema(
     {
         name:{
             type:String,
+            // required:true
+        },
+        folderId:{
+            type:String,
             required:true
         },
         contentType:{
             type:String,
-            enum:["pdf","img","txt"],
             required:true
         },
         contentLink:{
             type:String,
-            required:true
+            // required:true
+        },
+        description:{
+            type:String,
         },
         createAt: {
             type: Date,
