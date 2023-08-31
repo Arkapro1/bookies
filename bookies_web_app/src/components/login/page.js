@@ -1,28 +1,30 @@
 "use client";
 
-import { signIn, useSession,getSession } from "next-auth/react";
+import axios from "axios";
+import { getSession, signIn, useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import './style.css';
 import './style1.css';
-import axios from "axios";
 function Login() {
-    let session = useSession();
+    let {status} = useSession();
     const router = useRouter();
-    session = session.data;
+    // session = session.data;
     const [sidebar, setsidebar] = useState();
     const setUserAndLoadPage=async()=>{
         const sessionData=await getSession()
         if(sessionData){
             axios.post("/api/user/create",{name:sessionData?.user?.name,gmail:sessionData?.user?.email})
-        
-            redirect("/pages/homepage/userMainPage");
         }
+        
     }
     useEffect(()=>{
         setUserAndLoadPage();
     },[])
- 
+    
+    if(status=="authenticated"){
+        redirect("/pages/homepage/userMainPage");
+    }
       
     return (
         <div className=" w-full py-16 px-4 ">
@@ -44,11 +46,11 @@ function Login() {
                     </svg>
                     <p className="text-base font-medium ml-4 text-white">Continue with Google</p>
                 </button> 
-                <button onClick={() => signIn("github")} aria-label="Continue with github" role="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10"
+                {/* <button onClick={() => signIn("github")} aria-label="Continue with github" role="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10"
                 >
                     <img src="github.svg" width={55} height={10}></img>
                     <p className="text-base font-medium ml-4 text-white">Continue with Github</p>
-                </button>  
+                </button>   */}
             </div>
         </div>
         </div>

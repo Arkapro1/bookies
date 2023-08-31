@@ -11,12 +11,22 @@ const SubFolders = () => {
     // alert(12);
     const val = setVal(prompt("Enter a link"));
   };
+
+  const handleNote = (e) => {
+    e.preventDefault();
+    setToggle((prev) => !prev);
+    // alert(21);
+    setNoteToggle((prev) => !prev);
+  };
   const [val, setVal] = useState("def");
 
   console.log(val);
   const { data: session, status } = useSession();
+
   const [toggle, setToggle] = useState(false);
   const [toggle1, setToggle1] = useState(false);
+  const [noteToggle, setNoteToggle] = useState(false);
+
   if (status == "unauthenticated") {
     redirect("/");
   }
@@ -78,6 +88,15 @@ const SubFolders = () => {
   useEffect(() => {
     getFolder();
   }, []);
+
+  const [noteTitle, setNoteTitle] = useState("");
+  const [noteDesc, setNoteDesc] = useState("");
+
+  const handleNoteSubmit = () => {
+    // e.preventDefault();
+    console.log(noteTitle);
+  };
+
   return (
     <>
       {/* Folder Modal */}
@@ -243,7 +262,7 @@ const SubFolders = () => {
             id="authentication-modal"
             tabindex="-1"
             aria-hidden="true"
-            class="w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+            class=" w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
           >
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto">
               {/* <!-- Modal content --> */}
@@ -276,7 +295,6 @@ const SubFolders = () => {
                     Select and to your secound Brain 🧠Enhance{" "}
                   </h3>
                   <form class="ml-5" action="#">
-                    data-modal-target="authentication-modal"
                     <div class="">
                       {/* <button onClick={(e) => handleFile}> */}
                       <a
@@ -288,14 +306,13 @@ const SubFolders = () => {
                         <span class="relative">Upload files</span>
                       </a>
                       {/* </button> */}
-                      <a
-                        href="#_"
-                        class="ml-10 mb-5  relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group"
-                      >
-                        <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-blue-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
-                        <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-700"></span>
-                        <span class="relative">Quick notes</span>
-                      </a>
+                      <button onClick={handleNote}>
+                        <a class="ml-10 mb-5  relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group">
+                          <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-blue-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
+                          <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-700"></span>
+                          <span class="relative">Quick notes</span>
+                        </a>
+                      </button>
                       <button onClick={handleLink}>
                         <a class="ml-10 mb-5 relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group">
                           <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-blue-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
@@ -312,6 +329,102 @@ const SubFolders = () => {
                         <span class="relative">Upload image</span>
                       </a>
                     </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Text Toggle */}
+      {noteToggle && (
+        <div className=" fixed z-50 flex w-screen h-screen justify-center items-center bg-zinc-950/70 ">
+          <div
+            id="authentication-modal"
+            tabindex="-1"
+            aria-hidden="true"
+            className="w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+          >
+            <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 mx-auto">
+              {/* <!-- Modal content --> */}
+              <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button
+                  onClick={() => {
+                    setNoteToggle((prev) => !prev);
+                  }}
+                  type="button"
+                  className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  data-modal-hide="authentication-modal"
+                >
+                  <svg
+                    className="w-3 h-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 14"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                    />
+                  </svg>
+                </button>
+                <div className="px-6 py-6 lg:px-8">
+                  <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+                    Add Note
+                  </h3>
+                  <form className="space-y-6" action="#">
+                    <div>
+                      <label
+                        for="title"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Note Title
+                      </label>
+                      <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        placeholder="Note Title"
+                        required
+                        onChange={(e) => setNoteTitle(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        for="description"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Note Description
+                      </label>
+                      <textarea
+                        rows="5"
+                        type="text"
+                        name="description"
+                        id="description"
+                        placeholder="Note Description"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        required
+                        onChange={(e) => setNoteDesc(e.target.value)}
+                      />
+                    </div>
+
+                    {
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleNoteSubmit();
+                          setNoteToggle(false);
+                        }}
+                        className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        Add Note
+                      </button>
+                    }
                   </form>
                 </div>
               </div>

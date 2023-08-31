@@ -83,9 +83,6 @@ const userMainPage=()=>{
 
     return(
         <>
-        {/* <Suspense fallback={<p>Loading feed...</p>}> */}
-
-        
         {/* <!-- Main modal --> */}
         
 
@@ -252,13 +249,12 @@ View Collabed Spaces
                 clip-rule="evenodd" />
             </svg>
           </span>
-      </div>
+ </div>
 
         </div>
         </div>
-        
         <div className="mx-5 grid gap-8 place-items-center sm:grid-cols-2 sm:gap-12 lg:grid-cols-4  xl:gap-16">
-        <p>collab</p>
+
         {
          workspaces?.map((ele)=>{
             
@@ -270,22 +266,12 @@ View Collabed Spaces
         </div>
     </div>
 </section>
-{/* </Suspense> */}
+
         </>
     )
 }
 
-const Comp=()=>{
-  return(
-    <>
-      {/* <Suspense fallback={<p>Loading feed...</p>}> */}
-        {/* <userMainPage/> */}
-        {/* </Suspense> */}
-    </>
-  )
-}
 export default userMainPage;
-// export default Comp;
 
 
 
