@@ -28,25 +28,6 @@ const LinksInFolder = ({ links }) => {
     }
   }, [control, inView]);
 
-  // const [editDiv, setEditDiv] = false;
-
-  // const [editable, setEditable] = useState(false);
-  // const [text, setText] = useState("a text");
-  // const inputRef = useRef(null);
-  // const handleEdit = () => {
-  //   setEditable(true);
-  //   inputRef.current.focus();
-  // };
-  // const handleChange = (e) => {
-  //   setText(e.target.value);
-  // };
-  // const handleSave = () => {
-  //   setEditable(false);
-  // };
-  // useEffect(() => {
-  //   inputRef.current.disabled = !editable;
-  // }, [editable]);
-
   return (
     <>
       <span class="flex ml-8 text-4xl mt-20 mb-8">
@@ -65,10 +46,11 @@ const LinksInFolder = ({ links }) => {
           />
         </svg>
         {/* <motion.p initial="hidden" animate="visible" variants={textVariant}> */}
-        <p class="ml-2  body-font ">
+        <p className="ml-2 mb-4 text-xl font-extrabold text-gray-900 dark:text-white  lg:text-4xl">
           Your{" "}
-          <span class=" text-md font-bold italic text-blue-400 ">links</span>{" "}
-          {/* <span class="italic">here</span> */}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r to-sky-600 from-purple-600">
+            Links
+          </span>
         </p>
         {/* </motion.p> */}
       </span>
