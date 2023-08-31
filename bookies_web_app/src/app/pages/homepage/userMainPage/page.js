@@ -29,6 +29,7 @@ const userMainPage=()=>{
       {collaboratorGmail:"test@gmai2.com",workSpaceName:"test Workspace"},
     ])
     // console.log(session?.user?.email);
+    
   const folderEdit=async()=>{
     console.log(foldereditApi)
    await axios.put(foldereditApi,newWorkspace);
@@ -167,8 +168,11 @@ const userMainPage=()=>{
             <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">🔔 Knock! Knock! </h3>
                 {/* <form class="space-y-6" action="#"> */}
+                
                  { 
+                  collabrequests.length==0?setnotification(false):
                   collabrequests.map((request)=>{
+                    
                     return <>
                     <div>
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{request.collaboratorGmail} is requesting to Join --{request.workSpaceName}</label>
