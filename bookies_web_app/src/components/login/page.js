@@ -7,22 +7,24 @@ import './style.css';
 import './style1.css';
 import axios from "axios";
 function Login() {
-    let session = useSession();
+    let status = useSession();
     const router = useRouter();
-    session = session.data;
+    // session = session.data;
     const [sidebar, setsidebar] = useState();
     const setUserAndLoadPage=async()=>{
         const sessionData=await getSession()
         if(sessionData){
             axios.post("/api/user/create",{name:sessionData?.user?.name,gmail:sessionData?.user?.email})
         
-            redirect("/pages/homepage/userMainPage");
+            // redirect("/pages/homepage/userMainPage");
         }
     }
     useEffect(()=>{
         setUserAndLoadPage();
     },[])
- 
+     if(status=="authenticated"){
+          redirect("/pages/homepage/userMainPage");
+     }
       
     return (
         <div className=" w-full py-16 px-4 ">
