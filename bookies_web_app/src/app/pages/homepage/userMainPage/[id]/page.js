@@ -11,18 +11,21 @@ import TextInFolder from "@/components/LoggedIn/TextInFolder/page";
 import axios from "axios";
 const WorkspaceOpenView = () => {
     const {id}=useParams()
-    const addLinkApi=`/api/documents/link/${id}`
+    const addLinkApi=`/api/uploadfile/link/${id}`
     const addTextApi=`/api/documents/text/${id}`
     const addImgApi=`/api/documents/img/${id}`
     console.log(addLinkApi);
-    const [links,setLinks]=useState([4,4,4,4,4,4,4,4])
+    const [links,setLinks]=useState([4,4,444])
     const [texts,setTexts]=useState([3,3,3,3,3]);
     const [imgs,setImgs]=useState([3,3,3,3,3]);
     const [docs,setDocs]=useState([3,3,3,3,3]);
     
     const getAllLinks=async()=>{
        const apiData=await axios.get(addLinkApi)
+       console.log("all links",apiData?.data)
          setLinks(apiData.data)
+        // const apid=[1,2];
+        // setLinks(apid);
     }
     const getAllTexts=async()=>{
         const apiData=await axios.get(addTextApi)
@@ -41,7 +44,7 @@ const WorkspaceOpenView = () => {
       //  await axios.post(addLinkApi,{contentLink:link||"kjgajk",contentType:"link"})
     }
     useEffect(()=>{
-        // getAllLinks()
+        getAllLinks()
         //getAllTexts()
         //getAllImgs()
         //getAllDocs()
