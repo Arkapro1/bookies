@@ -2,7 +2,7 @@
 
 import { useSession ,getSession} from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 
 import axios from 'axios';
 
@@ -12,7 +12,6 @@ const userMainPage=()=>{
     const [toggle, setToggle] = useState(false);
     const [Jointoggle, setJoinToggle] = useState(false);
     const [notification, setnotification] = useState(false);
-    // const [Jointoggle, setJoinToggle] = useState(false);
     const WorkspacesApi="/api/folders"
  
    
@@ -23,13 +22,31 @@ const userMainPage=()=>{
     const [formtype,setFormtype]=useState(formselect[0])
     let [foldereditApi,foldereditApiSet]=useState("");
     let [folderdeleteApi,folderdeleteApiSet]=useState("");
+    const folderCodeInputRef = useRef(null);
+    const [folderCode,setFolderCode]=useState("")
+    const [collabCode,setCollabCode]=useState("")
+    const [collabToggle,setCollabToggle]=useState(true)
+    const requestCollabApi="/api/folderCollab/collabRequest"
+    const acceptCollab="/api/folderCollab/acceptCollab"
+    const CollabWorkspacesApi="/api/folderCollab/collabWorkspaces"
     //false array
-    const [collabrequests,setCollabrequests]=useState([
-      {collaboratorGmail:"test@gmai1.com",workSpaceName:"test Workspace"},
-      {collaboratorGmail:"test@gmai2.com",workSpaceName:"test Workspace"},
-    ])
+    const [collabrequests,setCollabrequests]=useState([])
     // console.log(session?.user?.email);
-    
+    const getCollabRequests=async()=>{
+     const sessionData=await getSession()
+     console.log(sessionData?.user?.email);
+     const requestData=  await axios.post(requestCollabApi,{email:sessionData?.user?.email});
+      console.log(requestData.data);
+     setCollabrequests(requestData.data)
+
+    }
+   const requestCollab=async()=>{
+      const sessionData=await getSession()
+      await axios.put(requestCollabApi,{workSpaceCode:collabCode,email:sessionData?.user?.email});
+   }
+   const makeOffInput=()=>{
+    folderCodeInputRef.current.blur();
+   }
   const folderEdit=async()=>{
     console.log(foldereditApi)
    await axios.put(foldereditApi,newWorkspace);
@@ -45,9 +62,7 @@ const userMainPage=()=>{
     const updateFormFill=(name,description)=>{
       setNewWorkspace({...newWorkspace,name,description})
     }
-    const updateWorkspace=()=>{
-      // console.log(email);
-    }
+
     const searchResult=(e)=>{
      
       const filterdata=constworkspaces.filter((ele)=>{
@@ -70,6 +85,13 @@ const userMainPage=()=>{
       constsetWorkspaces(content.data)
       
     }
+
+    const getCollabWorkSpaces=async()=>{
+      const sessionn=await getSession()
+      const content=await axios.put(CollabWorkspacesApi,{gmail:sessionn?.user?.email})
+      setWorkspaces([...content.data])
+      constsetWorkspaces([...content.data])
+    }
     const createWorkspace=async()=>{
      await axios.post(WorkspacesApi,newWorkspace);
      await getWorkspaces() 
@@ -77,6 +99,7 @@ const userMainPage=()=>{
     useEffect(() => {
       
       getWorkspaces();
+      // getCollabRequests();
       
       
     },[])
@@ -105,6 +128,12 @@ const userMainPage=()=>{
                         <label for="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Workspace Name</label>
                         <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Workspace Name" required value={newWorkspace.name} onChange={(e)=>setNewWorkspace({...newWorkspace,name:e.target.value,gmail:`${session?.user?.email}`})}/>
                     </div>
+                 { formtype=="UPDATE"&&  <div>
+                        <label for="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Workspace Code</label>
+                        <input type="text" name="folderCode" id="folderCode" className="bg-gray-50 border border-gray-300  text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" ref={folderCodeInputRef} onClick={makeOffInput} required value={folderCode} />
+                    </div>
+
+                 }
                     <div>
                         <label for="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                         <textarea rows="5" type="text" name="description" id="description" placeholder="Description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required value={newWorkspace.description} onChange={(e)=>setNewWorkspace({...newWorkspace,description:e.target.value})}/>
@@ -136,16 +165,16 @@ const userMainPage=()=>{
             </button>
             <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Join a Workspace</h3>
-                <form class="space-y-6" action="#">
+              
                   
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">WorkSpace Code</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required/>
+                        <input type="password" value={collabCode} onChange={(e)=>setCollabCode(e.target.value)} name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required/>
                     </div>
                     
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Request a Collab</button>
+                    <button type="text" onClick={()=>{requestCollab();setJoinToggle(false)}} class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Request a Collab</button>
                    
-                </form>
+                
             </div>
         </div>
     </div>
@@ -213,18 +242,18 @@ const userMainPage=()=>{
   Join a Workspace 
   </button>
   {/* Notification */}
-  <button onClick={()=>{setnotification(pev=>(!pev))}} data-modal-target="notification_Tg" data-modal-toggle="notification_Tg">
+  <button onClick={()=>{getCollabRequests();setnotification(pev=>(!pev));}} data-modal-target="notification_Tg" data-modal-toggle="notification_Tg">
 <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
   <path fill-rule="evenodd" d="M12 2.25A6.75 6.75 0 005.25 9v.75a8.217 8.217 0 01-2.119 5.52.75.75 0 00.298 1.206c1.54
   4.57 3.16.99 4.831 1.243a3.75 3.75 0 107.48 0 24.583 24.583 0 004.83-1.244.75.75 0 00.298-1.205 8.217 8.217 0 01-2.118-5.52V9A6.75 6.75 0 0012 2.25zM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 004.496 0l.002.1a2.25 2.25 0 11-4.5 0zm.75-10.5a.75.75 0 000 1.5h1.599l-2.223 3.334A.75.75 0 0010.5 13.5h3a.75.75 0 000-1.5h-1.599l2.223-3.334A.75.75 0 0013.5 7.5h-3z" clip-rule="evenodd" />
 </svg>
 </button>
 {/* View Collabed Spaces */}
-<button type="button" class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2">
+<button onClick={()=>{setCollabToggle((pev)=>!pev);collabToggle?getCollabWorkSpaces():getWorkspaces();}} type="button" class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 m-1 ">
   <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM8.547 4.505a8.25 8.25 0 1011.672 8.214l-.46-.46a2.252 2.252 0 01-.422-.586l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.211.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.654-.261a2.25 2.25 0 01-1.384-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.279-2.132z" clipRule="evenodd" />
 </svg>
-View Collabed Spaces
+{collabToggle?"View Collabed Spaces":"View Own WorkSpaces"}
 </button>
         {/* searchbox */}
         
@@ -258,7 +287,7 @@ View Collabed Spaces
         {
          workspaces?.map((ele)=>{
             
-            return <Article props={ele} setToggle={setToggle} setFormtype={setFormtype} updateFormFill={updateFormFill} foldereditApiSet={foldereditApiSet} folderdeleteApiSet={folderdeleteApiSet}/>
+            return <Article props={ele} setToggle={setToggle} setFormtype={setFormtype} updateFormFill={updateFormFill} foldereditApiSet={foldereditApiSet} folderdeleteApiSet={folderdeleteApiSet} setFolderCode={setFolderCode}/>
          })
          
          
@@ -293,10 +322,11 @@ export default userMainPage;
 
 
 
-const Article=({props,setToggle,setFormtype,updateFormFill,foldereditApiSet,folderdeleteApiSet})=>{
+const Article=({props,setToggle,setFormtype,updateFormFill,foldereditApiSet,folderdeleteApiSet,setFolderCode})=>{
   const {data:session ,status}=useSession();
   const foldereditApi=`/api/folderEdit/${props._id}`
   const folderdeleteApi=`/api/delete/folder/${props._id}`
+
  
     return(
         <>
@@ -341,7 +371,7 @@ const Article=({props,setToggle,setFormtype,updateFormFill,foldereditApiSet,fold
                 </span>
             </dd>
             </div>
-            <button onClick={()=>{folderdeleteApiSet(folderdeleteApi);foldereditApiSet(foldereditApi);setFormtype("UPDATE");setToggle(true);updateFormFill(props.name,props.description)}} className='flex items-center justify-center text-xs font-medium rounded-full px-4 py-1 space-x-1 border-2 border-black bg-white hover:bg-black hover:text-white text-black dark:bg-slate-800 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-black'>
+            <button onClick={()=>{setFolderCode(props.folderCode); folderdeleteApiSet(folderdeleteApi);foldereditApiSet(foldereditApi);setFormtype("UPDATE");setToggle(true);updateFormFill(props.name,props.description)}} className='flex items-center justify-center text-xs font-medium rounded-full px-4 py-1 space-x-1 border-2 border-black bg-white hover:bg-black hover:text-white text-black dark:bg-slate-800 dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-black'>
             <span>Edit</span>
             <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
                 <path d='M5 12h13M12 5l7 7-7 7' />

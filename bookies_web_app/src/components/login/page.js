@@ -11,17 +11,11 @@ function Login() {
     const router = useRouter();
     session = session.data;
     const [sidebar, setsidebar] = useState();
-    const setUserAndLoadPage=async()=>{
-        const sessionData=await getSession()
-        if(sessionData){
-            axios.post("/api/user/create",{name:sessionData?.user?.name,gmail:sessionData?.user?.email})
-        
-            redirect("/pages/homepage/userMainPage");
-        }
+   
+    if(session){
+        axios.post("/api/user/create",{name:session?.user?.name,gmail:session?.user?.email})
+        redirect("/pages/homepage/userMainPage");
     }
-    useEffect(()=>{
-        setUserAndLoadPage();
-    },[])
  
       
     return (
