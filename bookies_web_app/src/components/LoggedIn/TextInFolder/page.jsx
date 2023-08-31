@@ -26,7 +26,6 @@ const TextInFolder = ({ texts }) => {
   return (
     <>
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
-        <h1>Your Notes</h1>
         {texts.map((text) => {
           const [toggle, setToggle] = useState(false);
           const [editable, setEditable] = useState(false);
