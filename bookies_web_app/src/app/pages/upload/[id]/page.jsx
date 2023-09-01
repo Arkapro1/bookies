@@ -33,8 +33,10 @@ const Upload = () => {
         //
         if (response.status === 200) {
           alert("File Uploaded");
-          await axios.post(uploadfileApi,{contentLink:response.data.secure_url,format:response.data.format})
-          redirect(`/pages/homepage/userMainPage/${id}`);
+         await axios.post(uploadfileApi,{contentLink:response.data.secure_url,format:response.data.format})
+         const link="http://localhost:32914"+`/pages/homepage/userMainPage/${id}`;
+        // redirect(link);
+        window.location.replace(link);
           // mongo maro ekhane 
           
       } else {

@@ -45,7 +45,7 @@ const TextInFolder = ({ texts }) => {
       </span>
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
         {texts.map((text, index) => {
-          <TextHelper text={text} index={index} />;
+          return <TextHelper text={text} index={index} />;
         })}
       </div>
     </>
@@ -76,8 +76,8 @@ const TextHelper = ({ text }, { index }) => {
   const inputRef = useRef(null);
   const handleEdit = () => {
     setEditable(true);
-    document.getElementById("noteTitle").style.background = "#334155";
-    document.getElementById("noteDesc").style.background = "#334155";
+    document.getElementById(`noteTitle${index}`).style.background = "#334155";
+    document.getElementById(`noteDesc${index}`).style.background = "#334155";
     inputRef.current.focus();
   };
   const handleTitleChange = (e) => {
@@ -135,7 +135,7 @@ const TextHelper = ({ text }, { index }) => {
             readOnly={!editable}
             tabIndex={"0"}
             type="text"
-            id={noteDesc`${index}`}
+            id={`noteDesc${index}`}
             class="mb-2 p-1 rounded text-sm font-bold w-full text-gray-400 bg-transparent"
           />
           {toggle && (

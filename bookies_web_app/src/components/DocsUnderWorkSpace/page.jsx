@@ -25,6 +25,7 @@ const SubFolders = () => {
   const postLinks = async (contentLink) => {
     await axios.post(postLinkApi, { contentLink });
   };
+ 
   if (val) {
     postLinks(val);
   }
@@ -93,7 +94,9 @@ const SubFolders = () => {
 
   const [noteTitle, setNoteTitle] = useState("");
   const [noteDesc, setNoteDesc] = useState("");
-
+  const postNote = async () => {
+    await axios.post(postNoteApi, {name:noteTitle,description:noteDesc });
+  };
   const handleNoteSubmit = async () => {
     await postNote();
     console.log(noteTitle);
