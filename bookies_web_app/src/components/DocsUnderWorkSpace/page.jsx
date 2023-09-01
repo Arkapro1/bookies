@@ -24,11 +24,15 @@ const SubFolders = () => {
   const [val, setVal] = useState(false);
   const postLinks = async (contentLink) => {
     await axios.post(postLinkApi, { contentLink });
+    location.reload();
   };
  
-  if (val) {
+
+  useEffect(()=>{
+    if(val)
     postLinks(val);
-  }
+  },[val])
+
   console.log(val);
   const { data: session, status } = useSession();
 
@@ -96,6 +100,7 @@ const SubFolders = () => {
   const [noteDesc, setNoteDesc] = useState("");
   const postNote = async () => {
     await axios.post(postNoteApi, {name:noteTitle,description:noteDesc });
+    location.reload();
   };
   const handleNoteSubmit = async () => {
     await postNote();
