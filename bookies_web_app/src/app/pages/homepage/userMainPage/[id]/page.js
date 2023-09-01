@@ -15,7 +15,8 @@ const WorkspaceOpenView = () => {
     const {id}=useParams()
     const addLinkApi=`/api/uploadfile/link/${id}`
     const addTextApi=`/api/uploadfile/note/${id}`
-    const addImgApi=`/api/documents/img/${id}`
+    const getImgApi=`/api/uploadfile/getimgs/${id}`
+    const getDocApi=`/api/uploadfile/getfiles/${id}`
     console.log(addLinkApi);
     const [links,setLinks]=useState([4,4,444])
     const [texts,setTexts]=useState([3,3,3,3,3]);
@@ -35,14 +36,15 @@ const WorkspaceOpenView = () => {
           setTexts(apiData.data)
           // setTexts([1,2]);
      }
-    //  const getAllImgs=async()=>{
-    //     const apiData=await axios.get(addImgApi)
-    //       setImgs(apiData.data)
-    //  }
-    //  const getAllDocs=async()=>{
-    //     const apiData=await axios.get(addDocApi)
-    //       setDocs(apiData.data)
-    //  }
+     const getAllImgs=async()=>{
+        const apiData=await axios.get(getImgApi)
+          setImgs(apiData.data)
+     }
+     const getAllDocs=async()=>{
+        const apiData=await axios.get(getDocApi)
+        console.log(apiData);
+          setDocs(apiData.data)
+     }
 
     const putLink=async(link)=>{
       //  await axios.post(addLinkApi,{contentLink:link||"kjgajk",contentType:"link"})
@@ -50,8 +52,8 @@ const WorkspaceOpenView = () => {
     useEffect(()=>{
         getAllLinks()
         getAllTexts()
-        //getAllImgs()
-        //getAllDocs()
+        getAllImgs()
+        getAllDocs()
     },[])
     
 

@@ -13,6 +13,7 @@ export const GET=async(request,{params})=>{
         if(!documents){
             return new NextResponse("Document not found",{status:400});
         }
+        console.log(documents);
         
         return new NextResponse(JSON.stringify(documents, null, 2), {
             status: 200,

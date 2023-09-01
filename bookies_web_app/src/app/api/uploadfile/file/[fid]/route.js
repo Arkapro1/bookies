@@ -9,8 +9,8 @@ export const POST=async(request,{params})=>{
     const {fid}=params
     console.log(body,fid);
     const contentTypeList=["png","jpg","jpeg"]
-    const contentType=contentTypeList.includes(format)?"img":"pdf";
-   
+    const contentType=contentTypeList.includes(format)?"img":"file";
+   console.log(contentType);
     try {
         await connect();
         const newLink=await Documents.create({
@@ -18,6 +18,7 @@ export const POST=async(request,{params})=>{
             contentLink,
             folderId:fid
         })
+        console.log(newLink);
         const uplosdLink=await Folders.updateOne({_id:fid},{
             $push:{
                 documents:newLink

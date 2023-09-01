@@ -328,7 +328,7 @@ const SubFolders = () => {
                         </a>
                       </button>
                       <a
-                        href="/pages/upload"
+                        href={`/pages/upload/${id}`}
                         class="ml-10 mb-5 relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group"
                       >
                         <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-400 rounded-full group-hover:w-56 group-hover:h-56"></span>
