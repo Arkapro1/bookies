@@ -61,7 +61,6 @@ const WorkspaceOpenView = () => {
             <SubFolders putLink={putLink} />
             <LinksInFolder links={links} />
             <TextInFolder texts={texts}/>
-            
             <ImgInFolder imgs={imgs}/>
             <DocsInFolder docs={docs}/>
         </>
