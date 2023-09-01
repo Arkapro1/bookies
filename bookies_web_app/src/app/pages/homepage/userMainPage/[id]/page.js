@@ -14,7 +14,7 @@ import axios from 'axios';
 const WorkspaceOpenView = () => {
     const {id}=useParams()
     const addLinkApi=`/api/uploadfile/link/${id}`
-    const addTextApi=`/api/documents/text/${id}`
+    const addTextApi=`/api/uploadfile/note/${id}`
     const addImgApi=`/api/documents/img/${id}`
     console.log(addLinkApi);
     const [links,setLinks]=useState([4,4,444])
@@ -30,9 +30,10 @@ const WorkspaceOpenView = () => {
         // setLinks(apid);
     }
     const getAllTexts=async()=>{
-        // const apiData=await axios.get(addTextApi)
-          // setTexts(apiData.data)
-          setTexts([1,2]);
+        const apiData=await axios.get(addTextApi)
+        console.log(apiData.data);
+          setTexts(apiData.data)
+          // setTexts([1,2]);
      }
     //  const getAllImgs=async()=>{
     //     const apiData=await axios.get(addImgApi)
