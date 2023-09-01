@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Image } from 'cloudinary-react';
 import axios from 'axios';
 import { useParams } from "next/navigation";
+import { redirect } from "next/navigation";
 const CLOUDINARY_CLOUD_NAME="dp9sxoddy"
 ,CLOUDINARY_API_KEY="744592612514596"
 ,CLOUDINARY_API_SECRET="tTNiGqsPjnHncSuQ4NI5cY5x_Rc",
@@ -10,7 +11,7 @@ CLOUDINARY_UPLOAD_PRESET="npfiapsd"
 let uploadedImage=""
 const Upload = () => {
     const {id}=useParams()
-    const uploadfileApi="/api/uploadfile/"
+    const uploadfileApi=`/api/uploadfile/file/${id}`
     const [file, setFile] = useState([]);
     console.log("look",uploadedImage);
     const handleFileChange = async (e) => {
@@ -29,10 +30,13 @@ const Upload = () => {
           `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
           formData,
         )
+        //
         if (response.status === 200) {
           alert("File Uploaded");
-          window.location.href = "http://localhost:32914/pages/homepage/userMainPage/64f01c3e4421ccc76ca11ed5";
+          await axios.post(uploadfileApi,{contentLink:response.data.secure_url,format:response.data.format})
+          redirect(`/pages/homepage/userMainPage/${id}`);
           // mongo maro ekhane 
+          
       } else {
           alert("Upload Failed"); // Show an alert if the upload fails
       }
