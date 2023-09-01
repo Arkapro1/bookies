@@ -46,11 +46,11 @@ function Login() {
                     </svg>
                     <p className="text-base font-medium ml-4 text-white">Continue with Google</p>
                 </button> 
-                {/* <button onClick={() => signIn("github")} aria-label="Continue with github" role="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10"
+                <button onClick={() => signIn("github")} aria-label="Continue with github" role="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10"
                 >
                     <img src="github.svg" width={55} height={10}></img>
                     <p className="text-base font-medium ml-4 text-white">Continue with Github</p>
-                </button>   */}
+                </button>   
             </div>
         </div>
         </div>
