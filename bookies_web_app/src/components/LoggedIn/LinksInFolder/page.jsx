@@ -5,6 +5,9 @@ import { useInView } from "react-intersection-observer";
 
 const LinksInFolder = ({ links }) => {
   const [toggle, setToggle] = useState(false);
+  const [editable, setEditable] = useState(false);
+  const [text, setText] = useState("https://chat.openai.com/");
+  const inputRef = useRef(null);
 
   const control = useAnimation();
   const [ref, inView] = useInView();
@@ -56,17 +59,15 @@ const LinksInFolder = ({ links }) => {
       </span>
 
       <div className="grid  place-items-center sm:grid-cols-2 lg:grid-cols-4">
-      
-        {links.map((link,index) => {
-           return <LinkItem index={index} link={link}/>
-         
+        {links.map((link, index) => {
+          return <LinkItem index={index} link={link} />;
         })}
       </div>
     </>
   );
 };
 
-const LinkItem = ({link},{index}) => {
+const LinkItem = ({ link }, { index }) => {
   const control = useAnimation();
   const [ref, inView] = useInView();
   const [toggle, setToggle] = useState(false);
@@ -216,7 +217,6 @@ const LinkItem = ({link},{index}) => {
         </div>
       </div>
     </motion.div>
-  )
-  ;
+  );
 };
 export default LinksInFolder;

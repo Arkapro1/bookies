@@ -3,19 +3,18 @@ import axios from "axios";
 import { getSession, useSession } from "next-auth/react";
 import { redirect, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-// import Workspace from "../Folder/page";
+import LoadingSkeleton from "../loading/LoadingSkeleton";
 
 const SubFolders = () => {
   const handleLink = (e) => {
     e.preventDefault();
-  
-   const d= setVal(prompt("Enter a link"));
-   
+
+    const d = setVal(prompt("Enter a link"));
   };
   const { id } = useParams();
   const FolderApi = `/api/subfolders/${id}`;
-  const postNoteApi=`/api/uploadfile/note/${id}`
-  const postLinkApi=`/api/uploadfile/link/${id}`
+  const postNoteApi = `/api/uploadfile/note/${id}`;
+  const postLinkApi = `/api/uploadfile/link/${id}`;
   const handleNote = (e) => {
     e.preventDefault();
     setToggle((prev) => !prev);
@@ -23,10 +22,10 @@ const SubFolders = () => {
     setNoteToggle((prev) => !prev);
   };
   const [val, setVal] = useState(false);
-  const postLinks=async(contentLink)=>{
-    await axios.post(postLinkApi,{contentLink})
-  }
-  if(val){
+  const postLinks = async (contentLink) => {
+    await axios.post(postLinkApi, { contentLink });
+  };
+  if (val) {
     postLinks(val);
   }
   console.log(val);
@@ -39,8 +38,6 @@ const SubFolders = () => {
   if (status == "unauthenticated") {
     redirect("/");
   }
-  
- 
 
   const [Folder, setFolder] = useState([]);
   const [newFolder, setnewFolder] = useState({
@@ -70,7 +67,6 @@ const SubFolders = () => {
     await getFolder();
   };
 
- 
   // const updateWorkspace = () => {};
   // const searchResult = (e) => {
   //   const filterdata = constFolder.filter((ele) => {
@@ -98,12 +94,12 @@ const SubFolders = () => {
   const [noteTitle, setNoteTitle] = useState("");
   const [noteDesc, setNoteDesc] = useState("");
 
-  const handleNoteSubmit = async() => {
+  const handleNoteSubmit = async () => {
     await postNote();
     console.log(noteTitle);
   };
-  const postNote=async()=>{
-    await axios.post(postNoteApi,{name:noteTitle,description:noteDesc})
+  if (status == "loading") {
+    return <LoadingSkeleton />;
   }
   return (
     <>
@@ -128,7 +124,6 @@ const SubFolders = () => {
                       description: "",
                       isWorkSpace: true,
                     });
-
                   }}
                   type="button"
                   className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -428,7 +423,6 @@ const SubFolders = () => {
                         onClick={() => {
                           handleNoteSubmit();
                           setNoteToggle(false);
-                          
                         }}
                         className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
@@ -537,6 +531,10 @@ const FolderCard = ({
   const { data: session, status } = useSession();
   const foldereditApi = `/api/folderEdit/${props._id}`;
   const folderdeleteApi = `/api/delete/folder/${props._id}`;
+
+  if (status == "loading") {
+    return <LoadingSkeleton />;
+  }
 
   return (
     <>

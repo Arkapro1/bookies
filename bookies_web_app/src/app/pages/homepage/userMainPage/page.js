@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import './style.css';
 
+import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
 import axios from 'axios';
 
 const userMainPage=()=>{ 
@@ -14,8 +15,7 @@ const userMainPage=()=>{
     const [Jointoggle, setJoinToggle] = useState(false);
     const [notification, setnotification] = useState(false);
     const WorkspacesApi="/api/folders"
- 
-   
+  
     const [workspaces,setWorkspaces]=useState([])
     const [constworkspaces,constsetWorkspaces]=useState([])
     const [newWorkspace,setNewWorkspace]=useState({gmail:"",name:"",description:"",isWorkSpace:true})
@@ -110,7 +110,9 @@ const userMainPage=()=>{
       getWorkspaces();
       getCollabRequests();
     },[])
-
+    if(status=="loading"){
+      return <LoadingSkeleton/>
+    }
     return(
         <>
 
