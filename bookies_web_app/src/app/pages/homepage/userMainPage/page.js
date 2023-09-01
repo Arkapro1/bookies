@@ -279,7 +279,7 @@ const userMainPage=()=>{
                     aria-label="Search"
                     aria-describedby="button-addon2" onChange={(e)=>searchResult(e)} />
                   <button
-                    className="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
+                    className="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200 focus:text-white"
                     id="basic-addon2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
