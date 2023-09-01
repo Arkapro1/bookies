@@ -7,7 +7,7 @@ const CLOUDINARY_API_SECRET = 'tTNiGqsPjnHncSuQ4NI5cY5x_Rc';
 const docs=[
   { public_id: 'x01zfpyogutnhpkefwkf', caption: 'Image 1 Caption' }
 ]
-const DocsInFolder = () => {
+const DocsInFolder = ({docs}) => {
     const cloudinaryInstance = new cloudinary.Cloudinary({
         cloud_name: CLOUDINARY_CLOUD_NAME,
         api_key: CLOUDINARY_API_KEY,
@@ -31,34 +31,27 @@ const DocsInFolder = () => {
       </span>
             <div className="grid mb-4 place-items-center sm:grid-cols-2 lg:grid-cols-4">
                 {docs.map((doc, index) => {
-                    const docURL = cloudinaryInstance.url(doc.public_id, {
-                        secure: true,
-                    });
-console.log("kjbasdc",docURL);
-console.log("kjbasdc",doc.name);
+                    const docURL = `${doc.contentLink}`
+                    const docText=docURL.substring(docURL.lastIndexOf("/") + 1, docURL.lastIndexOf("."));
+
                     return (
                         <div key={index}>
-                            <div className="inline-flex rounded-md shadow-sm mb-4" role="group">
+                            <div className="inline-flex rounded-md shadow-sm mb-4 " role="group">
                                 <a
                                     href={docURL}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="px-4 py-2 text-sm font-medium border border-gray-600 rounded-l-lg focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
                                 >
-                                    {/* You can replace the SVG icon here */}
-                                    <svg
-                                        className="w-6 h-6 text-gray-800 dark:text-white"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 16 20"
-                                    >
-                                        {/* SVG path code */}
-                                    </svg>
+                                    {/* You can replace the SVG icon here */} 
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+</svg>
+
                                 </a>
-                                <div className="w-full pl-6 pr-28 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                <div className=" block  px-6  py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                                     {/* Display the document name */}
-                                    {doc.name}
+                                    <p>{docText}</p>
                                 </div>
                             </div>
                         </div>

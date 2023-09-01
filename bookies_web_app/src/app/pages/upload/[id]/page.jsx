@@ -4,12 +4,15 @@ import { Image } from 'cloudinary-react';
 import axios from 'axios';
 import { useParams } from "next/navigation";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+
 const CLOUDINARY_CLOUD_NAME="dp9sxoddy"
 ,CLOUDINARY_API_KEY="744592612514596"
 ,CLOUDINARY_API_SECRET="tTNiGqsPjnHncSuQ4NI5cY5x_Rc",
 CLOUDINARY_UPLOAD_PRESET="npfiapsd"
 let uploadedImage=""
 const Upload = () => {
+    const router=useRouter();
     const {id}=useParams()
     const uploadfileApi=`/api/uploadfile/file/${id}`
     const [file, setFile] = useState([]);
@@ -34,9 +37,10 @@ const Upload = () => {
         if (response.status === 200) {
           alert("File Uploaded");
          await axios.post(uploadfileApi,{contentLink:response.data.secure_url,format:response.data.format})
-         const link="http://localhost:32914"+`/pages/homepage/userMainPage/${id}`;
+        //  const link="http://localhost:32914"+`/pages/homepage/userMainPage/${id}`;
         // redirect(link);
-        window.location.replace(link);
+        // window.location.replace(link);
+        router.replace(`/pages/homepage/userMainPage/${id}`);
           // mongo maro ekhane 
           
       } else {
