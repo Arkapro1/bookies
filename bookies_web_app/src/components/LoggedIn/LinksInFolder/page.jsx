@@ -103,10 +103,9 @@ const LinkItem = ({ link }) => {
   const handleSave = async () => {
     setToggle((prev) => !prev);
     // document.getElementById(`input${index}`).style.background = "#0f172a";
-    await axios.put(
-      `http://localhost:32914/api/uploadfile/link/${link.folderId}/${link._id}`,
-      { contentLink: text }
-    );
+    await axios.put(`/api/uploadfile/link/${link.folderId}/${link._id}`, {
+      contentLink: text,
+    });
     handleEdit();
   };
   // const handleClick = () => {
@@ -119,9 +118,7 @@ const LinkItem = ({ link }) => {
 
   const handleDelete = async () => {
     console.log(link._id);
-    await axios.delete(
-      `http://localhost:32914/api/uploadfile/link/${link.folderId}/${link._id}`
-    );
+    await axios.delete(`/api/uploadfile/link/${link.folderId}/${link._id}`);
     location.reload();
   };
 
