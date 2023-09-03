@@ -15,7 +15,7 @@ const WorkspaceOpenView = () => {
     const {id}=useParams()
     const addLinkApi=`/api/uploadfile/link/${id}`
     const addTextApi=`/api/uploadfile/note/${id}`
-    const getImgApi=`/api/uploadfile/getimgs/${id}`
+    const getImgApi=`/api/uploadfile/getImgs/${id}`
     const getDocApi=`/api/uploadfile/getfiles/${id}`
     console.log(addLinkApi);
     const [links,setLinks]=useState([4,4,444])
