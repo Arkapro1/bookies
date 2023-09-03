@@ -1,8 +1,9 @@
+import Documents from "@/models/documentModel";
 import Folders from "@/models/folderModel";
 import connect from "@/utils/database";
-import Users from "@/models/user";
-import Documents from "@/models/documentModel";
 import { NextResponse } from "next/server";
+
+
 export const POST=async(request,{params})=>{
     const body=await request.json();
     const {contentLink}=body;
