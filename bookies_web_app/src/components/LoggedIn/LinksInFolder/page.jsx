@@ -4,34 +4,6 @@ import { useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const LinksInFolder = ({ links }) => {
-  // const [toggle, setToggle] = useState(false);
-  // const [editable, setEditable] = useState(false);
-  // const [text, setText] = useState("https://chat.openai.com/");
-  // const inputRef = useRef(null);
-  // console.log("id:" + JSON.stringify(links[0].folderId));
-
-  // const control = useAnimation();
-  // const [ref, inView] = useInView();
-  // const textVariant = {
-  //   visible: { opacity: 1, transition: { duration: 1 } },
-  //   hidden: { opacity: 0 },
-  // };
-  // const boxVariant = {
-  //   visible: {
-  //     opacity: 1,
-  //     scale: 1,
-  //     transition: { duration: 0.4 },
-  //   },
-  //   hidden: { opacity: 0, scale: 0.8 },
-  // };
-  // useEffect(() => {
-  //   if (inView) {
-  //     control.start("visible");
-  //   } else {
-  //     control.start("hidden");
-  //   }
-  // }, [control, inView]);
-
   return (
     <>
       <span class="flex ml-8 text-4xl mt-20 mb-8">
@@ -73,8 +45,9 @@ const LinkItem = ({ link }) => {
   // const [ref, inView] = useInView();
   const [toggle, setToggle] = useState(false);
   const [editable, setEditable] = useState(false);
-  const [text, setText] = useState(link.contentLink);
-  console.log(text);
+  let [text, setText] = useState(link.contentLink);
+
+  // console.log(text);
   useEffect(() => {
     setText(link.contentLink);
   }, [link.contentLink]);
@@ -121,6 +94,15 @@ const LinkItem = ({ link }) => {
     await axios.delete(`/api/uploadfile/link/${link.folderId}/${link._id}`);
     location.reload();
   };
+
+  function addHttpToHref(link) {
+    //all links will be absolute
+    if (/^https?:\/\//.test(link) || /^http?:\/\//.test(link)) {
+      return link;
+    } else {
+      return "http://" + link;
+    }
+  }
 
   return (
     // <motion.div
@@ -181,7 +163,11 @@ const LinkItem = ({ link }) => {
               />
             ) : (
               <div>
-                <a href={text} target="_blank">
+                <a
+                  href={addHttpToHref(text)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <input
                     type="text"
                     className=" w-full rounded p-2 bg-transparent cursor-pointer"
