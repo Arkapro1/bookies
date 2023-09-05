@@ -1,6 +1,7 @@
 "use client";
+import axios from "axios";
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 const TextInFolder = ({ texts }) => {
   const control = useAnimation();
@@ -73,12 +74,12 @@ const TextHelper = ({ text }, { index }) => {
   const [editable, setEditable] = useState(false);
   const [title, setTitle] = useState("title");
   const [desc, setDesc] = useState("description");
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
+  const closeTogg = () => {
+    setToggle((prev) => !prev);
+  };
   const handleEdit = () => {
-    setEditable(true);
-    document.getElementById(`noteTitle${index}`).style.background = "#334155";
-    document.getElementById(`noteDesc${index}`).style.background = "#334155";
-    inputRef.current.focus();
+    setEditable(!editable);
   };
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -86,15 +87,30 @@ const TextHelper = ({ text }, { index }) => {
   const handleDescChange = (e) => {
     setDesc(e.target.value);
   };
-  const handleSave = () => {
-    setEditable(false);
+  const handleSave = async () => {
     setToggle((prev) => !prev);
-    document.getElementById(`noteTitle${index}`).style.background = "#000";
-    document.getElementById(`noteDesc${index}`).style.background = "#000";
+    await axios.put(`/api/uploadfile/note/${text.folderId}/${text._id}`, {
+      name: title,
+      description: desc,
+    });
+    handleEdit();
   };
+
+  const handleDelete = async () => {
+    await axios.delete(`/api/uploadfile/note/${text.folderId}/${text._id}`);
+    location.reload();
+  };
+
+  // useEffect(() => {
+  //   inputRef.current.disabled = !editable;
+  // }, [editable]);
   useEffect(() => {
-    inputRef.current.disabled = !editable;
-  }, [editable]);
+    setTitle(text.name);
+  }, [text.name]);
+  useEffect(() => {
+    setDesc(text.description);
+  }, [text.description]);
+
   return (
     <div>
       <motion.div
@@ -112,37 +128,51 @@ const TextHelper = ({ text }, { index }) => {
           }}
           class="block w-64 mt-10 p-6  border border-gray-200 rounded-lg shadow  dark:border-gray-700 "
         >
-          {/* <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white"> */}
-          {/* Noteworthy technology */}
-          <input
-            value={text.name}
-            onChange={handleTitleChange}
-            ref={inputRef}
-            readOnly={!editable}
-            tabIndex={"0"}
-            type="text"
-            id={`noteTitle${index}`}
-            class="mb-2 p-1 rounded text-lg font-bold w-full text-white bg-transparent"
-          />
-          {/* </h5> */}
-          {/* <p class="text-sm text-left text-gray-700 dark:text-gray-400">
-                    Here are the biggest enterprise technology.
-                  </p> */}
-          <textarea
-            value={text.description}
-            onChange={handleDescChange}
-            ref={inputRef}
-            readOnly={!editable}
-            tabIndex={"0"}
-            type="text"
-            id={`noteDesc${index}`}
-            class="mb-2 p-1 rounded text-sm font-bold w-full text-gray-400 bg-transparent"
-          />
+          {editable ? (
+            <div>
+              <input
+                value={title}
+                onChange={handleTitleChange}
+                onBlur={handleSave}
+                type="text"
+                class="mb-2 p-1 rounded text-lg font-bold w-full text-white bg-gray-800"
+                tabIndex={"0"}
+                autofocus
+              />
+              <textarea
+                value={desc}
+                onChange={handleDescChange}
+                onBlur={handleSave}
+                type="text"
+                class="mb-2 p-1 rounded text-sm font-bold w-full text-gray-400 bg-gray-800"
+              />
+            </div>
+          ) : (
+            <div>
+              <input
+                value={title}
+                readOnly
+                tabIndex={"0"}
+                type="text"
+                disabled
+                class="mb-2 p-1 rounded text-lg font-bold w-full text-white bg-transparent"
+              />
+              <textarea
+                value={desc}
+                readOnly
+                tabIndex={"0"}
+                type="text"
+                disabled
+                class="mb-2 p-1 rounded text-sm font-bold w-full text-gray-400 bg-transparent"
+              />
+            </div>
+          )}
+
           {toggle && (
             <div className="mt-2">
               <button
                 className="mr-2 hover:bg-green-400 p-2 rounded"
-                onClick={editable ? handleSave : handleEdit}
+                onClick={handleEdit}
               >
                 <svg
                   class="w-[17px] h-[17px] text-gray-800 dark:text-white"
@@ -160,7 +190,10 @@ const TextHelper = ({ text }, { index }) => {
                   />
                 </svg>
               </button>
-              <button className="mr-2 hover:bg-red-700 p-2 rounded">
+              <button
+                className="mr-2 hover:bg-red-700 p-2 rounded"
+                onClick={handleDelete}
+              >
                 <svg
                   class="w-[17px] h-[17px] text-gray-800 dark:text-white"
                   aria-hidden="true"
