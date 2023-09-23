@@ -16,7 +16,7 @@ const userMainPage=()=>{
     const [notification, setnotification] = useState(false);
     const WorkspacesApi="/api/folders"
 
-    const [searchOpen, setSearchOpen] = useState(true);
+    const [searchOpen, setSearchOpen] = useState(false);
   
     const [workspaces,setWorkspaces]=useState([])
     const [constworkspaces,constsetWorkspaces]=useState([])
