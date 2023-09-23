@@ -15,6 +15,8 @@ const userMainPage=()=>{
     const [Jointoggle, setJoinToggle] = useState(false);
     const [notification, setnotification] = useState(false);
     const WorkspacesApi="/api/folders"
+
+    const [searchOpen, setSearchOpen] = useState(true);
   
     const [workspaces,setWorkspaces]=useState([])
     const [constworkspaces,constsetWorkspaces]=useState([])
@@ -173,7 +175,7 @@ const userMainPage=()=>{
                 </svg>
                 <span class="sr-only">Close modal</span>
             </button>
-                <h3 class="mb-4 text-lg font-medium text-gray-900 dark:text-white absolute top-5 left-4 ml-2">Join a Workspace</h3>
+                <h3 class="mb-4 text-lg  font-medium text-gray-900 dark:text-white absolute top-5 left-4 ml-2">Join a Workspace</h3>
             <div class="px-6 py-6 flex flex-col items-center ">
                   
                     <div class="mt-10 ">
@@ -235,46 +237,57 @@ const userMainPage=()=>{
      
     <div className="">
 
-        <div className="grid gap-auto  mb-10 pt-6 md:mb-16 lg:grid-cols-2 ">
+        <div className="grid gap-auto  mb-10 pt-6 md:mb-16 grid-cols-2 ">
         <div class="flex flex-col">
-          <h2 className="mb-4 inline text-start font-serif text-xl md:text-2xl lg:text-3xl font-bold text-gray-200 md:mb-6 md:text-4xl">Welcome {session?.user.name}</h2>
-          <div class="flex ">
+          <h2 className="mb-4 inline text-start font-serif text-md sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-200 md:mb-6">Welcome {session?.user.name}</h2>
+          <div class="flex flex-col sm:flex-row">
 
-          <button type="button" onClick={()=>{setJoinToggle((pev)=>!pev)}} data-modal-target="Join_A_Workspace_modal" data-modal-toggle="Join_A_Workspace_modal" class="mr-10 text-white  bg-blue-700 hover:bg-blue-800 focus:ring-3 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+          <button type="button" onClick={()=>{setJoinToggle((pev)=>!pev)}} data-modal-target="Join_A_Workspace_modal" data-modal-toggle="Join_A_Workspace_modal" 
+          class="sm:w-40 md:w-48 mr-10 text-white  bg-blue-700 hover:bg-blue-800 focus:ring-3 focus:ring-blue-300  rounded-lg text-xs sm:text-sm px-1 md:px-2 lg:px-5 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
             Join a Workspace 
             </button>
+           
           {/* View Collabed Spaces */}
-          <button onClick={()=>{setCollabToggle((pev)=>!pev);collabToggle?getCollabWorkSpaces():getWorkspaces();}} type="button" class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 m-1 ">
+          <button onClick={()=>{setCollabToggle((pev)=>!pev);collabToggle?getCollabWorkSpaces():getWorkspaces();}} type="button" 
+          class=" sm:w-40 md:w-48 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-xs sm:text-sm px-1 md:px-2 lg:px-5 py-2 text-center 
+           dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2">
+          {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 md:w-4 lg:w-6 mr-1">
             <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM8.547 4.505a8.25 8.25 0 1011.672 8.214l-.46-.46a2.252 2.252 0 01-.422-.586l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.211.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.654-.261a2.25 2.25 0 01-1.384-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.279-2.132z" clipRule="evenodd" />
-          </svg>
+          </svg> */}
           {collabToggle?"View Collabed Spaces":"View Own WorkSpaces"}
+          
           </button>
           </div>
         </div>  
         
-        <div className=" flex h-12 inline-flex justify-around">
+       
 
-          <button onClick={() => {setToggle((prev) => !prev);setFormtype("CREATE")}}  className="createbtn border border-gray-200 mx-4 rounded-3xl px-4 py-2 w-30 h-10 text-white  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  text-center  dark:hover:bg-gray-900 dark:focus:ring-gray-800 lg:ml-16 xl:ml-40" type="button">
+        <div className="pt-6 hidden sm:flex h-30  inline-flex justify-around">
+        {/* Create Button */}
+        <div className="flex items-center h-8 sm:h-10   ">
+          <button onClick={() => {setToggle((prev) => !prev);setFormtype("CREATE")}}  
+          className=" createbtn border border-gray-200 mx-2 lg:mx-4 rounded-3xl 
+          px-1 sm:px-2 lg:px-4 text-center 
+          py-1 sm:py-1 md:py-2 w-14 sm:w-16 lg:w-20 
+          text-white  hover:bg-blue-800 focus:ring-4 focus:outline-none 
+          focus:ring-blue-300 font-medium rounded-lg text-sm  text-center  dark:hover:bg-gray-900 
+          dark:focus:ring-gray-800 lg:ml-16 xl:ml-40" type="button">
             Create
           </button>  
-          {/* <button type="button" onClick={()=>{setJoinToggle((pev)=>!pev)}} data-modal-target="Join_A_Workspace_modal" data-modal-toggle="Join_A_Workspace_modal" class=" text-white m-4 bg-blue-700 hover:bg-blue-800 focus:ring-3 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-            Join a Workspace 
-            </button> */}
-        
-        
-        {/* Notification */}
+        {/* Notification Button */}
         <button onClick={()=>{setnotification(pev=>(!pev));}} className="h-10 mr-3">
-          <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="w-10 ">
+          <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="w-6 lg:w-10 ">
             <path fill-rule="evenodd" d="M12 2.25A6.75 6.75 0 005.25 9v.75a8.217 8.217 0 01-2.119 5.52.75.75 0 00.298 1.206c1.54
             4.57 3.16.99 4.831 1.243a3.75 3.75 0 107.48 0 24.583 24.583 0 004.83-1.244.75.75 0 00.298-1.205 8.217 8.217 0 01-2.118-5.52V9A6.75 6.75 0 0012 2.25zM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 004.496 0l.002.1a2.25 2.25 0 11-4.5 0zm.75-10.5a.75.75 0 000 1.5h1.599l-2.223 3.334A.75.75 0 0010.5 13.5h3a.75.75 0 000-1.5h-1.599l2.223-3.334A.75.75 0 0013.5 7.5h-3z" clip-rule="evenodd" />
           </svg> 
           </button>
-                  {/* searchbox */}        
+          </div>
+        {/* searchbox */}        
         <div className=" mb-4 flex flex-wrap h-10 ">
                 <input
                     type="search"
-                    className=" m-0 w-38 min-w-0 flex-auto rounded-md border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                    className=" m-0 min-w-0 w-20 sm:w-24 md:w-32 lg:w-44  flex-auto rounded-md border border-solid border-neutral-300 bg-transparent bg-clip-padding 
+                    px-2 mt-3 sm:mt-0 md:px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-200 dark:focus:border-primary"
                     placeholder="Search"
                     aria-label="Search"
                     aria-describedby="button-addon2" onChange={(e)=>searchResult(e)} />
@@ -294,8 +307,99 @@ const userMainPage=()=>{
                   </button>
         </div>
         </div>
+
+
+{/* right side in mobile */}
+        <div className=" pt-6 flex sm:hidden h-30   justify-around">
+        {/* Create Button */}
+      <div className="flex items-center h-8 sm:h-10   ">
+      {!searchOpen &&  
+      <>
+          <button onClick={() => {setToggle((prev) => !prev);setFormtype("CREATE")}}  
+          className=" createbtn border border-gray-200 mx-2 lg:mx-4 rounded-3xl 
+          px-1 sm:px-2 lg:px-4 text-center 
+          py-1 sm:py-1 md:py-2 w-14 sm:w-16 lg:w-20 
+          text-white  hover:bg-blue-800 focus:ring-4 focus:outline-none 
+          focus:ring-blue-300 font-medium rounded-lg text-sm  text-center  dark:hover:bg-gray-900 
+          dark:focus:ring-gray-800 lg:ml-16 xl:ml-40" type="button">
+            Create
+          </button>  
+        {/* Notification Button */}
+        <button onClick={()=>{setnotification(pev=>(!pev));}} className="h-10 mr-3">
+          <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="currentColor" class="w-6 lg:w-10 ">
+            <path fill-rule="evenodd" d="M12 2.25A6.75 6.75 0 005.25 9v.75a8.217 8.217 0 01-2.119 5.52.75.75 0 00.298 1.206c1.54
+            4.57 3.16.99 4.831 1.243a3.75 3.75 0 107.48 0 24.583 24.583 0 004.83-1.244.75.75 0 00.298-1.205 8.217 8.217 0 01-2.118-5.52V9A6.75 6.75 0 0012 2.25zM9.75 18c0-.034 0-.067.002-.1a25.05 25.05 0 004.496 0l.002.1a2.25 2.25 0 11-4.5 0zm.75-10.5a.75.75 0 000 1.5h1.599l-2.223 3.334A.75.75 0 0010.5 13.5h3a.75.75 0 000-1.5h-1.599l2.223-3.334A.75.75 0 0013.5 7.5h-3z" clip-rule="evenodd" />
+          </svg> 
+          </button>
+          <button
+                    onClick={() => setSearchOpen(true)}
+                    className="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200 focus:text-white"
+                    id="basic-addon2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="h-5 w-5">
+                      <path
+                        fill-rule="evenodd"
+                        d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                  </>
+      }
+      {searchOpen &&
+          <div className=" mb-4 flex flex-wrap h-10 ">
+          <input
+              type="search"
+              className=" m-0 min-w-0 w-24 sm:w-24 md:w-32 lg:w-44  flex-auto rounded-md border border-solid border-neutral-300 bg-transparent bg-clip-padding 
+              px-2 mt-3 sm:mt-0 md:px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-200 dark:focus:border-primary"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="button-addon2" onChange={(e)=>searchResult(e)} />
+            <button
+            onClick={() => setSearchOpen(false)}
+              className="mt-2  text-red-800 input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-extrabold text-red-700 "
+              id="basic-addon2">
+              X
+            </button>
+  </div>
+      }
+          </div>
+
+          
+        {/* searchbox */}        
+        <div className=" mb-4 flex flex-wrap h-10 hidden sm:block">
+                <input
+                    type="search"
+                    className=" m-0 min-w-0 w-20 sm:w-24 md:w-32 lg:w-44  flex-auto rounded-md border border-solid border-neutral-300 bg-transparent bg-clip-padding 
+                    px-2 mt-3 sm:mt-0 md:px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                    placeholder="Search"
+                    aria-label="Search"
+                    aria-describedby="button-addon2" onChange={(e)=>searchResult(e)} />
+                  <button
+                    className="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200 focus:text-white"
+                    id="basic-addon2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="h-5 w-5">
+                      <path
+                        fill-rule="evenodd"
+                        d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </button>
+        </div>
+        </div>
+
+
+
+
+    
     </div>
-        
+            
         <div className="mx-5 grid gap-8 place-items-center sm:grid-cols-2 sm:gap-12 lg:grid-cols-4  xl:gap-16">
 
         {

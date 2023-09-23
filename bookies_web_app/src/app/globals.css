@@ -13,17 +13,17 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -46,9 +46,21 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  background-image: linear-gradient(to right, rgb(182, 106, 239), rgb(93, 228, 238));
+  background-image: linear-gradient(
+    to right,
+    rgb(182, 106, 239),
+    rgb(93, 228, 238)
+  );
 }
 /* In your Tailwind CSS configuration or your custom styles */
 .font-poppins {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

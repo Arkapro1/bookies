@@ -1,0 +1,7 @@
+const App=()=>{
+    return(
+        <>
+        Home
+        </>
+    )
+}
