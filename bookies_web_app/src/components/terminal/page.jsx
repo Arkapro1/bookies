@@ -3,7 +3,7 @@ const Terminal = () => {
     <>
       <div class="w-60% mx-auto">
         {/* Terminal Window  */}
-        <div class="w-full shadow-2xl subpixel-antialiased rounded h-64 bg-gray-800 border-black mx-auto">
+        <div class="w-full shadow-2xl subpixel-antialiased rounded h-[530px] bg-gray-800 border-black mb-10 mx-auto md:h-64">
           {/* Terminal Header  */}
           <div class="flex items-center h-8 rounded-t bg-gray-100 border-b border-gray-500 text-center text-black" id="headerTerminal">
             <div class="flex ml-2 items-center text-center border-red-900 bg-red-500 shadow-inner rounded-full w-3 h-3" id="closebtn">
@@ -17,7 +17,7 @@ const Terminal = () => {
             </div>
           </div>
           {/* Terminal console  */}
-          <div class="pl-1 pt-1 h-auto  text-green-200 font-mono text-base bg-gray-800 " id="console">
+          <div class="pl-2 pt-1 h-auto  text-green-200 font-mono text-base bg-gray-800 rounded" id="console">
             <p class="pb-1">How it helps to boost our Productivity:</p>
             <h3 class="pb-1">In the realm of productivity, Bookies have emerged as a guiding light
               for digital nomads. Regardless of the diverse locations they traverse,

@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <AuthProvider>
         <Nav/>
-        <div className='max-w-screen-xl min-h-screen mx-auto p-4'>
+        <div className='w-full min-h-screen mx-auto p-4'>
         {children}
         </div>
         <Footer/>

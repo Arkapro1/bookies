@@ -5,22 +5,22 @@ import "./style.css";
 const Page = (params) => {
   return (
     <>
-      <section className="text-gray-600 body-font">
+      <section className="w-full text-gray-600 body-font">
         {/* Hero section  */}
-        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+        <div className="container mx-auto flex px-5 py-11 md:py-24 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <span className="typewriter text-orange-300 text-2xl text rounded-3xl terminal">
+            <span className="typewriter text-orange-300 text-lg md:text-2xl font-semibold rounded-3xl terminal">
               <h1>Unleash Smarter Bookmark Management 🔐</h1>
             </span>
             <br />
             <br />
-            <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+            <h2 className="mb-2 text-base md:text-lg font-semibold text-gray-900 dark:text-white">
               Elevate Your Rapid Notes and Swift Life with Bookies.ai 🚀
             </h2>
             <br />
             {/* Guide progress list */}
-            <ol className="relative text-gray-500 border-l border-gray-200 dark:border-gray-700 dark:text-gray-400">
-              <li className="mb-10 ml-6">
+            <ol className="relative w-[80%] md:w-[90%] lg:w-[70%] xl:w-[45%] flex flex-col justify-center items-center text-gray-500 border-l border-gray-200 dark:border-gray-700 dark:text-gray-400">
+              <li className="mb-10 md:ml-8 w-[80%]">
                 <span className="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
                   <svg
                     className="w-3.5 h-3.5 text-green-500 dark:text-green-400"
@@ -46,7 +46,7 @@ const Page = (params) => {
                   categorize and nest bookmarks for quick retrieval
                 </p>
               </li>
-              <li className="mb-10 ml-6">
+              <li className="mb-10 md:ml-8 w-[80%]">
                 <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
                   <svg
                     className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
@@ -63,7 +63,7 @@ const Page = (params) => {
                   your bookmarks anytime, anywhere, across all devices.
                 </p>
               </li>
-              <li className="mb-10 ml-6">
+              <li className="mb-10 md:ml-8 w-[80%]">
                 <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
                   <svg
                     className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
@@ -82,7 +82,7 @@ const Page = (params) => {
                   by sharing curated folders with friends and colleagues.
                 </p>
               </li>
-              <li className="ml-6">
+              <li className="md:ml-8 w-[80%]">
                 <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
                   <svg
                     className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
@@ -591,7 +591,7 @@ const Page = (params) => {
         <br />
       </section>
       {/* Terminal View  */}
-      <div className="flex items-center p-11">
+      <div className="flex items-center p-8">
         <Terminal />
       </div>
       {/* Flowbite Tablet view  */}
