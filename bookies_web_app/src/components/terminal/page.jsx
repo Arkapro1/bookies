@@ -3,7 +3,7 @@ const Terminal = () => {
     <>
       <div class="w-60% mx-auto">
         {/* Terminal Window  */}
-        <div class="w-full shadow-2xl subpixel-antialiased rounded h-[530px] bg-gray-800 border-black mb-10 mx-auto md:h-64">
+        <div class="w-full shadow-2xl subpixel-antialiased rounded h-auto bg-gray-800 border-black mb-10 mx-auto pb-4">
           {/* Terminal Header  */}
           <div class="flex items-center h-8 rounded-t bg-gray-100 border-b border-gray-500 text-center text-black" id="headerTerminal">
             <div class="flex ml-2 items-center text-center border-red-900 bg-red-500 shadow-inner rounded-full w-3 h-3" id="closebtn">
