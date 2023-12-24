@@ -5,23 +5,25 @@ import "./style.css";
 const Page = (params) => {
   return (
     <>
-      <section class="text-gray-600 body-font">
-        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <span class=" typewriter text-orange-300 text-2xl text   rounded-3xl terminal">
+      <section className="w-full text-gray-600 body-font">
+        {/* Hero section  */}
+        <div className="container mx-auto flex px-5 py-11 md:py-24 md:flex-row flex-col items-center">
+          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <span className="typewriter text-orange-300 text-lg md:text-2xl font-semibold rounded-3xl terminal">
               <h1>Unleash Smarter Bookmark Management 🔐</h1>
             </span>
             <br />
             <br />
-            <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+            <h2 className="mb-2 text-base md:text-lg font-semibold text-gray-900 dark:text-white">
               Elevate Your Rapid Notes and Swift Life with Bookies.ai 🚀
             </h2>
             <br />
-            <ol class="relative text-gray-500 border-l border-gray-200 dark:border-gray-700 dark:text-gray-400">
-              <li class="mb-10 ml-6">
-                <span class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
+            {/* Guide progress list */}
+            <ol className="relative w-[80%] md:w-[90%] lg:w-[70%] xl:w-[45%] flex flex-col justify-center items-center text-gray-500 border-l border-gray-200 dark:border-gray-700 dark:text-gray-400">
+              <li className="mb-10 md:ml-8 w-[80%]">
+                <span className="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
                   <svg
-                    class="w-3.5 h-3.5 text-green-500 dark:text-green-400"
+                    className="w-3.5 h-3.5 text-green-500 dark:text-green-400"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -36,18 +38,18 @@ const Page = (params) => {
                     />
                   </svg>
                 </span>
-                <h3 class="font-medium leading-tight text-gray-200">
+                <h3 className="font-medium leading-tight text-gray-200">
                   Effortless Info
                 </h3>
-                <p class="text-sm">
+                <p className="text-sm">
                   {" "}
                   categorize and nest bookmarks for quick retrieval
                 </p>
               </li>
-              <li class="mb-10 ml-6">
-                <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+              <li className="mb-10 md:ml-8 w-[80%]">
+                <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
                   <svg
-                    class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
+                    className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -56,15 +58,15 @@ const Page = (params) => {
                     <path d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z" />
                   </svg>
                 </span>
-                <h3 class="font-medium leading-tight text-gray-200 ">Access</h3>
-                <p class="text-sm">
+                <h3 className="font-medium leading-tight text-gray-200 ">Access</h3>
+                <p className="text-sm">
                   your bookmarks anytime, anywhere, across all devices.
                 </p>
               </li>
-              <li class="mb-10 ml-6">
-                <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+              <li className="mb-10 md:ml-8 w-[80%]">
+                <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
                   <svg
-                    class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
+                    className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -73,17 +75,17 @@ const Page = (params) => {
                     <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
                   </svg>
                 </span>
-                <h3 class="font-medium leading-tight text-gray-200">
+                <h3 className="font-medium leading-tight text-gray-200">
                   Collaborate
                 </h3>
-                <p class="text-sm">
+                <p className="text-sm">
                   by sharing curated folders with friends and colleagues.
                 </p>
               </li>
-              <li class="ml-6">
-                <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
+              <li className="md:ml-8 w-[80%]">
+                <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
                   <svg
-                    class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
+                    className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -92,10 +94,10 @@ const Page = (params) => {
                     <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z" />
                   </svg>
                 </span>
-                <h3 class="font-medium leading-tight text-gray-200">
+                <h3 className="font-medium leading-tight text-gray-200">
                   Discover
                 </h3>
-                <p class="text-sm">
+                <p className="text-sm">
                   Dive into AI-crafted articles meticulously personalized for
                   your bookmarked havens.
                 </p>
@@ -103,14 +105,15 @@ const Page = (params) => {
             </ol>
             <br />
             <br />
-            <div class="flex justify-center">
+            <div className="flex justify-center">
+              {/* "Use it on web" Button  */}
               <button
                 type="button"
-                class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2"
+                className="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2"
               >
                 <svg
                   aria-hidden="true"
-                  class="w-6 h-5 mr-2 -ml-1"
+                  className="w-6 h-5 mr-2 -ml-1"
                   viewBox="0 0 2405 2501"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -550,16 +553,19 @@ const Page = (params) => {
               </button>
             </div>
           </div>
-          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+            {/* Animated image  */}
             <img
               width={800}
-              class="object-cover object-center rounded bounce"
+              className="object-cover object-center rounded bounce"
               alt="hero"
               src="/images/image-removebg-preview.png"
             />
           </div>
         </div>
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-4  md:gap-0  md:place-items-center p-10 rounded-2xl border-dotted border-2 border-indigo-500/50 mx-8 ">
+        {/* Browser extension & Mobile app Cards  */}
+        <div className="flex flex-wrap gap-8 md:justify-around p-10 rounded-2xl border-dotted border-2 border-indigo-500/50 mx-8">
+          {/* Browser Extention Card  */}
           <div className="card2">
             <Services
               props={{
@@ -570,6 +576,7 @@ const Page = (params) => {
               }}
             />
           </div>
+          {/* Mobile app download Card  */}
           <div className="card2">
             <Services
               props={{
@@ -581,43 +588,13 @@ const Page = (params) => {
             />
           </div>
         </div>
-
         <br />
       </section>
-      <div class="flex items-center p-11">
-        {/* <button
-          type="button"
-          class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          <svg
-            class="w-5 h-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 20 16"
-          >
-            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
-            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
-          </svg>
-          <span class="sr-only">Notifications</span>
-          <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
-            20
-          </div>
-        </button> */}
-
-        {/* <p class="p-10 text-left text-gray-500 dark:text-gray-400">
-          In the realm of productivity, Bookies have emerged as a guiding light
-          for digital nomads. Regardless of the diverse locations they traverse,
-          Bookies empower these modern wanderers to seamlessly manage their
-          bookmarks. With universal accessibility, digital nomads can retrieve
-          their cherished resources from any corner of the world, on any device.
-          Effortless categorization ensures quick retrieval, enabling them to
-          stay focused and organized amidst their globetrotting endeavors.
-          Bookies have truly become an essential companion for those shaping
-          their professional journey from various horizons.
-        </p> */}
-       <Terminal/>
+      {/* Terminal View  */}
+      <div className="flex items-center p-8">
+        <Terminal />
       </div>
+      {/* Flowbite Tablet view  */}
       <Analysis />
       <br />
       <br />
